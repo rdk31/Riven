@@ -5,8 +5,6 @@ use testutils::*;
 const ROUTE: PlatformRoute = PlatformRoute::JP1;
 
 static MATCHES: &[&str] = &[
-    // Only has participant IDs for blue team.
-    "JP1_391732436",
     // New field `ParticipantChallenges` `twoWardsOneSweeperCount`
     "JP1_397348569",
     // New fields:

@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version 09d8c1d0fc1a3876de2513931c9cb27a616c8768
+// Version 50e0dd62c27c4cbb1b353fc311529f937c279806
 
 #![allow(missing_docs)]
 
@@ -532,93 +532,6 @@ pub mod lol_challenges_v1 {
         #[serde(rename = "percentile")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub percentile: Option<f64>,
-    }
-}
-
-/// Data structs used by [`LolStatusV3`](crate::endpoints::LolStatusV3).
-/// 
-/// Note: this module is automatically generated.
-#[allow(dead_code)]
-pub mod lol_status_v3 {
-    /// ShardStatus data object.
-    #[derive(Clone, Debug)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct ShardStatus {
-        #[serde(rename = "locales")]
-        pub locales: std::vec::Vec<String>,
-        #[serde(rename = "hostname")]
-        pub hostname: String,
-        #[serde(rename = "name")]
-        pub name: String,
-        #[serde(rename = "services")]
-        pub services: std::vec::Vec<Service>,
-        #[serde(rename = "slug")]
-        pub slug: String,
-        #[serde(rename = "region_tag")]
-        pub region_tag: String,
-    }
-    /// Service data object.
-    #[derive(Clone, Debug)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct Service {
-        #[serde(rename = "name")]
-        pub name: String,
-        #[serde(rename = "slug")]
-        pub slug: String,
-        #[serde(rename = "status")]
-        pub status: String,
-        #[serde(rename = "incidents")]
-        pub incidents: std::vec::Vec<Incident>,
-    }
-    /// Incident data object.
-    #[derive(Clone, Debug)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct Incident {
-        #[serde(rename = "id")]
-        pub id: i64,
-        #[serde(rename = "active")]
-        pub active: bool,
-        #[serde(rename = "created_at")]
-        pub created_at: String,
-        #[serde(rename = "updates")]
-        pub updates: std::vec::Vec<Message>,
-    }
-    /// Message data object.
-    #[derive(Clone, Debug)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct Message {
-        #[serde(rename = "id")]
-        pub id: String,
-        #[serde(rename = "author")]
-        pub author: String,
-        #[serde(rename = "heading")]
-        pub heading: String,
-        #[serde(rename = "content")]
-        pub content: String,
-        #[serde(rename = "severity")]
-        pub severity: String,
-        #[serde(rename = "created_at")]
-        pub created_at: String,
-        #[serde(rename = "updated_at")]
-        pub updated_at: String,
-        #[serde(rename = "translations")]
-        pub translations: std::vec::Vec<Translation>,
-    }
-    /// Translation data object.
-    #[derive(Clone, Debug)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct Translation {
-        #[serde(rename = "updated_at")]
-        pub updated_at: String,
-        #[serde(rename = "locale")]
-        pub locale: String,
-        #[serde(rename = "content")]
-        pub content: String,
     }
 }
 
@@ -2494,237 +2407,6 @@ pub mod spectator_tft_v5 {
     }
 }
 
-/// Data structs used by [`SpectatorV4`](crate::endpoints::SpectatorV4).
-/// 
-/// Note: this module is automatically generated.
-#[allow(dead_code)]
-pub mod spectator_v4 {
-    /// CurrentGameInfo data object.
-    #[derive(Clone, Debug)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct CurrentGameInfo {
-        /// The ID of the game
-        #[serde(rename = "gameId")]
-        pub game_id: i64,
-        /// The game type
-        #[serde(rename = "gameType")]
-        pub game_type: crate::consts::GameType,
-        /// The game start time represented in epoch milliseconds
-        #[serde(rename = "gameStartTime")]
-        pub game_start_time: i64,
-        /// The ID of the map
-        #[serde(rename = "mapId")]
-        pub map_id: crate::consts::Map,
-        /// The amount of time in seconds that has passed since the game started
-        #[serde(rename = "gameLength")]
-        pub game_length: i64,
-        /// The ID of the platform on which the game is being played
-        #[serde(rename = "platformId")]
-        pub platform_id: String,
-        /// The game mode
-        #[serde(rename = "gameMode")]
-        pub game_mode: crate::consts::GameMode,
-        /// Banned champion information
-        #[serde(rename = "bannedChampions")]
-        pub banned_champions: std::vec::Vec<BannedChampion>,
-        /// The queue type (queue types are documented on the Game Constants page)
-        #[serde(rename = "gameQueueConfigId")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub game_queue_config_id: Option<crate::consts::Queue>,
-        /// The observer information
-        #[serde(rename = "observers")]
-        pub observers: Observer,
-        /// The participant information
-        #[serde(rename = "participants")]
-        pub participants: std::vec::Vec<CurrentGameParticipant>,
-    }
-    /// BannedChampion data object.
-    #[derive(Clone, Debug)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct BannedChampion {
-        /// The turn during which the champion was banned
-        #[serde(rename = "pickTurn")]
-        pub pick_turn: i32,
-        /// The ID of the banned champion
-        #[serde(rename = "championId")]
-        pub champion_id: crate::consts::Champion,
-        /// The ID of the team that banned the champion
-        #[serde(rename = "teamId")]
-        pub team_id: crate::consts::Team,
-    }
-    /// Observer data object.
-    #[derive(Clone, Debug)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct Observer {
-        /// Key used to decrypt the spectator grid game data for playback
-        #[serde(rename = "encryptionKey")]
-        pub encryption_key: String,
-    }
-    /// CurrentGameParticipant data object.
-    #[derive(Clone, Debug)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct CurrentGameParticipant {
-        /// The ID of the champion played by this participant
-        #[serde(rename = "championId")]
-        pub champion_id: crate::consts::Champion,
-        /// Perks/Runes Reforged Information
-        #[serde(rename = "perks")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub perks: Option<Perks>,
-        /// The ID of the profile icon used by this participant
-        #[serde(rename = "profileIconId")]
-        pub profile_icon_id: i64,
-        /// Flag indicating whether or not this participant is a bot
-        #[serde(rename = "bot")]
-        pub bot: bool,
-        /// The team ID of this participant, indicating the participant's team
-        #[serde(rename = "teamId")]
-        pub team_id: crate::consts::Team,
-        /// The summoner name of this participant
-        #[serde(rename = "summonerName")]
-        pub summoner_name: String,
-        /// The encrypted summoner ID of this participant
-        #[serde(rename = "summonerId")]
-        pub summoner_id: String,
-        /// The encrypted puuid of this participant
-        #[serde(rename = "puuid")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub puuid: Option<String>,
-        /// The ID of the first summoner spell used by this participant
-        #[serde(rename = "spell1Id")]
-        pub spell1_id: i64,
-        /// The ID of the second summoner spell used by this participant
-        #[serde(rename = "spell2Id")]
-        pub spell2_id: i64,
-        /// List of Game Customizations
-        #[serde(rename = "gameCustomizationObjects")]
-        pub game_customization_objects: std::vec::Vec<GameCustomizationObject>,
-        #[serde(rename = "riotId")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub riot_id: Option<String>,
-    }
-    /// Perks data object.
-    #[derive(Clone, Debug)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct Perks {
-        /// IDs of the perks/runes assigned.
-        #[serde(rename = "perkIds")]
-        pub perk_ids: std::vec::Vec<i64>,
-        /// Primary runes path
-        #[serde(rename = "perkStyle")]
-        pub perk_style: i64,
-        /// Secondary runes path
-        #[serde(rename = "perkSubStyle")]
-        pub perk_sub_style: i64,
-    }
-    /// GameCustomizationObject data object.
-    #[derive(Clone, Debug)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct GameCustomizationObject {
-        /// Category identifier for Game Customization
-        #[serde(rename = "category")]
-        pub category: String,
-        /// Game Customization content
-        #[serde(rename = "content")]
-        pub content: String,
-    }
-    /// FeaturedGames data object.
-    #[derive(Clone, Debug)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct FeaturedGames {
-        /// The list of featured games
-        #[serde(rename = "gameList")]
-        pub game_list: std::vec::Vec<FeaturedGameInfo>,
-        /// The suggested interval to wait before requesting FeaturedGames again
-        #[serde(rename = "clientRefreshInterval")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub client_refresh_interval: Option<i64>,
-    }
-    /// FeaturedGameInfo data object.
-    #[derive(Clone, Debug)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct FeaturedGameInfo {
-        /// The game mode<br>
-        /// (Legal values:  CLASSIC,  ODIN,  ARAM,  TUTORIAL,  ONEFORALL,  ASCENSION,  FIRSTBLOOD,  KINGPORO)
-        #[serde(rename = "gameMode")]
-        pub game_mode: crate::consts::GameMode,
-        /// The amount of time in seconds that has passed since the game started
-        #[serde(rename = "gameLength")]
-        pub game_length: i64,
-        /// The ID of the map
-        #[serde(rename = "mapId")]
-        pub map_id: crate::consts::Map,
-        /// The game type<br>
-        /// (Legal values:  CUSTOM_GAME,  MATCHED_GAME,  TUTORIAL_GAME)
-        #[serde(rename = "gameType")]
-        pub game_type: crate::consts::GameType,
-        /// Banned champion information
-        #[serde(rename = "bannedChampions")]
-        pub banned_champions: std::vec::Vec<BannedChampion>,
-        /// The ID of the game
-        #[serde(rename = "gameId")]
-        pub game_id: i64,
-        /// The observer information
-        #[serde(rename = "observers")]
-        pub observers: Observer,
-        /// The queue type (queue types are documented on the Game Constants page)
-        #[serde(rename = "gameQueueConfigId")]
-        pub game_queue_config_id: crate::consts::Queue,
-        /// The participant information
-        #[serde(rename = "participants")]
-        pub participants: std::vec::Vec<Participant>,
-        /// The ID of the platform on which the game is being played
-        #[serde(rename = "platformId")]
-        pub platform_id: String,
-    }
-    /// Participant data object.
-    #[derive(Clone, Debug)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct Participant {
-        /// Flag indicating whether or not this participant is a bot
-        #[serde(rename = "bot")]
-        pub bot: bool,
-        /// The ID of the second summoner spell used by this participant
-        #[serde(rename = "spell2Id")]
-        pub spell2_id: i64,
-        /// The ID of the profile icon used by this participant
-        #[serde(rename = "profileIconId")]
-        pub profile_icon_id: i64,
-        /// The summoner name of this participant
-        #[serde(rename = "summonerName")]
-        pub summoner_name: String,
-        /// Encrypted summoner ID of this participant
-        #[serde(rename = "summonerId")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub summoner_id: Option<String>,
-        /// Encrypted puuid of this participant
-        #[serde(rename = "puuid")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub puuid: Option<String>,
-        /// The ID of the champion played by this participant
-        #[serde(rename = "championId")]
-        pub champion_id: crate::consts::Champion,
-        /// The team ID of this participant, indicating the participant's team
-        #[serde(rename = "teamId")]
-        pub team_id: crate::consts::Team,
-        /// The ID of the first summoner spell used by this participant
-        #[serde(rename = "spell1Id")]
-        pub spell1_id: i64,
-        #[serde(rename = "riotId")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub riot_id: Option<String>,
-    }
-}
-
 /// Data structs used by [`SpectatorV5`](crate::endpoints::SpectatorV5).
 /// 
 /// Note: this module is automatically generated.
@@ -3788,7 +3470,7 @@ pub mod tournament_v5 {
         #[serde(rename = "id")]
         pub id: i32,
         /// The tournament code's region.<br>
-        /// (Legal values:  BR,  EUNE,  EUW,  JP,  LAN,  LAS,  NA,  OCE,  PBE,  RU,  TR,  KR)
+        /// (Legal values:  BR,  EUNE,  EUW,  JP,  LAN,  LAS,  NA,  OCE,  PBE,  RU,  TR,  KR,  PH,  SG,  TH,  TW,  VN)
         #[serde(rename = "region")]
         pub region: String,
         /// The game map for the tournament code game
@@ -3889,7 +3571,7 @@ pub mod tournament_v5 {
     #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
     pub struct ProviderRegistrationParametersV5 {
         /// The region in which the provider will be running tournaments.<br>
-        /// (Legal values:  BR,  EUNE,  EUW,  JP,  LAN,  LAS,  NA,  OCE,  PBE,  RU,  TR,  KR)
+        /// (Legal values:  BR,  EUNE,  EUW,  JP,  LAN,  LAS,  NA,  OCE,  PBE,  RU,  TR,  KR,  PH,  SG,  TH,  TW,  VN)
         #[serde(rename = "region")]
         pub region: String,
         /// The provider's callback URL to which tournament game results in this region should be posted. The URL must be well-formed, use the http or https protocol, and use the default port for the protocol (http URLs must use port 80, https URLs must use port 443).

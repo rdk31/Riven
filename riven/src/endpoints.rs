@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version 09d8c1d0fc1a3876de2513931c9cb27a616c8768
+// Version 50e0dd62c27c4cbb1b353fc311529f937c279806
 
 //! Automatically generated endpoint handles.
 #![allow(clippy::let_and_return, clippy::too_many_arguments)]
@@ -90,15 +90,6 @@ impl RiotApi {
     pub fn lol_challenges_v1(&self) -> LolChallengesV1 {
         LolChallengesV1 { base: self }
     }
-    /// Returns a handle for accessing [LolStatusV3](crate::endpoints::LolStatusV3) endpoints.
-    /// # Riot Developer API Reference
-    /// <a href="https://developer.riotgames.com/apis#lol-status-v3" target="_blank">`lol-status-v3`</a>
-    ///
-    /// Note: this method is automatically generated.
-    #[inline]
-    pub fn lol_status_v3(&self) -> LolStatusV3 {
-        LolStatusV3 { base: self }
-    }
     /// Returns a handle for accessing [LolStatusV4](crate::endpoints::LolStatusV4) endpoints.
     /// # Riot Developer API Reference
     /// <a href="https://developer.riotgames.com/apis#lol-status-v4" target="_blank">`lol-status-v4`</a>
@@ -170,15 +161,6 @@ impl RiotApi {
     #[inline]
     pub fn spectator_tft_v5(&self) -> SpectatorTftV5 {
         SpectatorTftV5 { base: self }
-    }
-    /// Returns a handle for accessing [SpectatorV4](crate::endpoints::SpectatorV4) endpoints.
-    /// # Riot Developer API Reference
-    /// <a href="https://developer.riotgames.com/apis#spectator-v4" target="_blank">`spectator-v4`</a>
-    ///
-    /// Note: this method is automatically generated.
-    #[inline]
-    pub fn spectator_v4(&self) -> SpectatorV4 {
-        SpectatorV4 { base: self }
     }
     /// Returns a handle for accessing [SpectatorV5](crate::endpoints::SpectatorV5) endpoints.
     /// # Riot Developer API Reference
@@ -902,38 +884,6 @@ impl<'a> LolChallengesV1<'a> {
 
 }
 
-/// LolStatusV3 endpoints handle, accessed by calling [`lol_status_v3()`](crate::RiotApi::lol_status_v3) on a [`RiotApi`](crate::RiotApi) instance.
-/// # Riot Developer API Reference
-/// <a href="https://developer.riotgames.com/apis#lol-status-v3" target="_blank">`lol-status-v3`</a>
-///
-/// Note: this struct is automatically generated.
-#[repr(transparent)]
-pub struct LolStatusV3<'a> {
-    base: &'a RiotApi,
-}
-impl<'a> LolStatusV3<'a> {
-    /// Get League of Legends status for the given shard.
-    /// ## Rate Limit Notes
-    /// Requests to this API are not counted against the application Rate Limits.
-    /// # Parameters
-    /// * `route` - Route to query.
-    /// # Riot Developer API Reference
-    /// <a href="https://developer.riotgames.com/api-methods/#lol-status-v3/GET_getShardData" target="_blank">`lol-status-v3.getShardData`</a>
-    ///
-    /// Note: this method is automatically generated.
-    pub fn get_shard_data(&self, route: PlatformRoute)
-        -> impl Future<Output = Result<lol_status_v3::ShardStatus>> + 'a
-    {
-        let route_str = route.into();
-        let request = self.base.request(Method::GET, route_str, "/lol/status/v3/shard-data");
-        let future = self.base.execute_val::<lol_status_v3::ShardStatus>("lol-status-v3.getShardData", route_str, request);
-        #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("lol-status-v3.getShardData"));
-        future
-    }
-
-}
-
 /// LolStatusV4 endpoints handle, accessed by calling [`lol_status_v4()`](crate::RiotApi::lol_status_v4) on a [`RiotApi`](crate::RiotApi) instance.
 /// # Riot Developer API Reference
 /// <a href="https://developer.riotgames.com/apis#lol-status-v4" target="_blank">`lol-status-v4`</a>
@@ -1284,55 +1234,6 @@ impl<'a> SpectatorTftV5<'a> {
         let future = self.base.execute_val::<spectator_tft_v5::FeaturedGames>("spectator-tft-v5.getFeaturedGames", route_str, request);
         #[cfg(feature = "tracing")]
         let future = future.instrument(tracing::info_span!("spectator-tft-v5.getFeaturedGames"));
-        future
-    }
-
-}
-
-/// SpectatorV4 endpoints handle, accessed by calling [`spectator_v4()`](crate::RiotApi::spectator_v4) on a [`RiotApi`](crate::RiotApi) instance.
-/// # Riot Developer API Reference
-/// <a href="https://developer.riotgames.com/apis#spectator-v4" target="_blank">`spectator-v4`</a>
-///
-/// Note: this struct is automatically generated.
-#[repr(transparent)]
-pub struct SpectatorV4<'a> {
-    base: &'a RiotApi,
-}
-impl<'a> SpectatorV4<'a> {
-    /// Get current game information for the given summoner ID.
-    /// # Parameters
-    /// * `route` - Route to query.
-    /// * `encrypted_summoner_id` (required, in path) - The ID of the summoner.
-    /// # Riot Developer API Reference
-    /// <a href="https://developer.riotgames.com/api-methods/#spectator-v4/GET_getCurrentGameInfoBySummoner" target="_blank">`spectator-v4.getCurrentGameInfoBySummoner`</a>
-    ///
-    /// Note: this method is automatically generated.
-    pub fn get_current_game_info_by_summoner(&self, route: PlatformRoute, encrypted_summoner_id: &str)
-        -> impl Future<Output = Result<Option<spectator_v4::CurrentGameInfo>>> + 'a
-    {
-        let route_str = route.into();
-        let request = self.base.request(Method::GET, route_str, &format!("/lol/spectator/v4/active-games/by-summoner/{}", encrypted_summoner_id));
-        let future = self.base.execute_opt::<spectator_v4::CurrentGameInfo>("spectator-v4.getCurrentGameInfoBySummoner", route_str, request);
-        #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("spectator-v4.getCurrentGameInfoBySummoner"));
-        future
-    }
-
-    /// Get list of featured games.
-    /// # Parameters
-    /// * `route` - Route to query.
-    /// # Riot Developer API Reference
-    /// <a href="https://developer.riotgames.com/api-methods/#spectator-v4/GET_getFeaturedGames" target="_blank">`spectator-v4.getFeaturedGames`</a>
-    ///
-    /// Note: this method is automatically generated.
-    pub fn get_featured_games(&self, route: PlatformRoute)
-        -> impl Future<Output = Result<spectator_v4::FeaturedGames>> + 'a
-    {
-        let route_str = route.into();
-        let request = self.base.request(Method::GET, route_str, "/lol/spectator/v4/featured-games");
-        let future = self.base.execute_val::<spectator_v4::FeaturedGames>("spectator-v4.getFeaturedGames", route_str, request);
-        #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("spectator-v4.getFeaturedGames"));
         future
     }
 

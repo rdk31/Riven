@@ -59,7 +59,7 @@ pub enum GameMode {
     SIEGE,
     /// Star Guardian Invasion games
     STARGUARDIAN,
-    /// Teamfight Tactics, used in `spectator-v4` endpoints.
+    /// Teamfight Tactics.
     TFT,
     /// Tutorial games
     TUTORIAL,

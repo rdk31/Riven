@@ -96,8 +96,6 @@ impl Notify {
 
 #[cfg(all(test, not(target_family = "wasm")))]
 mod test {
-    use futures::FutureExt;
-
     use super::*;
 
     #[tokio::test]

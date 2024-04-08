@@ -51,11 +51,6 @@ async fn championmastery_getall_ma5tery() -> Result<(), String> {
 }
 
 #[riven_test]
-async fn spectator_v4_combo_test() -> Result<(), String> {
-    spectator_v4_combo(ROUTE).await
-}
-
-#[riven_test]
 async fn spectator_v5_combo_test() -> Result<(), String> {
     spectator_v5_combo(ROUTE).await
 }

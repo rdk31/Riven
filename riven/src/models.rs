@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version 50e0dd62c27c4cbb1b353fc311529f937c279806
+// Version 3ec94d23fb5d98706fbbb55a038f47798cf14813
 
 #![allow(missing_docs)]
 
@@ -214,8 +214,6 @@ pub mod league_exp_v4 {
         /// Player's summonerId (Encrypted)
         #[serde(rename = "summonerId")]
         pub summoner_id: String,
-        #[serde(rename = "summonerName")]
-        pub summoner_name: String,
         #[serde(rename = "queueType")]
         pub queue_type: crate::consts::QueueType,
         #[serde(rename = "tier")]
@@ -293,8 +291,6 @@ pub mod league_v4 {
         /// Winning team on Summoners Rift.
         #[serde(rename = "wins")]
         pub wins: i32,
-        #[serde(rename = "summonerName")]
-        pub summoner_name: String,
         #[serde(rename = "miniSeries")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub mini_series: Option<MiniSeries>,
@@ -340,8 +336,6 @@ pub mod league_v4 {
         /// Player's encrypted summonerId.
         #[serde(rename = "summonerId")]
         pub summoner_id: String,
-        #[serde(rename = "summonerName")]
-        pub summoner_name: String,
         #[serde(rename = "queueType")]
         pub queue_type: crate::consts::QueueType,
         #[serde(rename = "tier")]
@@ -2269,9 +2263,6 @@ pub mod spectator_tft_v5 {
         /// The team ID of this participant, indicating the participant's team
         #[serde(rename = "teamId")]
         pub team_id: crate::consts::Team,
-        /// The summoner name of this participant
-        #[serde(rename = "summonerName")]
-        pub summoner_name: String,
         /// The encrypted summoner ID of this participant
         #[serde(rename = "summonerId")]
         pub summoner_id: String,
@@ -2381,9 +2372,6 @@ pub mod spectator_tft_v5 {
         /// The ID of the profile icon used by this participant
         #[serde(rename = "profileIconId")]
         pub profile_icon_id: i64,
-        /// The summoner name of this participant
-        #[serde(rename = "summonerName")]
-        pub summoner_name: String,
         /// Encrypted summoner ID of this participant
         #[serde(rename = "summonerId")]
         #[serde(skip_serializing_if = "Option::is_none")]
@@ -2497,9 +2485,6 @@ pub mod spectator_v5 {
         /// The team ID of this participant, indicating the participant's team
         #[serde(rename = "teamId")]
         pub team_id: crate::consts::Team,
-        /// The summoner name of this participant
-        #[serde(rename = "summonerName")]
-        pub summoner_name: String,
         /// The encrypted summoner ID of this participant
         #[serde(rename = "summonerId")]
         pub summoner_id: String,
@@ -2612,9 +2597,6 @@ pub mod spectator_v5 {
         /// The ID of the profile icon used by this participant
         #[serde(rename = "profileIconId")]
         pub profile_icon_id: i64,
-        /// The summoner name of this participant
-        #[serde(rename = "summonerName")]
-        pub summoner_name: String,
         /// Encrypted summoner ID of this participant
         #[serde(rename = "summonerId")]
         #[serde(skip_serializing_if = "Option::is_none")]
@@ -2661,9 +2643,6 @@ pub mod summoner_v4 {
         /// Date summoner was last modified specified as epoch milliseconds. The following events will update this timestamp: profile icon change, playing the tutorial or advanced tutorial, finishing a game, summoner name change
         #[serde(rename = "revisionDate")]
         pub revision_date: i64,
-        /// Summoner name.
-        #[serde(rename = "name")]
-        pub name: String,
         /// Encrypted summoner ID. Max length 63 characters.
         #[serde(rename = "id")]
         pub id: String,
@@ -2710,8 +2689,6 @@ pub mod tft_league_v1 {
         /// First placement.
         #[serde(rename = "wins")]
         pub wins: i32,
-        #[serde(rename = "summonerName")]
-        pub summoner_name: String,
         #[serde(rename = "miniSeries")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub mini_series: Option<MiniSeries>,
@@ -2762,8 +2739,6 @@ pub mod tft_league_v1 {
         /// Player's encrypted summonerId.
         #[serde(rename = "summonerId")]
         pub summoner_id: String,
-        #[serde(rename = "summonerName")]
-        pub summoner_name: String,
         #[serde(rename = "queueType")]
         pub queue_type: crate::consts::QueueType,
         /// Only included for the RANKED_TFT_TURBO queueType.<br>
@@ -2821,8 +2796,6 @@ pub mod tft_league_v1 {
     pub struct TopRatedLadderEntry {
         #[serde(rename = "summonerId")]
         pub summoner_id: String,
-        #[serde(rename = "summonerName")]
-        pub summoner_name: String,
         /// (Legal values:  ORANGE,  PURPLE,  BLUE,  GREEN,  GRAY)
         #[serde(rename = "ratedTier")]
         pub rated_tier: String,
@@ -3248,9 +3221,6 @@ pub mod tft_summoner_v1 {
         /// Date summoner was last modified specified as epoch milliseconds. The following events will update this timestamp: summoner name change, summoner level change, or profile icon change.
         #[serde(rename = "revisionDate")]
         pub revision_date: i64,
-        /// Summoner name.
-        #[serde(rename = "name")]
-        pub name: String,
         /// Encrypted summoner ID. Max length 63 characters.
         #[serde(rename = "id")]
         pub id: String,

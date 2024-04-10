@@ -35,18 +35,25 @@ rt.block_on(async {
     let api_key = std::env!("RGAPI_KEY"); // "RGAPI-01234567-89ab-cdef-0123-456789abcdef";
     let riot_api = RiotApi::new(api_key);
 
-    // Get summoner data.
-    let summoner = riot_api.summoner_v4()
-        .get_by_summoner_name(PlatformRoute::NA1, "잘 못").await
+    // The region.
+    let platform = PlatformRoute::NA1;
+
+    // Get account data.
+    let account = riot_api.account_v1()
+        .get_by_riot_id(platform.to_regional(), "잘 못", "NA1").await
         .expect("Get summoner failed.")
         .expect("There is no summoner with that name.");
 
-    // Print summoner name.
-    println!("{} Champion Masteries:", summoner.name);
+    // Print account name#tag.
+    println!(
+        "{}#{} Champion Masteries:",
+        account.game_name.unwrap_or_default(),
+        account.tag_line.unwrap_or_default(),
+    );
 
     // Get champion mastery data.
     let masteries = riot_api.champion_mastery_v4()
-        .get_all_champion_masteries_by_puuid(PlatformRoute::NA1, &summoner.puuid).await
+        .get_all_champion_masteries_by_puuid(platform, &account.puuid).await
         .expect("Get champion masteries failed.");
 
     // Print champion masteries.

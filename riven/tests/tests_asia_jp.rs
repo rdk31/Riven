@@ -30,7 +30,7 @@ async fn summoner_get_kanjikana() -> Result<(), String> {
         .await
         .map_err(|e| e.to_string())?
         .ok_or_else(|| "Failed to get myheadhard".to_owned())?;
-    rassert_eq!("私の頭がかたい", s.name);
+    rassert!(0 < s.puuid.len());
     Ok(())
 }
 

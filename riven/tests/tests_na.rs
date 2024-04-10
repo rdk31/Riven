@@ -4,14 +4,9 @@ use riven::models::summoner_v4::*;
 use testutils::*;
 
 fn validate_summoners(s1: Summoner, s2: Summoner) -> Result<(), String> {
-    rassert_eq!(s1.name, s2.name, "Names didn't match {}.", "");
-    rassert_eq!(s1.id, s2.id, "SummonerId didn't match {}.", "");
-    rassert_eq!(
-        s1.account_id,
-        s2.account_id,
-        "AccountId didn't match {}.",
-        ""
-    );
+    rassert_eq!(s1.puuid, s2.puuid, "PUUIDs didn't match.");
+    rassert_eq!(s1.id, s2.id, "Summoner IDs didn't match.");
+    rassert_eq!(s1.account_id, s2.account_id, "Account IDs didn't match.");
     Ok(())
 }
 

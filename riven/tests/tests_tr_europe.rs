@@ -1,7 +1,7 @@
 mod testutils;
+
 use futures::future::join_all;
 use riven::consts::*;
-use riven::models::summoner_v4::Summoner;
 use testutils::*;
 
 const ROUTE: PlatformRoute = PlatformRoute::TR1;
@@ -19,16 +19,29 @@ async fn league_summoner_bulk_test() -> Result<(), String> {
         league_list.entries.len()
     );
 
-    let summoner_vec = join_all(league_list.entries.iter().take(50).map(|entry| {
-        riot_api()
+    let summoner_vec = join_all(league_list.entries.iter().take(50).map(|entry| async move {
+        let summoner = riot_api()
             .summoner_v4()
             .get_by_summoner_id(ROUTE, &entry.summoner_id)
+            .await?;
+        let account = riot_api()
+            .account_v1()
+            .get_by_puuid(ROUTE.to_regional(), &summoner.puuid)
+            .await;
+        Ok(account)
     }))
     .await;
 
     for (i, s) in summoner_vec.into_iter().enumerate() {
-        let summoner: Summoner = s.map_err(|e| e.to_string())?;
-        println!("{}: {}", i + 1, summoner.name);
+        let account = s
+            .and_then(std::convert::identity)
+            .map_err(|e| e.to_string())?;
+        println!(
+            "{}: {}#{}",
+            i + 1,
+            account.game_name.unwrap_or_default(),
+            account.tag_line.unwrap_or_default(),
+        );
     }
 
     Ok(())

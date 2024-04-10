@@ -85,10 +85,7 @@ async fn tft_combo() -> Result<(), String> {
         .tft_summoner_v1()
         .get_by_summoner_id(ROUTE, &top_player_entry.summoner_id);
     let top_player = top_player.await.map_err(|e| e.to_string())?;
-    println!(
-        "Top player is {} with `puuid` {}.",
-        top_player.name, top_player.puuid
-    );
+    println!("Top player has `puuid` {}.", top_player.puuid);
     let match_ids = riot_api().tft_match_v1().get_match_ids_by_puuid(
         ROUTE.to_regional(),
         &top_player.puuid,

@@ -292,7 +292,9 @@ pub async fn match_v5_get_timeline(
 
 pub async fn spectator_v5_combo(route: PlatformRoute) -> Result<(), String> {
     let featured_p = riot_api().spectator_v5().get_featured_games(route);
-    let featured = featured_p.await.map_err(|e| e.to_string())?;
+    let featured = featured_p
+        .await
+        .map_err(|e| format!("Failed to fetch featured games: {}", e))?;
 
     if featured.game_list.is_empty() {
         eprintln!("Featured game list is empty!");
@@ -303,8 +305,8 @@ pub async fn spectator_v5_combo(route: PlatformRoute) -> Result<(), String> {
     let participant = &featured_game.participants[0];
     let puuid = participant.puuid.as_ref().ok_or_else(|| {
         format!(
-            "Summoner in spectator featured game {} missing summoner ID: {}",
-            featured_game.game_id, &participant.summoner_name,
+            "Summoner in spectator featured game {} missing summoner ID. PUUID: {:?}",
+            featured_game.game_id, participant.puuid,
         )
     })?;
 
@@ -321,11 +323,11 @@ pub async fn spectator_v5_combo(route: PlatformRoute) -> Result<(), String> {
         let participant_match = livegame
             .participants
             .iter()
-            .find(|p| p.summoner_name == participant.summoner_name);
+            .find(|p| p.puuid == participant.puuid);
         rassert!(
             participant_match.is_some(),
-            "Failed to find summoner in match: {}.",
-            &participant.summoner_name
+            "Failed to find summoner in match with PUUID: {:?}.",
+            participant.puuid
         );
     }
     Ok(())
@@ -344,8 +346,8 @@ pub async fn spectator_tft_v5_combo(route: PlatformRoute) -> Result<(), String> 
     let participant = &featured_game.participants[0];
     let puuid = participant.puuid.as_ref().ok_or_else(|| {
         format!(
-            "Summoner in spectator featured game {} missing summoner ID: {}",
-            featured_game.game_id, &participant.summoner_name,
+            "Summoner in spectator featured game {} missing summoner ID. PUUID: {:?}",
+            featured_game.game_id, participant.puuid,
         )
     })?;
 
@@ -362,11 +364,11 @@ pub async fn spectator_tft_v5_combo(route: PlatformRoute) -> Result<(), String> 
         let participant_match = livegame
             .participants
             .iter()
-            .find(|p| p.summoner_name == participant.summoner_name);
+            .find(|p| p.puuid == participant.puuid);
         rassert!(
             participant_match.is_some(),
-            "Failed to find summoner in match: {}.",
-            &participant.summoner_name
+            "Failed to find summoner in match with PUUID: {:?}.",
+            participant.puuid
         );
     }
     Ok(())

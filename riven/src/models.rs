@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version 3ec94d23fb5d98706fbbb55a038f47798cf14813
+// Version 476b88d4eab4128e0842db0ab6ded999e00f6ae5
 
 #![allow(missing_docs)]
 
@@ -68,6 +68,8 @@ pub mod champion_mastery_v4 {
     #[derive(serde::Serialize, serde::Deserialize)]
     #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
     pub struct ChampionMastery {
+        #[serde(rename = "puuid")]
+        pub puuid: String,
         /// Number of points needed to achieve next level. Zero if player reached maximum champion level for this champion.
         #[serde(rename = "championPointsUntilNextLevel")]
         pub champion_points_until_next_level: i64,
@@ -95,9 +97,10 @@ pub mod champion_mastery_v4 {
         /// The token earned for this champion at the current championLevel. When the championLevel is advanced the tokensEarned resets to 0.
         #[serde(rename = "tokensEarned")]
         pub tokens_earned: i32,
-        #[serde(rename = "puuid")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub puuid: Option<String>,
+        #[serde(rename = "markRequiredForNextLevel")]
+        pub mark_required_for_next_level: i32,
+        #[serde(rename = "championSeasonMilestone")]
+        pub champion_season_milestone: i32,
     }
 }
 

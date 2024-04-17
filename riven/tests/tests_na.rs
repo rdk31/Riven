@@ -64,7 +64,7 @@ async fn leagueexp_get() -> Result<(), String> {
 }
 
 #[riven_test]
-async fn champion_mastery_v4() -> Result<(), String> {
+async fn championmasteryv4_lugnutsk() -> Result<(), String> {
     let summoner = riot_api()
         .summoner_v4()
         .get_by_summoner_name(ROUTE, "LugnutsK");
@@ -77,6 +77,24 @@ async fn champion_mastery_v4() -> Result<(), String> {
         .get_all_champion_masteries_by_puuid(ROUTE, &summoner.puuid);
     let masteries = masteries.await.map_err(|e| e.to_string())?;
     rassert!(74 <= masteries.len());
+    Ok(())
+}
+
+#[riven_test]
+async fn championmasteryv4_getall_iamchanese123() -> Result<(), String> {
+    let summoner =
+        riot_api()
+            .account_v1()
+            .get_by_riot_id(ROUTE.to_regional(), "iamchanese123", "NA1");
+    let summoner = summoner
+        .await
+        .map_err(|e| e.to_string())?
+        .ok_or_else(|| "'LugnutsK' not found!".to_owned())?;
+    let masteries = riot_api()
+        .champion_mastery_v4()
+        .get_all_champion_masteries_by_puuid(ROUTE, &summoner.puuid);
+    let masteries = masteries.await.map_err(|e| e.to_string())?;
+    rassert_eq!(59, masteries.len());
     Ok(())
 }
 

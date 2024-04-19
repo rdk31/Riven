@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version 476b88d4eab4128e0842db0ab6ded999e00f6ae5
+// Version 596ae582b11c95961b2f374729458d455ad59bbf
 
 #![allow(missing_docs)]
 
@@ -3751,6 +3751,15 @@ pub mod val_match_v1 {
         pub is_ranked: bool,
         #[serde(rename = "seasonId")]
         pub season_id: String,
+        #[serde(rename = "gameVersion")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub game_version: Option<String>,
+        #[serde(rename = "region")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub region: Option<String>,
+        #[serde(rename = "premierMatchInfo")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub premier_match_info: Option<serde_json::Map<String, serde_json::Value>>,
     }
     /// Player data object.
     #[derive(Clone, Debug)]
@@ -3777,6 +3786,12 @@ pub mod val_match_v1 {
         pub player_card: String,
         #[serde(rename = "playerTitle")]
         pub player_title: String,
+        #[serde(rename = "isObserver")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub is_observer: Option<bool>,
+        #[serde(rename = "accountLevel")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub account_level: Option<i32>,
     }
     /// PlayerStats data object.
     #[derive(Clone, Debug)]
@@ -3796,7 +3811,8 @@ pub mod val_match_v1 {
         #[serde(rename = "playtimeMillis")]
         pub playtime_millis: i32,
         #[serde(rename = "abilityCasts")]
-        pub ability_casts: AbilityCasts,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub ability_casts: Option<AbilityCasts>,
     }
     /// AbilityCasts data object.
     #[derive(Clone, Debug)]
@@ -3855,14 +3871,17 @@ pub mod val_match_v1 {
         pub winning_team: String,
         /// PUUID of player
         #[serde(rename = "bombPlanter")]
-        pub bomb_planter: String,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub bomb_planter: Option<String>,
         /// PUUID of player
         #[serde(rename = "bombDefuser")]
-        pub bomb_defuser: String,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub bomb_defuser: Option<String>,
         #[serde(rename = "plantRoundTime")]
         pub plant_round_time: i32,
         #[serde(rename = "plantPlayerLocations")]
-        pub plant_player_locations: std::vec::Vec<PlayerLocations>,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub plant_player_locations: Option<std::vec::Vec<PlayerLocations>>,
         #[serde(rename = "plantLocation")]
         pub plant_location: Location,
         #[serde(rename = "plantSite")]
@@ -3870,7 +3889,8 @@ pub mod val_match_v1 {
         #[serde(rename = "defuseRoundTime")]
         pub defuse_round_time: i32,
         #[serde(rename = "defusePlayerLocations")]
-        pub defuse_player_locations: std::vec::Vec<PlayerLocations>,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub defuse_player_locations: Option<std::vec::Vec<PlayerLocations>>,
         #[serde(rename = "defuseLocation")]
         pub defuse_location: Location,
         #[serde(rename = "playerStats")]
@@ -3994,13 +4014,17 @@ pub mod val_match_v1 {
     #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
     pub struct Ability {
         #[serde(rename = "grenadeEffects")]
-        pub grenade_effects: String,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub grenade_effects: Option<String>,
         #[serde(rename = "ability1Effects")]
-        pub ability1_effects: String,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub ability1_effects: Option<String>,
         #[serde(rename = "ability2Effects")]
-        pub ability2_effects: String,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub ability2_effects: Option<String>,
         #[serde(rename = "ultimateEffects")]
-        pub ultimate_effects: String,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub ultimate_effects: Option<String>,
     }
     /// Matchlist data object.
     #[derive(Clone, Debug)]

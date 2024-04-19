@@ -91,6 +91,9 @@ function stringifyType(prop, { endpoint = null, optional = false, fullpath = tru
       return (owned ? (fullpath ? 'std::vec::' : '') + `Vec<${subprop}>` : `&[${subprop}]`);
     case 'string': return (owned ? 'String' : '&str');
     case 'object':
+      if (1 === Object.keys(prop).length) { // Only `{ "type": "object" }`.
+        return 'serde_json::Map<String, serde_json::Value>'
+      }
       return 'std::collections::HashMap<' + stringifyType(prop['x-key'], { endpoint, optional, fullpath, owned }) + ', ' +
         stringifyType(prop.additionalProperties, { endpoint, optional, fullpath, owned }) + '>';
     default: return prop.type;

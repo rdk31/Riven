@@ -1,6 +1,6 @@
 mod testutils;
 use riven::consts::*;
-use testutils::{riot_api, riven_test};
+use testutils::{riot_api, riven_test, val_match_v1_latest};
 
 const ROUTE: ValPlatformRoute = ValPlatformRoute::LATAM;
 
@@ -25,6 +25,8 @@ async fn val_content_ranked_test() -> Result<(), String> {
                 && act.parent_id != Some("00000000-0000-0000-0000-000000000000".to_string())
         })
         .ok_or(format!("No active acts of {} found.", contents.acts.len()))?;
+
+    println!("ACT {:?}", act);
 
     let p = riot_api()
         .val_ranked_v1()
@@ -52,4 +54,9 @@ async fn val_content_ranked_test() -> Result<(), String> {
     }
 
     Ok(())
+}
+
+#[riven_test]
+async fn val_match_v1_latest_test() -> Result<(), String> {
+    val_match_v1_latest(ROUTE).await
 }

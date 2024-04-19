@@ -6,7 +6,7 @@ use std::future::Future;
 use std::sync::OnceLock;
 
 use futures::try_join;
-use riven::consts::{PlatformRoute, QueueType, RegionalRoute};
+use riven::consts::{PlatformRoute, QueueType, RegionalRoute, ValPlatformRoute};
 use riven::{RiotApi, RiotApiConfig};
 #[cfg(not(target_family = "wasm"))]
 pub use tokio_shared_rt::test as riven_test;
@@ -90,6 +90,7 @@ pub fn riot_api() -> &'static RiotApi {
     })
 }
 
+/// Get recent Challenger matches and check that they parse as valid.
 pub async fn league_v4_match_v5_latest_combo(route: PlatformRoute) -> Result<(), String> {
     const NUM_MATCHES: usize = 10;
 
@@ -154,6 +155,7 @@ pub async fn league_v4_match_v5_latest_combo(route: PlatformRoute) -> Result<(),
     Ok(())
 }
 
+/// Check that the given TFT matches parse as valid.
 pub async fn tft_match_v1_get(
     route: RegionalRoute,
     matches: impl IntoIterator<Item = impl AsRef<str>>,
@@ -193,6 +195,7 @@ pub async fn tft_match_v1_get(
     Ok(())
 }
 
+/// Check that the given LoL matches parse as valid.
 pub async fn match_v5_get(
     route: RegionalRoute,
     matches: impl IntoIterator<Item = impl AsRef<str>>,
@@ -252,6 +255,7 @@ pub async fn match_v5_get(
     join_all_future_errs(futures).await
 }
 
+/// Check that the given LoL match timelines parse as valid.
 pub async fn match_v5_get_timeline(
     route: RegionalRoute,
     matches: impl IntoIterator<Item = impl AsRef<str>>,
@@ -290,6 +294,7 @@ pub async fn match_v5_get_timeline(
     join_all_future_errs(futures).await
 }
 
+/// Get LoL featured spectator games and check if summoners in one show up as in-game.
 pub async fn spectator_v5_combo(route: PlatformRoute) -> Result<(), String> {
     let featured_p = riot_api().spectator_v5().get_featured_games(route);
     let featured = featured_p
@@ -333,6 +338,7 @@ pub async fn spectator_v5_combo(route: PlatformRoute) -> Result<(), String> {
     Ok(())
 }
 
+/// Get TFT featured spectator games and check if summoners in one show up as in-game.
 pub async fn spectator_tft_v5_combo(route: PlatformRoute) -> Result<(), String> {
     let featured_p = riot_api().spectator_tft_v5().get_featured_games(route);
     let featured = featured_p.await.map_err(|e| e.to_string())?;
@@ -372,6 +378,41 @@ pub async fn spectator_tft_v5_combo(route: PlatformRoute) -> Result<(), String> 
         );
     }
     Ok(())
+}
+
+/// Get recent Challenger matches and check that they parse as valid.
+pub async fn val_match_v1_latest(route: ValPlatformRoute) -> Result<(), String> {
+    // Val rate limits are super low.
+    const NUM_MATCHES: usize = 5;
+
+    let recent_matches = riot_api()
+        .val_match_v1()
+        .get_recent(route, "competitive")
+        .await
+        .map_err(|e| format!("Failed to get recent Valorant matches: {}", e))?;
+
+    val_match_v1_get(route, &recent_matches.match_ids[..NUM_MATCHES]).await
+}
+
+/// Check that the given Valorant matches parse as valid.
+pub async fn val_match_v1_get(
+    route: ValPlatformRoute,
+    matches: impl IntoIterator<Item = impl AsRef<str>>,
+) -> Result<(), String> {
+    let futures = matches.into_iter().map(|matche| async move {
+        let matche = matche.as_ref();
+        let p = riot_api().val_match_v1().get_match(route, matche);
+        let m = p
+            .await
+            .map_err(|e| format!("Failed to get match {}: {:?}", matche, e))?
+            .ok_or(format!("Match {} not found.", matche))?;
+
+        // TODO(mingwei): Check the match a bit.
+        let _ = m;
+
+        Ok(())
+    });
+    join_all_future_errs(futures).await
 }
 
 /// Joins all futures and keeps ALL error messages, separated by newlines.

@@ -1,5 +1,4 @@
 /// Non-match Valorant tests for LATAM.
-
 mod testutils;
 use riven::consts::*;
 use testutils::{riven_test, val_content_ranked};

@@ -135,32 +135,37 @@
 //!
 //! If the `Option` is `None`, this indicates that the request completed
 //! successfully but no data was returned. This happens in several situations, such
-//! as getting a summoner (by name) or match (by id) that doesn't exist, or getting
+//! as getting an account (by `name#tag`) or match (by id) that doesn't exist, or getting
 //! spectator data for a summoner who is not in-game.
-//! Specifically, the API returned a 404 HTTP status code in this situation.
+//! Specifically, the API returned an HTTP 404 (or 204) status code.
 //!
-//! The error type used by Riven is `riven::RiotApiError`. It provides some basic
-//! diagnostic information, such as the source Reqwest error, the number of retries
-//! attempted, and the Reqwest `Response` object.
+//! The error type returned by Riven is [`RiotApiError`](https://docs.rs/riven/latest/riven/struct.RiotApiError.html).
+//! It provides some basic diagnostic information, such as the source reqwest
+//! error, the number of retries attempted, and the reqwest `Response` object.
 //!
-//! You can configure the number of time Riven retries using
-//! `RiotApiConfig::set_retries(...)` and the `RiotApi::from_config(config)`
-//! constructor. By default, Riven retries up to 3 times (4 requests total).
-//! Some errors, such as 400 client errors, are not retried as they would
-//! inevitably fail again.
+//! By default, Riven retries up to 3 times (4 requests total). Some errors, such
+//! as 400 client errors, are not retried as they would inevitably fail again.
+//!
+//! You can configure Riven by creating a [`RiotApiConfig`](https://docs.rs/riven/latest/riven/struct.RiotApiConfig.html)
+//! instance, setting the desired config values, and passing that to [`RiotApi::new`](https://docs.rs/riven/latest/riven/struct.RiotApi.html#method.new)
+//! (instead of just the API key). For example, you can configure the number of
+//! times Riven retries using [`RiotApiConfig::set_retries(...)`](https://docs.rs/riven/latest/riven/struct.RiotApiConfig.html#method.set_retries).
+//!
 //!
 //! ## Semantic Versioning
 //!
 //! This package follows semantic versioning to an extent. However, the Riot API
 //! itself changes often and does not follow semantic versioning, which makes
-//! things difficult. Out-of-date versions will slowly partially cease to work due
-//! to this.
+//! things difficult. Keep Riven up-to-date as out-of-date versions will slowly
+//! cease to work.
 //!
-//! When the API changes, this may result in breaking changes in the `models`
-//! module, `endpoints` module, and some of the `consts` module. "Handle accessor"
-//! methods may be removed from `RiotApi` if the corresponding endpoint is removed
-//! from the Riot API. These breaking changes will increment the **MINOR** version,
-//! not the major version.
+//! When the API changes, this may result in breaking changes in the [`models`](https://docs.rs/riven/latest/riven/models/index.html)
+//! module, [`endpoints`](https://docs.rs/riven/latest/riven/endpoints/index.html)
+//! module, and some of the [`consts`](https://docs.rs/riven/latest/riven/consts/index.html)
+//! module. Models may receive new fields (and, less frequently, have fields
+//! removed), endpoints may be added or removed, and new enum variants may be added.
+//! These breaking changes will increment the **MINOR** version, not the major
+//! version. (`major.minor.patch`)
 //!
 //! Parts of Riven that do not depend on Riot API changes do follow semantic
 //! versioning.
@@ -183,7 +188,6 @@
 //! dependencies.
 //!
 //! To run the srcgen use `node riven/srcgen` from the repository root.
-//!
 //!
 
 // Re-exported reqwest types.

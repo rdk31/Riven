@@ -20,31 +20,6 @@ static MATCHES: &[&str] = &[
     "JP1_419115017",
 ];
 
-/// Summoner tests.
-#[riven_test]
-async fn summoner_get_kanjikana() -> Result<(), String> {
-    let p = riot_api()
-        .summoner_v4()
-        .get_by_summoner_name(ROUTE, "私の 頭が かたい");
-    let s = p
-        .await
-        .map_err(|e| e.to_string())?
-        .ok_or_else(|| "Failed to get myheadhard".to_owned())?;
-    rassert!(0 < s.puuid.len());
-    Ok(())
-}
-
-// Failure cases.
-
-// /// Make sure get_raw_response(...) with invalid path fails as expected.
-// #[riven_test]
-// async fn raw_response_invalid -> Result<(), String> {
-//     let p = riot_api().get_raw_response("summoner-v4.getBySummonerName", Region::JP.into(), "INVALID/PATH".to_owned(), None);
-//     let r = p.await;
-//     rassert!(r.is_err());
-//     Ok(())
-// }
-
 /// summoner_v4().get_by_summoner_name(...) normally returns an option.
 /// If we use `get` (instead of `get_optional`) make sure it errors.
 #[riven_test]

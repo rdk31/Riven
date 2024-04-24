@@ -30,6 +30,15 @@ async fn account_v1_getbyriotid_getbypuuid() -> Result<(), String> {
     Ok(())
 }
 
+#[riven_test]
+async fn account_v1_getbyriotid_none() -> Result<(), String> {
+    let p = riot_api()
+        .account_v1()
+        .get_by_riot_id(ROUTE, "this account does not exist", "NA1");
+    rassert!(p.await.map_err(|e| e.to_string())?.is_none());
+    Ok(())
+}
+
 /// Tournament stub test.
 #[riven_test]
 async fn tournamentstub() -> Result<(), String> {

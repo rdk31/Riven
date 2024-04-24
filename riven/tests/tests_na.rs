@@ -1,38 +1,8 @@
 mod testutils;
 use riven::consts::*;
-use riven::models::summoner_v4::*;
 use testutils::*;
 
-fn validate_summoners(s1: Summoner, s2: Summoner) -> Result<(), String> {
-    rassert_eq!(s1.puuid, s2.puuid, "PUUIDs didn't match.");
-    rassert_eq!(s1.id, s2.id, "Summoner IDs didn't match.");
-    rassert_eq!(s1.account_id, s2.account_id, "Account IDs didn't match.");
-    Ok(())
-}
-
 const ROUTE: PlatformRoute = PlatformRoute::NA1;
-
-// Summoner tests.
-
-#[riven_test]
-async fn summoner_double() -> Result<(), String> {
-    let l1p = riot_api()
-        .summoner_v4()
-        .get_by_summoner_name(ROUTE, "lug nuts k");
-    let l2p = riot_api()
-        .summoner_v4()
-        .get_by_summoner_name(ROUTE, "lugnuts k");
-    let l1 = l1p
-        .await
-        .map_err(|e| e.to_string())?
-        .ok_or_else(|| "'lug nuts k' not found!".to_owned())?;
-    let l2 = l2p
-        .await
-        .map_err(|e| e.to_string())?
-        .ok_or_else(|| "'lugnuts k' not found!".to_owned())?;
-    validate_summoners(l1, l2)?;
-    Ok(())
-}
 
 #[riven_test]
 async fn champion_getrotation() -> Result<(), String> {
@@ -65,16 +35,17 @@ async fn leagueexp_get() -> Result<(), String> {
 
 #[riven_test]
 async fn championmasteryv4_lugnutsk() -> Result<(), String> {
-    let summoner = riot_api()
-        .summoner_v4()
-        .get_by_summoner_name(ROUTE, "LugnutsK");
-    let summoner = summoner
+    let account =
+        riot_api()
+            .account_v1()
+            .get_by_riot_id(RegionalRoute::AMERICAS, "LugnutsK", "000");
+    let account = account
         .await
         .map_err(|e| e.to_string())?
         .ok_or_else(|| "'LugnutsK' not found!".to_owned())?;
     let masteries = riot_api()
         .champion_mastery_v4()
-        .get_all_champion_masteries_by_puuid(ROUTE, &summoner.puuid);
+        .get_all_champion_masteries_by_puuid(ROUTE, &account.puuid);
     let masteries = masteries.await.map_err(|e| e.to_string())?;
     rassert!(74 <= masteries.len());
     Ok(())

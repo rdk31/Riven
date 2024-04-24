@@ -51,27 +51,6 @@ async fn tftmatchv1_getmatch() -> Result<(), String> {
     Ok(())
 }
 
-#[riven_test]
-async fn tftsummonerv1_getbyname() -> Result<(), String> {
-    let p = riot_api()
-        .tft_summoner_v1()
-        .get_by_summoner_name(ROUTE, "相当猥琐");
-    let _s = p
-        .await
-        .map_err(|e| e.to_string())?
-        .ok_or("Failed to get TFT summoner.".to_owned())?;
-    Ok(())
-}
-
-#[riven_test]
-async fn tftsummonerv1_getbyname_none() -> Result<(), String> {
-    let p = riot_api()
-        .tft_summoner_v1()
-        .get_by_summoner_name(ROUTE, "this summoner does not exist");
-    rassert!(p.await.map_err(|e| e.to_string())?.is_none());
-    Ok(())
-}
-
 /// Get top rated player, get some of their matches.
 #[riven_test]
 async fn tft_combo() -> Result<(), String> {

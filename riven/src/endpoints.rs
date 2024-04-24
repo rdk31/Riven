@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version d88b76516d4cc65491fb04b455d05dec3545ebfd
+// Version 3d364f8efe1fc3090102af41f8d7fec1554abf45
 
 //! Automatically generated endpoint handles.
 #![allow(clippy::let_and_return, clippy::too_many_arguments)]
@@ -1336,25 +1336,6 @@ impl<'a> SummonerV4<'a> {
         future
     }
 
-    /// Get a summoner by summoner name.
-    /// # Parameters
-    /// * `route` - Route to query.
-    /// * `summoner_name` (required, in path) - Summoner Name
-    /// # Riot Developer API Reference
-    /// <a href="https://developer.riotgames.com/api-methods/#summoner-v4/GET_getBySummonerName" target="_blank">`summoner-v4.getBySummonerName`</a>
-    ///
-    /// Note: this method is automatically generated.
-    pub fn get_by_summoner_name(&self, route: PlatformRoute, summoner_name: &str)
-        -> impl Future<Output = Result<Option<summoner_v4::Summoner>>> + 'a
-    {
-        let route_str = route.into();
-        let request = self.base.request(Method::GET, route_str, &format!("/lol/summoner/v4/summoners/by-name/{}", summoner_name));
-        let future = self.base.execute_opt::<summoner_v4::Summoner>("summoner-v4.getBySummonerName", route_str, request);
-        #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("summoner-v4.getBySummonerName"));
-        future
-    }
-
     /// Get a summoner by PUUID.
     /// # Parameters
     /// * `route` - Route to query.
@@ -1682,25 +1663,6 @@ impl<'a> TftSummonerV1<'a> {
         let future = self.base.execute_val::<tft_summoner_v1::Summoner>("tft-summoner-v1.getByAccountId", route_str, request);
         #[cfg(feature = "tracing")]
         let future = future.instrument(tracing::info_span!("tft-summoner-v1.getByAccountId"));
-        future
-    }
-
-    /// Get a summoner by summoner name.
-    /// # Parameters
-    /// * `route` - Route to query.
-    /// * `summoner_name` (required, in path) - Summoner Name
-    /// # Riot Developer API Reference
-    /// <a href="https://developer.riotgames.com/api-methods/#tft-summoner-v1/GET_getBySummonerName" target="_blank">`tft-summoner-v1.getBySummonerName`</a>
-    ///
-    /// Note: this method is automatically generated.
-    pub fn get_by_summoner_name(&self, route: PlatformRoute, summoner_name: &str)
-        -> impl Future<Output = Result<Option<tft_summoner_v1::Summoner>>> + 'a
-    {
-        let route_str = route.into();
-        let request = self.base.request(Method::GET, route_str, &format!("/tft/summoner/v1/summoners/by-name/{}", summoner_name));
-        let future = self.base.execute_opt::<tft_summoner_v1::Summoner>("tft-summoner-v1.getBySummonerName", route_str, request);
-        #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tft-summoner-v1.getBySummonerName"));
         future
     }
 

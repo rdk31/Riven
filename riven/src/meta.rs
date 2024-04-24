@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version d88b76516d4cc65491fb04b455d05dec3545ebfd
+// Version 3d364f8efe1fc3090102af41f8d7fec1554abf45
 
 //! Metadata about the Riot API and Riven.
 //!
@@ -16,7 +16,7 @@
 
 /// Metadata for endpoints. Each tuple corresponds to one endpoint and contains
 /// the HTTP [`Method`](reqwest::Method), `str` path, and the method's `str` ID.
-pub static ALL_ENDPOINTS: [(reqwest::Method, &str, &str); 81] = [
+pub static ALL_ENDPOINTS: [(reqwest::Method, &str, &str); 79] = [
     (reqwest::Method::GET, "/riot/account/v1/accounts/by-puuid/{puuid}", "account-v1.getByPuuid"),
     (reqwest::Method::GET, "/riot/account/v1/accounts/by-riot-id/{gameName}/{tagLine}", "account-v1.getByRiotId"),
     (reqwest::Method::GET, "/riot/account/v1/accounts/me", "account-v1.getByAccessToken"),
@@ -61,7 +61,6 @@ pub static ALL_ENDPOINTS: [(reqwest::Method, &str, &str); 81] = [
     (reqwest::Method::GET, "/lol/spectator/v5/featured-games", "spectator-v5.getFeaturedGames"),
     (reqwest::Method::GET, "/fulfillment/v1/summoners/by-puuid/{rsoPUUID}", "summoner-v4.getByRSOPUUID"),
     (reqwest::Method::GET, "/lol/summoner/v4/summoners/by-account/{encryptedAccountId}", "summoner-v4.getByAccountId"),
-    (reqwest::Method::GET, "/lol/summoner/v4/summoners/by-name/{summonerName}", "summoner-v4.getBySummonerName"),
     (reqwest::Method::GET, "/lol/summoner/v4/summoners/by-puuid/{encryptedPUUID}", "summoner-v4.getByPUUID"),
     (reqwest::Method::GET, "/lol/summoner/v4/summoners/me", "summoner-v4.getByAccessToken"),
     (reqwest::Method::GET, "/lol/summoner/v4/summoners/{encryptedSummonerId}", "summoner-v4.getBySummonerId"),
@@ -76,7 +75,6 @@ pub static ALL_ENDPOINTS: [(reqwest::Method, &str, &str); 81] = [
     (reqwest::Method::GET, "/tft/match/v1/matches/{matchId}", "tft-match-v1.getMatch"),
     (reqwest::Method::GET, "/tft/status/v1/platform-data", "tft-status-v1.getPlatformData"),
     (reqwest::Method::GET, "/tft/summoner/v1/summoners/by-account/{encryptedAccountId}", "tft-summoner-v1.getByAccountId"),
-    (reqwest::Method::GET, "/tft/summoner/v1/summoners/by-name/{summonerName}", "tft-summoner-v1.getBySummonerName"),
     (reqwest::Method::GET, "/tft/summoner/v1/summoners/by-puuid/{encryptedPUUID}", "tft-summoner-v1.getByPUUID"),
     (reqwest::Method::GET, "/tft/summoner/v1/summoners/me", "tft-summoner-v1.getByAccessToken"),
     (reqwest::Method::GET, "/tft/summoner/v1/summoners/{encryptedSummonerId}", "tft-summoner-v1.getBySummonerId"),

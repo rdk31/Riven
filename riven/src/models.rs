@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version 3d364f8efe1fc3090102af41f8d7fec1554abf45
+// Version 41709c9467fb6608974d90fc3b12980cd76acde3
 
 #![allow(missing_docs)]
 
@@ -98,10 +98,6 @@ pub mod champion_mastery_v4 {
         /// The token earned for this champion at the current championLevel. When the championLevel is advanced the tokensEarned resets to 0.
         #[serde(rename = "tokensEarned")]
         pub tokens_earned: i32,
-        #[serde(rename = "markRequiredForNextLevel")]
-        pub mark_required_for_next_level: i32,
-        #[serde(rename = "championSeasonMilestone")]
-        pub champion_season_milestone: i32,
     }
 }
 

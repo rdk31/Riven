@@ -38,7 +38,7 @@ pub enum QueueType {
     RANKED_TFT_PAIRS,
     /// Ranked Teamfight Tactics (Double Up Workshop) games
     RANKED_TFT_DOUBLE_UP,
-    /// 2v2v2v2 "Arena" games
+    /// "Arena" games
     CHERRY,
 }
 

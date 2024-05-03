@@ -246,9 +246,7 @@ newtype_enum! {
         TWISTED_TREELINE_3V3_RANKED_FLEX_DEPRECATED_470 = 470,
         /// `490`.
         /// Normal (Quickplay) games on Summoner's Rift
-        ///
-        /// https://github.com/RiotGames/developer-relations/issues/846
-        SUMMONERS_RIFT_NORMAL_QUICKPLAY_ = 490,
+        SUMMONERS_RIFT_NORMAL_QUICKPLAY = 490,
         /// `600`.
         /// Blood Hunt Assassin games on Summoner's Rift
         SUMMONERS_RIFT_BLOOD_HUNT_ASSASSIN = 600,
@@ -353,16 +351,16 @@ newtype_enum! {
         CONVERGENCE_TEAMFIGHT_TACTICS_SIMLUATION = 1111,
         /// `1130`.
         /// Ranked Teamfight Tactics (Hyper Roll) games on Convergence
-        CONVERGENCE_RANKED_TEAMFIGHT_TACTICS_HYPER_ROLL_ = 1130,
+        CONVERGENCE_RANKED_TEAMFIGHT_TACTICS_HYPER_ROLL = 1130,
         /// `1150`.
         /// Ranked Teamfight Tactics (Double Up Workshop) games on Convergence
         ///
         /// Deprecated in patch 12.11 in favor of queueId 1160
         #[deprecated(note="Deprecated in patch 12.11 in favor of queueId 1160")]
-        CONVERGENCE_RANKED_TEAMFIGHT_TACTICS_DOUBLE_UP_WORKSHOP__DEPRECATED_1150 = 1150,
+        CONVERGENCE_RANKED_TEAMFIGHT_TACTICS_DOUBLE_UP_WORKSHOP_DEPRECATED_1150 = 1150,
         /// `1160`.
         /// Ranked Teamfight Tactics (Double Up Workshop) games on Convergence
-        CONVERGENCE_RANKED_TEAMFIGHT_TACTICS_DOUBLE_UP_WORKSHOP_ = 1160,
+        CONVERGENCE_RANKED_TEAMFIGHT_TACTICS_DOUBLE_UP_WORKSHOP = 1160,
         /// `1200`.
         /// Nexus Blitz games on Nexus Blitz
         ///
@@ -377,7 +375,10 @@ newtype_enum! {
         SUMMONERS_RIFT_ULTIMATE_SPELLBOOK = 1400,
         /// `1700`.
         /// 2v2v2v2 `CHERRY` games on Arena
-        ARENA_2V2V2V2_CHERRY_ = 1700,
+        ARENA_2V2V2V2_CHERRY = 1700,
+        /// `1710`.
+        /// Arena (`CHERRY` games) games on Rings of Wrath
+        RINGS_OF_WRATH_ARENA_CHERRY_GAMES = 1710,
         /// `1900`.
         /// Pick URF games on Summoner's Rift
         SUMMONERS_RIFT_PICK_URF = 1900,

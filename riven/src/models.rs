@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version 41709c9467fb6608974d90fc3b12980cd76acde3
+// Version a70746fcf353ba0ad0aceceafcc70d4ba8de4431
 
 #![allow(missing_docs)]
 
@@ -2079,36 +2079,6 @@ pub mod match_v5 {
         #[serde(rename = "xp")]
         pub xp: i32,
     }
-    /// MatchTimelineInfoFrameParticipantFrames data object.
-    #[derive(Clone, Debug)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct MatchTimelineInfoFrameParticipantFrames {
-        #[serde(rename = "1")]
-        pub x1: MatchTimelineInfoFrameParticipantFrame,
-        #[serde(rename = "2")]
-        pub x2: MatchTimelineInfoFrameParticipantFrame,
-        #[serde(rename = "3")]
-        pub x3: MatchTimelineInfoFrameParticipantFrame,
-        #[serde(rename = "4")]
-        pub x4: MatchTimelineInfoFrameParticipantFrame,
-        #[serde(rename = "5")]
-        pub x5: MatchTimelineInfoFrameParticipantFrame,
-        #[serde(rename = "6")]
-        pub x6: MatchTimelineInfoFrameParticipantFrame,
-        #[serde(rename = "7")]
-        pub x7: MatchTimelineInfoFrameParticipantFrame,
-        #[serde(rename = "8")]
-        pub x8: MatchTimelineInfoFrameParticipantFrame,
-        /// Possibly null for the Arena 2v2v2v2 (`CHERRY`) game mode.
-        #[serde(rename = "9")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub x9: Option<MatchTimelineInfoFrameParticipantFrame>,
-        /// Possibly null for the Arena 2v2v2v2 (`CHERRY`) game mode.
-        #[serde(rename = "10")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub x10: Option<MatchTimelineInfoFrameParticipantFrame>,
-    }
     /// MatchTimelineInfoFrame data object.
     #[derive(Clone, Debug)]
     #[derive(serde::Serialize, serde::Deserialize)]
@@ -2118,7 +2088,7 @@ pub mod match_v5 {
         pub events: std::vec::Vec<MatchTimelineInfoFrameEvent>,
         #[serde(rename = "participantFrames")]
         #[serde(skip_serializing_if = "Option::is_none")]
-        pub participant_frames: Option<MatchTimelineInfoFrameParticipantFrames>,
+        pub participant_frames: Option<std::collections::HashMap<i32, MatchTimelineInfoFrameParticipantFrame>>,
         #[serde(rename = "timestamp")]
         pub timestamp: i32,
     }

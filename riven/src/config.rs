@@ -14,6 +14,7 @@ pub struct RiotApiConfig {
     pub(crate) burst_factor: f32,
     pub(crate) duration_overhead: Duration,
     pub(crate) client_builder: Option<ClientBuilder>,
+    pub(crate) rso_clear_header: Option<String>,
 }
 
 impl RiotApiConfig {
@@ -81,6 +82,7 @@ impl RiotApiConfig {
             burst_factor: Self::PRECONFIG_BURST_BURST_FACTOR,
             duration_overhead: Self::PRECONFIG_BURST_DURATION_OVERHEAD,
             client_builder: Some(ClientBuilder::new().default_headers(default_headers)),
+            rso_clear_header: Some(Self::RIOT_KEY_HEADER.to_owned()),
         }
     }
 
@@ -101,6 +103,7 @@ impl RiotApiConfig {
             burst_factor: Self::PRECONFIG_BURST_BURST_FACTOR,
             duration_overhead: Self::PRECONFIG_BURST_DURATION_OVERHEAD,
             client_builder: Some(client_builder),
+            rso_clear_header: Some(Self::RIOT_KEY_HEADER.to_owned()),
         }
     }
 
@@ -293,6 +296,24 @@ impl RiotApiConfig {
     /// `self`, for chaining.
     pub fn set_duration_overhead(mut self, duration_overhead: Duration) -> Self {
         self.duration_overhead = duration_overhead;
+        self
+    }
+
+    /// Sets the header to clear for RSO requests (if `Some`), or will not override any headers (if
+    /// `None`).
+    ///
+    /// This is a bit of a hack. The client used by Riven is expected to include the API key as a
+    /// default header. However, if the API key is included in an [RSO](https://developer.riotgames.com/docs/lol#rso-integration)
+    /// request the server responds with a 400 "Bad request - Invalid authorization specified"
+    /// error. To avoid this the `rso_clear_header` header is overridden to be empty for RSO
+    /// requests.
+    ///
+    /// This is set to `Some(`[`Self::RIOT_KEY_HEADER`]`)` by default.
+    ///
+    /// # Returns
+    /// `self`, for chaining.
+    pub fn set_rso_clear_header(mut self, rso_clear_header: Option<String>) -> Self {
+        self.rso_clear_header = rso_clear_header;
         self
     }
 }

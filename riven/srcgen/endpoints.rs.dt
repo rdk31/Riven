@@ -77,6 +77,7 @@ impl<'a> {{= endpoint }}<'a> {
                 const method = dotUtils.changeCase.snakeCase(operationId.slice(operationId.indexOf('.') + 1));
 
                 const resp200 = operation.responses['200'];
+                const isRso = (null != operation.security) && (null != operation.security[0]['rso']);
 
                 /* Return type checks. */
                 let hasReturn = false;
@@ -109,6 +110,9 @@ impl<'a> {{= endpoint }}<'a> {
                 const argBuilder = [
                     'route: ', dotUtils.changeCase.pascalCase(operation['x-route-enum']), 'Route'
                 ];
+                if (isRso) {
+                    argBuilder.push(', access_token: impl std::fmt::Display');
+                }
 
                 /* Add body params before path/query. */
                 if (bodyType) {
@@ -161,17 +165,17 @@ impl<'a> {{= endpoint }}<'a> {
 }}
     /// # Parameters
     /// * `route` - Route to query.
-{{
-                if (allParams)
-                {
-                    for (let param of allParams)
-                    {
-}}
+{{? isRso }}
+    /// * `access_token` - RSO access token.
+{{?}}
+{{~ allParams || [] :param }}
     /// * `{{= dotUtils.changeCase.snakeCase(param.name) }}` ({{= param.required ? 'required' : 'optional' }}, in {{= param.in }}){{= param.description ? ' - ' + param.description : ''}}
-{{
-                    }
-                }
-}}
+{{~}}
+{{? isRso }}
+    /// # RSO
+    /// This endpoint uses [Riot Sign On](https://developer.riotgames.com/docs/lol#rso-integration)
+    /// via the `access_token` parameter, instead of the Riot API key.
+{{?}}
     /// # Riot Developer API Reference
     /// <a href="{{= operation.externalDocs.url }}" target="_blank">`{{= operationId }}`</a>
     ///
@@ -181,22 +185,16 @@ impl<'a> {{= endpoint }}<'a> {
     {
         let route_str = route.into();
         let request = self.base.request(Method::{{= verb.toUpperCase() }}, route_str, {{= routeArgument }});
-{{
-                for (let queryParam of queryParams)
-                {
-}}
+{{? isRso }}
+        let mut request = request.bearer_auth(access_token);
+        if let Some(clear) = self.base.get_rso_clear_header() { request = request.header(clear, "") }
+{{?}}
+{{~ queryParams :queryParam }}
         {{= dotUtils.formatAddQueryParam(queryParam) }}
-{{
-                }
-}}
-{{
-                for (const headerParam of headerParams)
-                {
-}}
+{{~}}
+{{~ headerParams :headerParam }}
         {{= dotUtils.formatAddHeaderParam(headerParam) }}
-{{
-                }
-}}
+{{~}}
 {{? bodyType }}
         let request = request.body(serde_json::ser::to_vec(body).unwrap());
 {{?}}

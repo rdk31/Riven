@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version a70746fcf353ba0ad0aceceafcc70d4ba8de4431
+// Version 92f57e3e7279cc02ec6a5ce6665ca08354d6a178
 
 //! Automatically generated endpoint handles.
 #![allow(clippy::let_and_return, clippy::too_many_arguments)]
@@ -324,17 +324,21 @@ impl<'a> AccountV1<'a> {
     /// Get account by access token
     /// # Parameters
     /// * `route` - Route to query.
-    /// * `authorization` (required, in header)
+    /// * `access_token` - RSO access token.
+    /// # RSO
+    /// This endpoint uses [Riot Sign On](https://developer.riotgames.com/docs/lol#rso-integration)
+    /// via the `access_token` parameter, instead of the Riot API key.
     /// # Riot Developer API Reference
     /// <a href="https://developer.riotgames.com/api-methods/#account-v1/GET_getByAccessToken" target="_blank">`account-v1.getByAccessToken`</a>
     ///
     /// Note: this method is automatically generated.
-    pub fn get_by_access_token(&self, route: RegionalRoute, authorization: &str)
+    pub fn get_by_access_token(&self, route: RegionalRoute, access_token: impl std::fmt::Display)
         -> impl Future<Output = Result<account_v1::Account>> + 'a
     {
         let route_str = route.into();
         let request = self.base.request(Method::GET, route_str, "/riot/account/v1/accounts/me");
-        let request = request.header("Authorization", authorization);
+        let mut request = request.bearer_auth(access_token);
+        if let Some(clear) = self.base.get_rso_clear_header() { request = request.header(clear, "") }
         let future = self.base.execute_val::<account_v1::Account>("account-v1.getByAccessToken", route_str, request);
         #[cfg(feature = "tracing")]
         let future = future.instrument(tracing::info_span!("account-v1.getByAccessToken"));
@@ -927,17 +931,21 @@ impl<'a> LorDeckV1<'a> {
     /// Get a list of the calling user's decks.
     /// # Parameters
     /// * `route` - Route to query.
-    /// * `authorization` (required, in header)
+    /// * `access_token` - RSO access token.
+    /// # RSO
+    /// This endpoint uses [Riot Sign On](https://developer.riotgames.com/docs/lol#rso-integration)
+    /// via the `access_token` parameter, instead of the Riot API key.
     /// # Riot Developer API Reference
     /// <a href="https://developer.riotgames.com/api-methods/#lor-deck-v1/GET_getDecks" target="_blank">`lor-deck-v1.getDecks`</a>
     ///
     /// Note: this method is automatically generated.
-    pub fn get_decks(&self, route: RegionalRoute, authorization: &str)
+    pub fn get_decks(&self, route: RegionalRoute, access_token: impl std::fmt::Display)
         -> impl Future<Output = Result<Vec<lor_deck_v1::Deck>>> + 'a
     {
         let route_str = route.into();
         let request = self.base.request(Method::GET, route_str, "/lor/deck/v1/decks/me");
-        let request = request.header("Authorization", authorization);
+        let mut request = request.bearer_auth(access_token);
+        if let Some(clear) = self.base.get_rso_clear_header() { request = request.header(clear, "") }
         let future = self.base.execute_val::<Vec<lor_deck_v1::Deck>>("lor-deck-v1.getDecks", route_str, request);
         #[cfg(feature = "tracing")]
         let future = future.instrument(tracing::info_span!("lor-deck-v1.getDecks"));
@@ -947,17 +955,21 @@ impl<'a> LorDeckV1<'a> {
     /// Create a new deck for the calling user.
     /// # Parameters
     /// * `route` - Route to query.
-    /// * `authorization` (required, in header)
+    /// * `access_token` - RSO access token.
+    /// # RSO
+    /// This endpoint uses [Riot Sign On](https://developer.riotgames.com/docs/lol#rso-integration)
+    /// via the `access_token` parameter, instead of the Riot API key.
     /// # Riot Developer API Reference
     /// <a href="https://developer.riotgames.com/api-methods/#lor-deck-v1/POST_createDeck" target="_blank">`lor-deck-v1.createDeck`</a>
     ///
     /// Note: this method is automatically generated.
-    pub fn create_deck(&self, route: RegionalRoute, body: &lor_deck_v1::NewDeck, authorization: &str)
+    pub fn create_deck(&self, route: RegionalRoute, access_token: impl std::fmt::Display, body: &lor_deck_v1::NewDeck)
         -> impl Future<Output = Result<String>> + 'a
     {
         let route_str = route.into();
         let request = self.base.request(Method::POST, route_str, "/lor/deck/v1/decks/me");
-        let request = request.header("Authorization", authorization);
+        let mut request = request.bearer_auth(access_token);
+        if let Some(clear) = self.base.get_rso_clear_header() { request = request.header(clear, "") }
         let request = request.body(serde_json::ser::to_vec(body).unwrap());
         let future = self.base.execute_val::<String>("lor-deck-v1.createDeck", route_str, request);
         #[cfg(feature = "tracing")]
@@ -980,17 +992,21 @@ impl<'a> LorInventoryV1<'a> {
     /// Return a list of cards owned by the calling user.
     /// # Parameters
     /// * `route` - Route to query.
-    /// * `authorization` (required, in header)
+    /// * `access_token` - RSO access token.
+    /// # RSO
+    /// This endpoint uses [Riot Sign On](https://developer.riotgames.com/docs/lol#rso-integration)
+    /// via the `access_token` parameter, instead of the Riot API key.
     /// # Riot Developer API Reference
     /// <a href="https://developer.riotgames.com/api-methods/#lor-inventory-v1/GET_getCards" target="_blank">`lor-inventory-v1.getCards`</a>
     ///
     /// Note: this method is automatically generated.
-    pub fn get_cards(&self, route: RegionalRoute, authorization: &str)
+    pub fn get_cards(&self, route: RegionalRoute, access_token: impl std::fmt::Display)
         -> impl Future<Output = Result<Vec<lor_inventory_v1::Card>>> + 'a
     {
         let route_str = route.into();
         let request = self.base.request(Method::GET, route_str, "/lor/inventory/v1/cards/me");
-        let request = request.header("Authorization", authorization);
+        let mut request = request.bearer_auth(access_token);
+        if let Some(clear) = self.base.get_rso_clear_header() { request = request.header(clear, "") }
         let future = self.base.execute_val::<Vec<lor_inventory_v1::Card>>("lor-inventory-v1.getCards", route_str, request);
         #[cfg(feature = "tracing")]
         let future = future.instrument(tracing::info_span!("lor-inventory-v1.getCards"));
@@ -1358,17 +1374,21 @@ impl<'a> SummonerV4<'a> {
     /// Get a summoner by access token.
     /// # Parameters
     /// * `route` - Route to query.
-    /// * `authorization` (optional, in header) - Bearer token
+    /// * `access_token` - RSO access token.
+    /// # RSO
+    /// This endpoint uses [Riot Sign On](https://developer.riotgames.com/docs/lol#rso-integration)
+    /// via the `access_token` parameter, instead of the Riot API key.
     /// # Riot Developer API Reference
     /// <a href="https://developer.riotgames.com/api-methods/#summoner-v4/GET_getByAccessToken" target="_blank">`summoner-v4.getByAccessToken`</a>
     ///
     /// Note: this method is automatically generated.
-    pub fn get_by_access_token(&self, route: PlatformRoute, authorization: Option<&str>)
+    pub fn get_by_access_token(&self, route: PlatformRoute, access_token: impl std::fmt::Display)
         -> impl Future<Output = Result<summoner_v4::Summoner>> + 'a
     {
         let route_str = route.into();
         let request = self.base.request(Method::GET, route_str, "/lol/summoner/v4/summoners/me");
-        let mut request = request; if let Some(authorization) = authorization { request = request.header("Authorization", authorization); }
+        let mut request = request.bearer_auth(access_token);
+        if let Some(clear) = self.base.get_rso_clear_header() { request = request.header(clear, "") }
         let future = self.base.execute_val::<summoner_v4::Summoner>("summoner-v4.getByAccessToken", route_str, request);
         #[cfg(feature = "tracing")]
         let future = future.instrument(tracing::info_span!("summoner-v4.getByAccessToken"));
@@ -1688,17 +1708,21 @@ impl<'a> TftSummonerV1<'a> {
     /// Get a summoner by access token.
     /// # Parameters
     /// * `route` - Route to query.
-    /// * `authorization` (optional, in header) - Bearer token.
+    /// * `access_token` - RSO access token.
+    /// # RSO
+    /// This endpoint uses [Riot Sign On](https://developer.riotgames.com/docs/lol#rso-integration)
+    /// via the `access_token` parameter, instead of the Riot API key.
     /// # Riot Developer API Reference
     /// <a href="https://developer.riotgames.com/api-methods/#tft-summoner-v1/GET_getByAccessToken" target="_blank">`tft-summoner-v1.getByAccessToken`</a>
     ///
     /// Note: this method is automatically generated.
-    pub fn get_by_access_token(&self, route: PlatformRoute, authorization: Option<&str>)
+    pub fn get_by_access_token(&self, route: PlatformRoute, access_token: impl std::fmt::Display)
         -> impl Future<Output = Result<tft_summoner_v1::Summoner>> + 'a
     {
         let route_str = route.into();
         let request = self.base.request(Method::GET, route_str, "/tft/summoner/v1/summoners/me");
-        let mut request = request; if let Some(authorization) = authorization { request = request.header("Authorization", authorization); }
+        let mut request = request.bearer_auth(access_token);
+        if let Some(clear) = self.base.get_rso_clear_header() { request = request.header(clear, "") }
         let future = self.base.execute_val::<tft_summoner_v1::Summoner>("tft-summoner-v1.getByAccessToken", route_str, request);
         #[cfg(feature = "tracing")]
         let future = future.instrument(tracing::info_span!("tft-summoner-v1.getByAccessToken"));

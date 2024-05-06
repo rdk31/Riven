@@ -187,6 +187,11 @@ impl RiotApi {
             .execute(&self.config, method_id, request)
     }
 
+    /// Gets the [`RiotApiConfig::rso_clear_header`] for use in RSO endpoints.
+    pub(crate) fn get_rso_clear_header(&self) -> Option<&str> {
+        self.config.rso_clear_header.as_deref()
+    }
+
     /// Get or create the RegionalRequester for the given region.
     fn regional_requester(&self, region_platform: &'static str) -> Arc<RegionalRequester> {
         self.regional_requesters

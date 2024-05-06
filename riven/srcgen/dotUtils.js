@@ -28,7 +28,7 @@ Array.prototype.sortBy = function(lambda) {
 
 function preamble() {
   return `\
-#![cfg_attr(rustfmt, rustfmt_skip)]
+#![cfg_attr(any(), rustfmt::skip)]
 ///////////////////////////////////////////////
 //                                           //
 //                     !                     //

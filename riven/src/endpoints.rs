@@ -1,4 +1,4 @@
-#![cfg_attr(rustfmt, rustfmt_skip)]
+#![cfg_attr(any(), rustfmt::skip)]
 ///////////////////////////////////////////////
 //                                           //
 //                     !                     //

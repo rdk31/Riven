@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version 92f57e3e7279cc02ec6a5ce6665ca08354d6a178
+// Version 6461993a9c4165ddca053929f19f6d0e3eb1ca14
 
 #![allow(missing_docs)]
 
@@ -941,6 +941,12 @@ pub mod match_v5 {
     #[derive(serde::Serialize, serde::Deserialize)]
     #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
     pub struct Participant {
+        #[serde(rename = "allInPings")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub all_in_pings: Option<i32>,
+        #[serde(rename = "assistMePings")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub assist_me_pings: Option<i32>,
         #[serde(rename = "assists")]
         pub assists: i32,
         #[serde(rename = "baronKills")]
@@ -961,11 +967,17 @@ pub mod match_v5 {
         pub champion_id: Result<crate::consts::Champion, std::num::TryFromIntError>,
         #[serde(rename = "championName")]
         pub champion_name: String,
+        #[serde(rename = "commandPings")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub command_pings: Option<i32>,
         /// This field is currently only utilized for Kayn's transformations. (Legal values: 0 - None, 1 - Slayer, 2 - Assassin)
         #[serde(rename = "championTransform")]
         pub champion_transform: i32,
         #[serde(rename = "consumablesPurchased")]
         pub consumables_purchased: i32,
+        #[serde(rename = "challenges")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub challenges: Option<Challenges>,
         #[serde(rename = "damageDealtToBuildings")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub damage_dealt_to_buildings: Option<i32>,
@@ -973,6 +985,9 @@ pub mod match_v5 {
         pub damage_dealt_to_objectives: i32,
         #[serde(rename = "damageDealtToTurrets")]
         pub damage_dealt_to_turrets: i32,
+        #[serde(rename = "dangerPings")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub danger_pings: Option<i32>,
         #[serde(rename = "damageSelfMitigated")]
         pub damage_self_mitigated: i32,
         #[serde(rename = "deaths")]
@@ -983,6 +998,15 @@ pub mod match_v5 {
         pub double_kills: i32,
         #[serde(rename = "dragonKills")]
         pub dragon_kills: i32,
+        #[serde(rename = "eligibleForProgression")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub eligible_for_progression: Option<bool>,
+        #[serde(rename = "enemyMissingPings")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub enemy_missing_pings: Option<i32>,
+        #[serde(rename = "enemyVisionPings")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub enemy_vision_pings: Option<i32>,
         #[serde(rename = "firstBloodAssist")]
         pub first_blood_assist: bool,
         #[serde(rename = "firstBloodKill")]
@@ -995,6 +1019,9 @@ pub mod match_v5 {
         pub game_ended_in_early_surrender: bool,
         #[serde(rename = "gameEndedInSurrender")]
         pub game_ended_in_surrender: bool,
+        #[serde(rename = "getBackPings")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub get_back_pings: Option<i32>,
         #[serde(rename = "goldEarned")]
         pub gold_earned: i32,
         #[serde(rename = "goldSpent")]
@@ -1046,8 +1073,14 @@ pub mod match_v5 {
         pub magic_damage_dealt_to_champions: i32,
         #[serde(rename = "magicDamageTaken")]
         pub magic_damage_taken: i32,
+        #[serde(rename = "missions")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub missions: Option<Missions>,
         #[serde(rename = "neutralMinionsKilled")]
         pub neutral_minions_killed: i32,
+        #[serde(rename = "needVisionPings")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub need_vision_pings: Option<i32>,
         #[serde(rename = "nexusKills")]
         pub nexus_kills: i32,
         #[serde(rename = "nexusTakedowns")]
@@ -1060,6 +1093,9 @@ pub mod match_v5 {
         pub objectives_stolen: i32,
         #[serde(rename = "objectivesStolenAssists")]
         pub objectives_stolen_assists: i32,
+        #[serde(rename = "onMyWayPings")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub on_my_way_pings: Option<i32>,
         #[serde(rename = "participantId")]
         pub participant_id: i32,
         #[serde(rename = "pentaKills")]
@@ -1072,6 +1108,9 @@ pub mod match_v5 {
         pub physical_damage_dealt_to_champions: i32,
         #[serde(rename = "physicalDamageTaken")]
         pub physical_damage_taken: i32,
+        #[serde(rename = "placement")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub placement: Option<i32>,
         #[serde(rename = "playerAugment1")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub player_augment1: Option<i32>,
@@ -1087,13 +1126,18 @@ pub mod match_v5 {
         #[serde(rename = "playerSubteamId")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub player_subteam_id: Option<i32>,
+        #[serde(rename = "pushPings")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub push_pings: Option<i32>,
         #[serde(rename = "profileIcon")]
         pub profile_icon: i32,
         #[serde(rename = "puuid")]
         pub puuid: String,
         #[serde(rename = "quadraKills")]
         pub quadra_kills: i32,
-        /// Replaced by `riotIdGameName` in games played in patch 14.5 and after.
+        #[serde(rename = "riotIdGameName")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub riot_id_game_name: Option<String>,
         #[serde(rename = "riotIdName")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub riot_id_name: Option<String>,
@@ -1111,6 +1155,9 @@ pub mod match_v5 {
         pub spell3_casts: i32,
         #[serde(rename = "spell4Casts")]
         pub spell4_casts: i32,
+        #[serde(rename = "subteamPlacement")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub subteam_placement: Option<i32>,
         #[serde(rename = "summoner1Casts")]
         pub summoner1_casts: i32,
         #[serde(rename = "summoner1Id")]
@@ -1136,6 +1183,9 @@ pub mod match_v5 {
         pub time_c_cing_others: i32,
         #[serde(rename = "timePlayed")]
         pub time_played: i32,
+        #[serde(rename = "totalAllyJungleMinionsKilled")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub total_ally_jungle_minions_killed: Option<i32>,
         #[serde(rename = "totalDamageDealt")]
         pub total_damage_dealt: i32,
         #[serde(rename = "totalDamageDealtToChampions")]
@@ -1144,6 +1194,9 @@ pub mod match_v5 {
         pub total_damage_shielded_on_teammates: i32,
         #[serde(rename = "totalDamageTaken")]
         pub total_damage_taken: i32,
+        #[serde(rename = "totalEnemyJungleMinionsKilled")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub total_enemy_jungle_minions_killed: Option<i32>,
         #[serde(rename = "totalHeal")]
         pub total_heal: i32,
         #[serde(rename = "totalHealsOnTeammates")]
@@ -1176,6 +1229,9 @@ pub mod match_v5 {
         pub unreal_kills: i32,
         #[serde(rename = "visionScore")]
         pub vision_score: i32,
+        #[serde(rename = "visionClearedPings")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub vision_cleared_pings: Option<i32>,
         #[serde(rename = "visionWardsBoughtInGame")]
         pub vision_wards_bought_in_game: i32,
         #[serde(rename = "wardsKilled")]
@@ -1184,73 +1240,15 @@ pub mod match_v5 {
         pub wards_placed: i32,
         #[serde(rename = "win")]
         pub win: bool,
-        /// Use `riotIdName` for games before patch 14.5.
-        #[serde(rename = "riotIdGameName")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub riot_id_game_name: Option<String>,
-        #[serde(rename = "allInPings")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub all_in_pings: Option<i32>,
-        #[serde(rename = "assistMePings")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub assist_me_pings: Option<i32>,
         #[serde(rename = "baitPings")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub bait_pings: Option<i32>,
         #[serde(rename = "basicPings")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub basic_pings: Option<i32>,
-        #[serde(rename = "commandPings")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub command_pings: Option<i32>,
-        #[serde(rename = "dangerPings")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub danger_pings: Option<i32>,
-        #[serde(rename = "enemyMissingPings")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub enemy_missing_pings: Option<i32>,
-        #[serde(rename = "enemyVisionPings")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub enemy_vision_pings: Option<i32>,
-        #[serde(rename = "getBackPings")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub get_back_pings: Option<i32>,
         #[serde(rename = "holdPings")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub hold_pings: Option<i32>,
-        #[serde(rename = "needVisionPings")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub need_vision_pings: Option<i32>,
-        #[serde(rename = "onMyWayPings")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub on_my_way_pings: Option<i32>,
-        #[serde(rename = "pushPings")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub push_pings: Option<i32>,
-        #[serde(rename = "visionClearedPings")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub vision_cleared_pings: Option<i32>,
-        #[serde(rename = "eligibleForProgression")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub eligible_for_progression: Option<bool>,
-        #[serde(rename = "challenges")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub challenges: Option<ParticipantChallenges>,
-        #[serde(rename = "totalAllyJungleMinionsKilled")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub total_ally_jungle_minions_killed: Option<i32>,
-        #[serde(rename = "totalEnemyJungleMinionsKilled")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub total_enemy_jungle_minions_killed: Option<i32>,
-        #[serde(rename = "subteamPlacement")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub subteam_placement: Option<i32>,
-        #[serde(rename = "placement")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub placement: Option<i32>,
-        #[serde(rename = "missions")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub missions: Option<ParticipantMissions>,
         #[serde(rename = "playerScore0")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub player_score0: Option<i32>,
@@ -1287,6 +1285,461 @@ pub mod match_v5 {
         #[serde(rename = "playerScore9")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub player_score9: Option<i32>,
+    }
+    /// Challenges data object.
+    /// # Description
+    /// Challenges DTO
+    ///
+    /// Note: This struct is automatically generated
+    #[derive(Clone, Debug)]
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
+    pub struct Challenges {
+        #[serde(rename = "12AssistStreakCount")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub x12_assist_streak_count: Option<i32>,
+        #[serde(rename = "abilityUses")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub ability_uses: Option<i32>,
+        #[serde(rename = "acesBefore15Minutes")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub aces_before15_minutes: Option<i32>,
+        #[serde(rename = "alliedJungleMonsterKills")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub allied_jungle_monster_kills: Option<f64>,
+        #[serde(rename = "baronTakedowns")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub baron_takedowns: Option<i32>,
+        #[serde(rename = "blastConeOppositeOpponentCount")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub blast_cone_opposite_opponent_count: Option<i32>,
+        #[serde(rename = "bountyGold")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub bounty_gold: Option<i32>,
+        #[serde(rename = "buffsStolen")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub buffs_stolen: Option<i32>,
+        #[serde(rename = "completeSupportQuestInTime")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub complete_support_quest_in_time: Option<i32>,
+        #[serde(rename = "controlWardsPlaced")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub control_wards_placed: Option<i32>,
+        #[serde(rename = "damagePerMinute")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub damage_per_minute: Option<f64>,
+        #[serde(rename = "damageTakenOnTeamPercentage")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub damage_taken_on_team_percentage: Option<f64>,
+        #[serde(rename = "dancedWithRiftHerald")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub danced_with_rift_herald: Option<i32>,
+        #[serde(rename = "deathsByEnemyChamps")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub deaths_by_enemy_champs: Option<i32>,
+        #[serde(rename = "dodgeSkillShotsSmallWindow")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub dodge_skill_shots_small_window: Option<i32>,
+        #[serde(rename = "doubleAces")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub double_aces: Option<i32>,
+        #[serde(rename = "dragonTakedowns")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub dragon_takedowns: Option<i32>,
+        #[serde(rename = "legendaryItemUsed")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub legendary_item_used: Option<std::vec::Vec<i32>>,
+        #[serde(rename = "effectiveHealAndShielding")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub effective_heal_and_shielding: Option<f32>,
+        #[serde(rename = "elderDragonKillsWithOpposingSoul")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub elder_dragon_kills_with_opposing_soul: Option<i32>,
+        #[serde(rename = "elderDragonMultikills")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub elder_dragon_multikills: Option<i32>,
+        #[serde(rename = "enemyChampionImmobilizations")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub enemy_champion_immobilizations: Option<i32>,
+        #[serde(rename = "enemyJungleMonsterKills")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub enemy_jungle_monster_kills: Option<f64>,
+        #[serde(rename = "epicMonsterKillsNearEnemyJungler")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub epic_monster_kills_near_enemy_jungler: Option<i32>,
+        #[serde(rename = "epicMonsterKillsWithin30SecondsOfSpawn")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub epic_monster_kills_within30_seconds_of_spawn: Option<i32>,
+        #[serde(rename = "epicMonsterSteals")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub epic_monster_steals: Option<i32>,
+        #[serde(rename = "epicMonsterStolenWithoutSmite")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub epic_monster_stolen_without_smite: Option<i32>,
+        #[serde(rename = "firstTurretKilled")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub first_turret_killed: Option<i32>,
+        #[serde(rename = "firstTurretKilledTime")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub first_turret_killed_time: Option<f32>,
+        #[serde(rename = "flawlessAces")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub flawless_aces: Option<i32>,
+        #[serde(rename = "fullTeamTakedown")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub full_team_takedown: Option<i32>,
+        #[serde(rename = "gameLength")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub game_length: Option<f64>,
+        #[serde(rename = "getTakedownsInAllLanesEarlyJungleAsLaner")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub get_takedowns_in_all_lanes_early_jungle_as_laner: Option<i32>,
+        #[serde(rename = "goldPerMinute")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub gold_per_minute: Option<f64>,
+        #[serde(rename = "hadOpenNexus")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub had_open_nexus: Option<i32>,
+        #[serde(rename = "immobilizeAndKillWithAlly")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub immobilize_and_kill_with_ally: Option<i32>,
+        #[serde(rename = "initialBuffCount")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub initial_buff_count: Option<i32>,
+        #[serde(rename = "initialCrabCount")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub initial_crab_count: Option<i32>,
+        #[serde(rename = "jungleCsBefore10Minutes")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub jungle_cs_before10_minutes: Option<f64>,
+        #[serde(rename = "junglerTakedownsNearDamagedEpicMonster")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub jungler_takedowns_near_damaged_epic_monster: Option<i32>,
+        #[serde(rename = "kda")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub kda: Option<f64>,
+        #[serde(rename = "killAfterHiddenWithAlly")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub kill_after_hidden_with_ally: Option<i32>,
+        #[serde(rename = "killedChampTookFullTeamDamageSurvived")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub killed_champ_took_full_team_damage_survived: Option<i32>,
+        #[serde(rename = "killingSprees")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub killing_sprees: Option<i32>,
+        #[serde(rename = "killParticipation")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub kill_participation: Option<f64>,
+        #[serde(rename = "killsNearEnemyTurret")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub kills_near_enemy_turret: Option<i32>,
+        #[serde(rename = "killsOnOtherLanesEarlyJungleAsLaner")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub kills_on_other_lanes_early_jungle_as_laner: Option<i32>,
+        #[serde(rename = "killsOnRecentlyHealedByAramPack")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub kills_on_recently_healed_by_aram_pack: Option<i32>,
+        #[serde(rename = "killsUnderOwnTurret")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub kills_under_own_turret: Option<i32>,
+        #[serde(rename = "killsWithHelpFromEpicMonster")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub kills_with_help_from_epic_monster: Option<i32>,
+        #[serde(rename = "knockEnemyIntoTeamAndKill")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub knock_enemy_into_team_and_kill: Option<i32>,
+        #[serde(rename = "kTurretsDestroyedBeforePlatesFall")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub k_turrets_destroyed_before_plates_fall: Option<i32>,
+        #[serde(rename = "landSkillShotsEarlyGame")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub land_skill_shots_early_game: Option<i32>,
+        #[serde(rename = "laneMinionsFirst10Minutes")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub lane_minions_first10_minutes: Option<i32>,
+        #[serde(rename = "lostAnInhibitor")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub lost_an_inhibitor: Option<i32>,
+        #[serde(rename = "maxKillDeficit")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub max_kill_deficit: Option<i32>,
+        #[serde(rename = "mejaisFullStackInTime")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub mejais_full_stack_in_time: Option<i32>,
+        #[serde(rename = "moreEnemyJungleThanOpponent")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub more_enemy_jungle_than_opponent: Option<f64>,
+        #[serde(rename = "multiKillOneSpell")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub multi_kill_one_spell: Option<i32>,
+        #[serde(rename = "multikills")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub multikills: Option<i32>,
+        #[serde(rename = "multikillsAfterAggressiveFlash")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub multikills_after_aggressive_flash: Option<i32>,
+        #[serde(rename = "multiTurretRiftHeraldCount")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub multi_turret_rift_herald_count: Option<i32>,
+        #[serde(rename = "outerTurretExecutesBefore10Minutes")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub outer_turret_executes_before10_minutes: Option<i32>,
+        #[serde(rename = "outnumberedKills")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub outnumbered_kills: Option<i32>,
+        #[serde(rename = "outnumberedNexusKill")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub outnumbered_nexus_kill: Option<i32>,
+        #[serde(rename = "perfectDragonSoulsTaken")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub perfect_dragon_souls_taken: Option<i32>,
+        #[serde(rename = "perfectGame")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub perfect_game: Option<i32>,
+        #[serde(rename = "pickKillWithAlly")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub pick_kill_with_ally: Option<i32>,
+        #[serde(rename = "poroExplosions")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub poro_explosions: Option<i32>,
+        #[serde(rename = "quickCleanse")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub quick_cleanse: Option<i32>,
+        #[serde(rename = "quickFirstTurret")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub quick_first_turret: Option<i32>,
+        #[serde(rename = "quickSoloKills")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub quick_solo_kills: Option<i32>,
+        #[serde(rename = "riftHeraldTakedowns")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub rift_herald_takedowns: Option<i32>,
+        #[serde(rename = "saveAllyFromDeath")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub save_ally_from_death: Option<i32>,
+        #[serde(rename = "scuttleCrabKills")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub scuttle_crab_kills: Option<i32>,
+        #[serde(rename = "shortestTimeToAceFromFirstTakedown")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub shortest_time_to_ace_from_first_takedown: Option<f32>,
+        #[serde(rename = "skillshotsDodged")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub skillshots_dodged: Option<i32>,
+        #[serde(rename = "skillshotsHit")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub skillshots_hit: Option<i32>,
+        #[serde(rename = "snowballsHit")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub snowballs_hit: Option<i32>,
+        #[serde(rename = "soloBaronKills")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub solo_baron_kills: Option<i32>,
+        #[serde(rename = "soloKills")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub solo_kills: Option<i32>,
+        #[serde(rename = "stealthWardsPlaced")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub stealth_wards_placed: Option<i32>,
+        #[serde(rename = "survivedSingleDigitHpCount")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub survived_single_digit_hp_count: Option<i32>,
+        #[serde(rename = "survivedThreeImmobilizesInFight")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub survived_three_immobilizes_in_fight: Option<i32>,
+        #[serde(rename = "takedownOnFirstTurret")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub takedown_on_first_turret: Option<i32>,
+        #[serde(rename = "takedowns")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub takedowns: Option<i32>,
+        #[serde(rename = "takedownsAfterGainingLevelAdvantage")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub takedowns_after_gaining_level_advantage: Option<i32>,
+        #[serde(rename = "takedownsBeforeJungleMinionSpawn")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub takedowns_before_jungle_minion_spawn: Option<i32>,
+        #[serde(rename = "takedownsFirstXMinutes")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub takedowns_first_x_minutes: Option<i32>,
+        #[serde(rename = "takedownsInAlcove")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub takedowns_in_alcove: Option<i32>,
+        #[serde(rename = "takedownsInEnemyFountain")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub takedowns_in_enemy_fountain: Option<i32>,
+        #[serde(rename = "teamBaronKills")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub team_baron_kills: Option<i32>,
+        #[serde(rename = "teamDamagePercentage")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub team_damage_percentage: Option<f64>,
+        #[serde(rename = "teamElderDragonKills")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub team_elder_dragon_kills: Option<i32>,
+        #[serde(rename = "teamRiftHeraldKills")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub team_rift_herald_kills: Option<i32>,
+        #[serde(rename = "tookLargeDamageSurvived")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub took_large_damage_survived: Option<i32>,
+        #[serde(rename = "turretPlatesTaken")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub turret_plates_taken: Option<i32>,
+        #[serde(rename = "turretsTakenWithRiftHerald")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub turrets_taken_with_rift_herald: Option<i32>,
+        #[serde(rename = "turretTakedowns")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub turret_takedowns: Option<i32>,
+        #[serde(rename = "twentyMinionsIn3SecondsCount")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub twenty_minions_in3_seconds_count: Option<i32>,
+        #[serde(rename = "twoWardsOneSweeperCount")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub two_wards_one_sweeper_count: Option<i32>,
+        #[serde(rename = "unseenRecalls")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub unseen_recalls: Option<i32>,
+        #[serde(rename = "visionScorePerMinute")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub vision_score_per_minute: Option<f64>,
+        #[serde(rename = "wardsGuarded")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub wards_guarded: Option<i32>,
+        #[serde(rename = "wardTakedowns")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub ward_takedowns: Option<i32>,
+        #[serde(rename = "wardTakedownsBefore20M")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub ward_takedowns_before20_m: Option<i32>,
+        #[serde(rename = "baronBuffGoldAdvantageOverThreshold")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub baron_buff_gold_advantage_over_threshold: Option<f64>,
+        #[serde(rename = "controlWardTimeCoverageInRiverOrEnemyHalf")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub control_ward_time_coverage_in_river_or_enemy_half: Option<f64>,
+        #[serde(rename = "earliestBaron")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub earliest_baron: Option<f64>,
+        #[serde(rename = "earliestDragonTakedown")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub earliest_dragon_takedown: Option<f64>,
+        #[serde(rename = "earliestElderDragon")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub earliest_elder_dragon: Option<f64>,
+        #[serde(rename = "earlyLaningPhaseGoldExpAdvantage")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub early_laning_phase_gold_exp_advantage: Option<f64>,
+        #[serde(rename = "fasterSupportQuestCompletion")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub faster_support_quest_completion: Option<f64>,
+        #[serde(rename = "fastestLegendary")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub fastest_legendary: Option<f64>,
+        #[serde(rename = "hadAfkTeammate")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub had_afk_teammate: Option<f64>,
+        #[serde(rename = "highestChampionDamage")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub highest_champion_damage: Option<f64>,
+        #[serde(rename = "highestCrowdControlScore")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub highest_crowd_control_score: Option<f64>,
+        #[serde(rename = "highestWardKills")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub highest_ward_kills: Option<f64>,
+        #[serde(rename = "junglerKillsEarlyJungle")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub jungler_kills_early_jungle: Option<f64>,
+        #[serde(rename = "killsOnLanersEarlyJungleAsJungler")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub kills_on_laners_early_jungle_as_jungler: Option<f64>,
+        #[serde(rename = "laningPhaseGoldExpAdvantage")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub laning_phase_gold_exp_advantage: Option<f64>,
+        #[serde(rename = "legendaryCount")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub legendary_count: Option<f64>,
+        #[serde(rename = "maxCsAdvantageOnLaneOpponent")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub max_cs_advantage_on_lane_opponent: Option<f64>,
+        #[serde(rename = "maxLevelLeadLaneOpponent")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub max_level_lead_lane_opponent: Option<f64>,
+        #[serde(rename = "mostWardsDestroyedOneSweeper")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub most_wards_destroyed_one_sweeper: Option<f64>,
+        #[serde(rename = "mythicItemUsed")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub mythic_item_used: Option<f64>,
+        #[serde(rename = "playedChampSelectPosition")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub played_champ_select_position: Option<f64>,
+        #[serde(rename = "soloTurretsLategame")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub solo_turrets_lategame: Option<f64>,
+        #[serde(rename = "takedownsFirst25Minutes")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub takedowns_first25_minutes: Option<f64>,
+        #[serde(rename = "teleportTakedowns")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub teleport_takedowns: Option<f64>,
+        #[serde(rename = "thirdInhibitorDestroyedTime")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub third_inhibitor_destroyed_time: Option<f64>,
+        #[serde(rename = "threeWardsOneSweeperCount")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub three_wards_one_sweeper_count: Option<f64>,
+        #[serde(rename = "visionScoreAdvantageLaneOpponent")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub vision_score_advantage_lane_opponent: Option<f64>,
+    }
+    /// Missions data object.
+    /// # Description
+    /// Missions DTO
+    ///
+    /// Note: This struct is automatically generated
+    #[derive(Clone, Debug)]
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
+    pub struct Missions {
+        #[serde(rename = "playerScore0")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub player_score0: Option<i32>,
+        #[serde(rename = "playerScore1")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub player_score1: Option<i32>,
+        #[serde(rename = "playerScore2")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub player_score2: Option<i32>,
+        #[serde(rename = "playerScore3")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub player_score3: Option<i32>,
+        #[serde(rename = "playerScore4")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub player_score4: Option<i32>,
+        #[serde(rename = "playerScore5")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub player_score5: Option<i32>,
+        #[serde(rename = "playerScore6")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub player_score6: Option<i32>,
+        #[serde(rename = "playerScore7")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub player_score7: Option<i32>,
+        #[serde(rename = "playerScore8")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub player_score8: Option<i32>,
+        #[serde(rename = "playerScore9")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub player_score9: Option<i32>,
+        #[serde(rename = "playerScore10")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub player_score10: Option<i32>,
+        #[serde(rename = "playerScore11")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub player_score11: Option<i32>,
     }
     /// Perks data object.
     #[derive(Clone, Debug)]
@@ -1371,15 +1824,15 @@ pub mod match_v5 {
         pub champion: Objective,
         #[serde(rename = "dragon")]
         pub dragon: Objective,
+        #[serde(rename = "horde")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub horde: Option<Objective>,
         #[serde(rename = "inhibitor")]
         pub inhibitor: Objective,
         #[serde(rename = "riftHerald")]
         pub rift_herald: Objective,
         #[serde(rename = "tower")]
         pub tower: Objective,
-        #[serde(rename = "horde")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub horde: Option<Objective>,
     }
     /// Objective data object.
     #[derive(Clone, Debug)]
@@ -1391,463 +1844,86 @@ pub mod match_v5 {
         #[serde(rename = "kills")]
         pub kills: i32,
     }
-    /// ParticipantChallenges data object.
+    /// Timeline data object.
     #[derive(Clone, Debug)]
     #[derive(serde::Serialize, serde::Deserialize)]
     #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct ParticipantChallenges {
-        #[serde(rename = "12AssistStreakCount")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub x12_assist_streak_count: Option<f64>,
-        #[serde(rename = "abilityUses")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub ability_uses: Option<f64>,
-        #[serde(rename = "acesBefore15Minutes")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub aces_before15_minutes: Option<f64>,
-        #[serde(rename = "alliedJungleMonsterKills")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub allied_jungle_monster_kills: Option<f64>,
-        #[serde(rename = "baronBuffGoldAdvantageOverThreshold")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub baron_buff_gold_advantage_over_threshold: Option<f64>,
-        #[serde(rename = "baronTakedowns")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub baron_takedowns: Option<f64>,
-        #[serde(rename = "blastConeOppositeOpponentCount")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub blast_cone_opposite_opponent_count: Option<f64>,
-        #[serde(rename = "bountyGold")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub bounty_gold: Option<f64>,
-        #[serde(rename = "buffsStolen")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub buffs_stolen: Option<f64>,
-        #[serde(rename = "completeSupportQuestInTime")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub complete_support_quest_in_time: Option<f64>,
-        #[serde(rename = "controlWardsPlaced")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub control_wards_placed: Option<f64>,
-        #[serde(rename = "controlWardTimeCoverageInRiverOrEnemyHalf")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub control_ward_time_coverage_in_river_or_enemy_half: Option<f64>,
-        #[serde(rename = "damagePerMinute")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub damage_per_minute: Option<f64>,
-        #[serde(rename = "damageTakenOnTeamPercentage")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub damage_taken_on_team_percentage: Option<f64>,
-        #[serde(rename = "dancedWithRiftHerald")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub danced_with_rift_herald: Option<f64>,
-        #[serde(rename = "deathsByEnemyChamps")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub deaths_by_enemy_champs: Option<f64>,
-        #[serde(rename = "dodgeSkillShotsSmallWindow")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub dodge_skill_shots_small_window: Option<f64>,
-        #[serde(rename = "doubleAces")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub double_aces: Option<f64>,
-        #[serde(rename = "dragonTakedowns")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub dragon_takedowns: Option<f64>,
-        #[serde(rename = "earliestBaron")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub earliest_baron: Option<f64>,
-        #[serde(rename = "earliestDragonTakedown")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub earliest_dragon_takedown: Option<f64>,
-        #[serde(rename = "earliestElderDragon")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub earliest_elder_dragon: Option<f64>,
-        #[serde(rename = "earlyLaningPhaseGoldExpAdvantage")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub early_laning_phase_gold_exp_advantage: Option<f64>,
-        #[serde(rename = "effectiveHealAndShielding")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub effective_heal_and_shielding: Option<f64>,
-        #[serde(rename = "elderDragonKillsWithOpposingSoul")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub elder_dragon_kills_with_opposing_soul: Option<f64>,
-        #[serde(rename = "elderDragonMultikills")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub elder_dragon_multikills: Option<f64>,
-        #[serde(rename = "enemyChampionImmobilizations")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub enemy_champion_immobilizations: Option<f64>,
-        #[serde(rename = "enemyJungleMonsterKills")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub enemy_jungle_monster_kills: Option<f64>,
-        #[serde(rename = "epicMonsterKillsNearEnemyJungler")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub epic_monster_kills_near_enemy_jungler: Option<f64>,
-        #[serde(rename = "epicMonsterKillsWithin30SecondsOfSpawn")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub epic_monster_kills_within30_seconds_of_spawn: Option<f64>,
-        #[serde(rename = "epicMonsterSteals")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub epic_monster_steals: Option<f64>,
-        #[serde(rename = "epicMonsterStolenWithoutSmite")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub epic_monster_stolen_without_smite: Option<f64>,
-        #[serde(rename = "fasterSupportQuestCompletion")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub faster_support_quest_completion: Option<f64>,
-        #[serde(rename = "fastestLegendary")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub fastest_legendary: Option<f64>,
-        #[serde(rename = "firstTurretKilled")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub first_turret_killed: Option<f64>,
-        #[serde(rename = "firstTurretKilledTime")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub first_turret_killed_time: Option<f64>,
-        #[serde(rename = "flawlessAces")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub flawless_aces: Option<f64>,
-        #[serde(rename = "fullTeamTakedown")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub full_team_takedown: Option<f64>,
-        #[serde(rename = "gameLength")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub game_length: Option<f64>,
-        #[serde(rename = "getTakedownsInAllLanesEarlyJungleAsLaner")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub get_takedowns_in_all_lanes_early_jungle_as_laner: Option<f64>,
-        #[serde(rename = "goldPerMinute")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub gold_per_minute: Option<f64>,
-        #[serde(rename = "hadAfkTeammate")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub had_afk_teammate: Option<f64>,
-        #[serde(rename = "hadOpenNexus")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub had_open_nexus: Option<f64>,
-        #[serde(rename = "highestChampionDamage")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub highest_champion_damage: Option<f64>,
-        #[serde(rename = "highestCrowdControlScore")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub highest_crowd_control_score: Option<f64>,
-        #[serde(rename = "highestWardKills")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub highest_ward_kills: Option<f64>,
-        #[serde(rename = "immobilizeAndKillWithAlly")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub immobilize_and_kill_with_ally: Option<f64>,
-        #[serde(rename = "initialBuffCount")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub initial_buff_count: Option<f64>,
-        #[serde(rename = "initialCrabCount")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub initial_crab_count: Option<f64>,
-        #[serde(rename = "jungleCsBefore10Minutes")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub jungle_cs_before10_minutes: Option<f64>,
-        #[serde(rename = "junglerKillsEarlyJungle")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub jungler_kills_early_jungle: Option<f64>,
-        #[serde(rename = "junglerTakedownsNearDamagedEpicMonster")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub jungler_takedowns_near_damaged_epic_monster: Option<f64>,
-        #[serde(rename = "kda")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub kda: Option<f64>,
-        #[serde(rename = "killAfterHiddenWithAlly")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub kill_after_hidden_with_ally: Option<f64>,
-        #[serde(rename = "killedChampTookFullTeamDamageSurvived")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub killed_champ_took_full_team_damage_survived: Option<f64>,
-        #[serde(rename = "killingSprees")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub killing_sprees: Option<f64>,
-        #[serde(rename = "killParticipation")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub kill_participation: Option<f64>,
-        #[serde(rename = "killsNearEnemyTurret")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub kills_near_enemy_turret: Option<f64>,
-        #[serde(rename = "killsOnLanersEarlyJungleAsJungler")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub kills_on_laners_early_jungle_as_jungler: Option<f64>,
-        #[serde(rename = "killsOnOtherLanesEarlyJungleAsLaner")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub kills_on_other_lanes_early_jungle_as_laner: Option<f64>,
-        #[serde(rename = "killsOnRecentlyHealedByAramPack")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub kills_on_recently_healed_by_aram_pack: Option<f64>,
-        #[serde(rename = "killsUnderOwnTurret")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub kills_under_own_turret: Option<f64>,
-        #[serde(rename = "killsWithHelpFromEpicMonster")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub kills_with_help_from_epic_monster: Option<f64>,
-        #[serde(rename = "knockEnemyIntoTeamAndKill")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub knock_enemy_into_team_and_kill: Option<f64>,
-        #[serde(rename = "kTurretsDestroyedBeforePlatesFall")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub k_turrets_destroyed_before_plates_fall: Option<f64>,
-        #[serde(rename = "landSkillShotsEarlyGame")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub land_skill_shots_early_game: Option<f64>,
-        #[serde(rename = "laneMinionsFirst10Minutes")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub lane_minions_first10_minutes: Option<f64>,
-        #[serde(rename = "laningPhaseGoldExpAdvantage")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub laning_phase_gold_exp_advantage: Option<f64>,
-        #[serde(rename = "legendaryCount")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub legendary_count: Option<f64>,
-        #[serde(rename = "lostAnInhibitor")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub lost_an_inhibitor: Option<f64>,
-        #[serde(rename = "maxCsAdvantageOnLaneOpponent")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub max_cs_advantage_on_lane_opponent: Option<f64>,
-        #[serde(rename = "maxKillDeficit")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub max_kill_deficit: Option<f64>,
-        #[serde(rename = "maxLevelLeadLaneOpponent")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub max_level_lead_lane_opponent: Option<f64>,
-        #[serde(rename = "mejaisFullStackInTime")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub mejais_full_stack_in_time: Option<f64>,
-        #[serde(rename = "moreEnemyJungleThanOpponent")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub more_enemy_jungle_than_opponent: Option<f64>,
-        #[serde(rename = "mostWardsDestroyedOneSweeper")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub most_wards_destroyed_one_sweeper: Option<f64>,
-        #[serde(rename = "multiKillOneSpell")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub multi_kill_one_spell: Option<f64>,
-        #[serde(rename = "multikills")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub multikills: Option<f64>,
-        #[serde(rename = "multikillsAfterAggressiveFlash")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub multikills_after_aggressive_flash: Option<f64>,
-        #[serde(rename = "multiTurretRiftHeraldCount")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub multi_turret_rift_herald_count: Option<f64>,
-        #[serde(rename = "mythicItemUsed")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub mythic_item_used: Option<f64>,
-        #[serde(rename = "outerTurretExecutesBefore10Minutes")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub outer_turret_executes_before10_minutes: Option<f64>,
-        #[serde(rename = "outnumberedKills")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub outnumbered_kills: Option<f64>,
-        #[serde(rename = "outnumberedNexusKill")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub outnumbered_nexus_kill: Option<f64>,
-        #[serde(rename = "perfectDragonSoulsTaken")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub perfect_dragon_souls_taken: Option<f64>,
-        #[serde(rename = "perfectGame")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub perfect_game: Option<f64>,
-        #[serde(rename = "pickKillWithAlly")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub pick_kill_with_ally: Option<f64>,
-        #[serde(rename = "playedChampSelectPosition")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub played_champ_select_position: Option<f64>,
-        #[serde(rename = "poroExplosions")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub poro_explosions: Option<f64>,
-        #[serde(rename = "quickCleanse")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub quick_cleanse: Option<f64>,
-        #[serde(rename = "quickFirstTurret")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub quick_first_turret: Option<f64>,
-        #[serde(rename = "quickSoloKills")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub quick_solo_kills: Option<f64>,
-        #[serde(rename = "riftHeraldTakedowns")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub rift_herald_takedowns: Option<f64>,
-        #[serde(rename = "saveAllyFromDeath")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub save_ally_from_death: Option<f64>,
-        #[serde(rename = "scuttleCrabKills")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub scuttle_crab_kills: Option<f64>,
-        #[serde(rename = "shortestTimeToAceFromFirstTakedown")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub shortest_time_to_ace_from_first_takedown: Option<f64>,
-        #[serde(rename = "skillshotsDodged")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub skillshots_dodged: Option<f64>,
-        #[serde(rename = "skillshotsHit")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub skillshots_hit: Option<f64>,
-        #[serde(rename = "snowballsHit")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub snowballs_hit: Option<f64>,
-        #[serde(rename = "soloBaronKills")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub solo_baron_kills: Option<f64>,
-        #[serde(rename = "soloKills")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub solo_kills: Option<f64>,
-        #[serde(rename = "soloTurretsLategame")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub solo_turrets_lategame: Option<f64>,
-        #[serde(rename = "stealthWardsPlaced")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub stealth_wards_placed: Option<f64>,
-        #[serde(rename = "survivedSingleDigitHpCount")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub survived_single_digit_hp_count: Option<f64>,
-        #[serde(rename = "survivedThreeImmobilizesInFight")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub survived_three_immobilizes_in_fight: Option<f64>,
-        #[serde(rename = "takedownOnFirstTurret")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub takedown_on_first_turret: Option<f64>,
-        #[serde(rename = "takedowns")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub takedowns: Option<f64>,
-        #[serde(rename = "takedownsAfterGainingLevelAdvantage")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub takedowns_after_gaining_level_advantage: Option<f64>,
-        #[serde(rename = "takedownsBeforeJungleMinionSpawn")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub takedowns_before_jungle_minion_spawn: Option<f64>,
-        #[serde(rename = "takedownsFirst25Minutes")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub takedowns_first25_minutes: Option<f64>,
-        #[serde(rename = "takedownsFirstXMinutes")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub takedowns_first_x_minutes: Option<f64>,
-        #[serde(rename = "takedownsInAlcove")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub takedowns_in_alcove: Option<f64>,
-        #[serde(rename = "takedownsInEnemyFountain")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub takedowns_in_enemy_fountain: Option<f64>,
-        #[serde(rename = "teamBaronKills")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub team_baron_kills: Option<f64>,
-        #[serde(rename = "teamDamagePercentage")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub team_damage_percentage: Option<f64>,
-        #[serde(rename = "teamElderDragonKills")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub team_elder_dragon_kills: Option<f64>,
-        #[serde(rename = "teamRiftHeraldKills")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub team_rift_herald_kills: Option<f64>,
-        #[serde(rename = "teleportTakedowns")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub teleport_takedowns: Option<f64>,
-        #[serde(rename = "thirdInhibitorDestroyedTime")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub third_inhibitor_destroyed_time: Option<f64>,
-        #[serde(rename = "threeWardsOneSweeperCount")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub three_wards_one_sweeper_count: Option<f64>,
-        #[serde(rename = "tookLargeDamageSurvived")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub took_large_damage_survived: Option<f64>,
-        #[serde(rename = "turretPlatesTaken")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub turret_plates_taken: Option<f64>,
-        #[serde(rename = "turretsTakenWithRiftHerald")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub turrets_taken_with_rift_herald: Option<f64>,
-        #[serde(rename = "turretTakedowns")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub turret_takedowns: Option<f64>,
-        #[serde(rename = "twentyMinionsIn3SecondsCount")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub twenty_minions_in3_seconds_count: Option<f64>,
-        #[serde(rename = "twoWardsOneSweeperCount")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub two_wards_one_sweeper_count: Option<i32>,
-        #[serde(rename = "unseenRecalls")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub unseen_recalls: Option<f64>,
-        #[serde(rename = "visionScoreAdvantageLaneOpponent")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub vision_score_advantage_lane_opponent: Option<f64>,
-        #[serde(rename = "visionScorePerMinute")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub vision_score_per_minute: Option<f64>,
-        #[serde(rename = "wardsGuarded")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub wards_guarded: Option<f64>,
-        #[serde(rename = "wardTakedowns")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub ward_takedowns: Option<f64>,
-        #[serde(rename = "wardTakedownsBefore20M")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub ward_takedowns_before20_m: Option<f64>,
-        #[serde(rename = "legendaryItemUsed")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub legendary_item_used: Option<std::vec::Vec<i32>>,
-    }
-    /// ParticipantMissions data object.
-    #[derive(Clone, Debug)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct ParticipantMissions {
-        #[serde(rename = "PlayerScore0", alias = "playerScore0")]
-        pub player_score0: i32,
-        #[serde(rename = "PlayerScore1", alias = "playerScore1")]
-        pub player_score1: i32,
-        #[serde(rename = "PlayerScore10", alias = "playerScore10")]
-        pub player_score10: i32,
-        #[serde(rename = "PlayerScore11", alias = "playerScore11")]
-        pub player_score11: i32,
-        #[serde(rename = "PlayerScore2", alias = "playerScore2")]
-        pub player_score2: i32,
-        #[serde(rename = "PlayerScore3", alias = "playerScore3")]
-        pub player_score3: i32,
-        #[serde(rename = "PlayerScore4", alias = "playerScore4")]
-        pub player_score4: i32,
-        #[serde(rename = "PlayerScore5", alias = "playerScore5")]
-        pub player_score5: i32,
-        #[serde(rename = "PlayerScore6", alias = "playerScore6")]
-        pub player_score6: i32,
-        #[serde(rename = "PlayerScore7", alias = "playerScore7")]
-        pub player_score7: i32,
-        #[serde(rename = "PlayerScore8", alias = "playerScore8")]
-        pub player_score8: i32,
-        #[serde(rename = "PlayerScore9", alias = "playerScore9")]
-        pub player_score9: i32,
-    }
-    /// MatchTimeline data object.
-    #[derive(Clone, Debug)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct MatchTimeline {
+    pub struct Timeline {
+        /// Match metadata.
         #[serde(rename = "metadata")]
-        pub metadata: Metadata,
+        pub metadata: MetadataTimeLine,
+        /// Match info.
         #[serde(rename = "info")]
-        pub info: MatchTimelineInfo,
+        pub info: InfoTimeLine,
     }
-    /// MatchTimelineInfoFrameEvent data object.
+    /// MetadataTimeLine data object.
     #[derive(Clone, Debug)]
     #[derive(serde::Serialize, serde::Deserialize)]
     #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct MatchTimelineInfoFrameEvent {
+    pub struct MetadataTimeLine {
+        /// Match data version.
+        #[serde(rename = "dataVersion")]
+        pub data_version: String,
+        /// Match id.
+        #[serde(rename = "matchId")]
+        pub match_id: String,
+        /// A list of participant PUUIDs.
+        #[serde(rename = "participants")]
+        pub participants: std::vec::Vec<String>,
+    }
+    /// InfoTimeLine data object.
+    #[derive(Clone, Debug)]
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
+    pub struct InfoTimeLine {
+        /// Refer to indicate if the game ended in termination.
+        #[serde(rename = "endOfGameResult")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub end_of_game_result: Option<String>,
+        #[serde(rename = "frameInterval")]
+        pub frame_interval: i64,
+        #[serde(rename = "gameId")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub game_id: Option<i64>,
+        #[serde(rename = "participants")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub participants: Option<std::vec::Vec<ParticipantTimeLine>>,
+        #[serde(rename = "frames")]
+        pub frames: std::vec::Vec<FramesTimeLine>,
+    }
+    /// ParticipantTimeLine data object.
+    #[derive(Clone, Debug)]
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
+    pub struct ParticipantTimeLine {
+        #[serde(rename = "participantId")]
+        pub participant_id: i32,
+        #[serde(rename = "puuid")]
+        pub puuid: String,
+    }
+    /// FramesTimeLine data object.
+    #[derive(Clone, Debug)]
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
+    pub struct FramesTimeLine {
+        #[serde(rename = "events")]
+        pub events: std::vec::Vec<EventsTimeLine>,
+        #[serde(rename = "participantFrames")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub participant_frames: Option<std::collections::HashMap<i32, ParticipantFrame>>,
+        #[serde(rename = "timestamp")]
+        pub timestamp: i32,
+    }
+    /// EventsTimeLine data object.
+    #[derive(Clone, Debug)]
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
+    pub struct EventsTimeLine {
+        #[serde(rename = "timestamp")]
+        pub timestamp: i64,
         #[serde(rename = "realTimestamp")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub real_timestamp: Option<i64>,
-        #[serde(rename = "timestamp")]
-        pub timestamp: i32,
-        /// Timeline event type.<br>
-        /// (Known legal values: ASCENDED_EVENT, BUILDING_KILL, CAPTURE_POINT, CHAMPION_KILL, CHAMPION_SPECIAL_KILL, CHAMPION_TRANSFORM, DRAGON_SOUL_GIVEN, ELITE_MONSTER_KILL, GAME_END, ITEM_DESTROYED, ITEM_PURCHASED, ITEM_SOLD, ITEM_UNDO, LEVEL_UP, OBJECTIVE_BOUNTY_FINISH, OBJECTIVE_BOUNTY_PRESTART, PAUSE_END, PAUSE_START, SKILL_LEVEL_UP, TURRET_PLATE_DESTROYED, WARD_KILL, WARD_PLACED)
         #[serde(rename = "type")]
         pub r#type: String,
         #[serde(rename = "itemId")]
@@ -1885,13 +1961,13 @@ pub mod match_v5 {
         pub killer_id: Option<i32>,
         #[serde(rename = "position")]
         #[serde(skip_serializing_if = "Option::is_none")]
-        pub position: Option<MatchTimelinePosition>,
+        pub position: Option<Position>,
         #[serde(rename = "victimDamageDealt")]
         #[serde(skip_serializing_if = "Option::is_none")]
-        pub victim_damage_dealt: Option<std::vec::Vec<MatchTimelineInfoFrameEventVictimDamageDealt>>,
+        pub victim_damage_dealt: Option<std::vec::Vec<MatchTimelineVictimDamage>>,
         #[serde(rename = "victimDamageReceived")]
         #[serde(skip_serializing_if = "Option::is_none")]
-        pub victim_damage_received: Option<std::vec::Vec<MatchTimelineInfoFrameEventVictimDamageDealt>>,
+        pub victim_damage_received: Option<std::vec::Vec<MatchTimelineVictimDamage>>,
         #[serde(rename = "victimId")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub victim_id: Option<i32>,
@@ -1950,11 +2026,67 @@ pub mod match_v5 {
         #[serde(skip_serializing_if = "Option::is_none")]
         pub actual_start_time: Option<i64>,
     }
-    /// MatchTimelineInfoFrameParticipantFrameChampionStats data object.
+    /// ParticipantFrames data object.
     #[derive(Clone, Debug)]
     #[derive(serde::Serialize, serde::Deserialize)]
     #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct MatchTimelineInfoFrameParticipantFrameChampionStats {
+    pub struct ParticipantFrames {
+        #[serde(rename = "1")]
+        pub x1: ParticipantFrame,
+        #[serde(rename = "2")]
+        pub x2: ParticipantFrame,
+        #[serde(rename = "3")]
+        pub x3: ParticipantFrame,
+        #[serde(rename = "4")]
+        pub x4: ParticipantFrame,
+        #[serde(rename = "5")]
+        pub x5: ParticipantFrame,
+        #[serde(rename = "6")]
+        pub x6: ParticipantFrame,
+        #[serde(rename = "7")]
+        pub x7: ParticipantFrame,
+        #[serde(rename = "8")]
+        pub x8: ParticipantFrame,
+        #[serde(rename = "9")]
+        pub x9: ParticipantFrame,
+        #[serde(rename = "10")]
+        pub x10: ParticipantFrame,
+    }
+    /// ParticipantFrame data object.
+    #[derive(Clone, Debug)]
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
+    pub struct ParticipantFrame {
+        #[serde(rename = "championStats")]
+        pub champion_stats: ChampionStats,
+        #[serde(rename = "currentGold")]
+        pub current_gold: i32,
+        #[serde(rename = "damageStats")]
+        pub damage_stats: DamageStats,
+        #[serde(rename = "goldPerSecond")]
+        pub gold_per_second: i32,
+        #[serde(rename = "jungleMinionsKilled")]
+        pub jungle_minions_killed: i32,
+        #[serde(rename = "level")]
+        pub level: i32,
+        #[serde(rename = "minionsKilled")]
+        pub minions_killed: i32,
+        #[serde(rename = "participantId")]
+        pub participant_id: i32,
+        #[serde(rename = "position")]
+        pub position: Position,
+        #[serde(rename = "timeEnemySpentControlled")]
+        pub time_enemy_spent_controlled: i32,
+        #[serde(rename = "totalGold")]
+        pub total_gold: i32,
+        #[serde(rename = "xp")]
+        pub xp: i32,
+    }
+    /// ChampionStats data object.
+    #[derive(Clone, Debug)]
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
+    pub struct ChampionStats {
         #[serde(rename = "abilityHaste")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub ability_haste: Option<i32>,
@@ -2009,11 +2141,11 @@ pub mod match_v5 {
         #[serde(rename = "spellVamp")]
         pub spell_vamp: i32,
     }
-    /// MatchTimelineInfoFrameParticipantFrameDamageStats data object.
+    /// DamageStats data object.
     #[derive(Clone, Debug)]
     #[derive(serde::Serialize, serde::Deserialize)]
     #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct MatchTimelineInfoFrameParticipantFrameDamageStats {
+    pub struct DamageStats {
         #[serde(rename = "magicDamageDone")]
         pub magic_damage_done: i32,
         #[serde(rename = "magicDamageDoneToChampions")]
@@ -2039,64 +2171,21 @@ pub mod match_v5 {
         #[serde(rename = "trueDamageTaken")]
         pub true_damage_taken: i32,
     }
-    /// MatchTimelinePosition data object.
+    /// Position data object.
     #[derive(Clone, Debug)]
     #[derive(serde::Serialize, serde::Deserialize)]
     #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct MatchTimelinePosition {
+    pub struct Position {
         #[serde(rename = "x")]
         pub x: i32,
         #[serde(rename = "y")]
         pub y: i32,
     }
-    /// MatchTimelineInfoFrameParticipantFrame data object.
+    /// MatchTimelineVictimDamage data object.
     #[derive(Clone, Debug)]
     #[derive(serde::Serialize, serde::Deserialize)]
     #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct MatchTimelineInfoFrameParticipantFrame {
-        #[serde(rename = "championStats")]
-        pub champion_stats: MatchTimelineInfoFrameParticipantFrameChampionStats,
-        #[serde(rename = "currentGold")]
-        pub current_gold: i32,
-        #[serde(rename = "damageStats")]
-        pub damage_stats: MatchTimelineInfoFrameParticipantFrameDamageStats,
-        #[serde(rename = "goldPerSecond")]
-        pub gold_per_second: i32,
-        #[serde(rename = "jungleMinionsKilled")]
-        pub jungle_minions_killed: i32,
-        #[serde(rename = "level")]
-        pub level: i32,
-        #[serde(rename = "minionsKilled")]
-        pub minions_killed: i32,
-        #[serde(rename = "participantId")]
-        pub participant_id: i32,
-        #[serde(rename = "position")]
-        pub position: MatchTimelinePosition,
-        #[serde(rename = "timeEnemySpentControlled")]
-        pub time_enemy_spent_controlled: i32,
-        #[serde(rename = "totalGold")]
-        pub total_gold: i32,
-        #[serde(rename = "xp")]
-        pub xp: i32,
-    }
-    /// MatchTimelineInfoFrame data object.
-    #[derive(Clone, Debug)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct MatchTimelineInfoFrame {
-        #[serde(rename = "events")]
-        pub events: std::vec::Vec<MatchTimelineInfoFrameEvent>,
-        #[serde(rename = "participantFrames")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub participant_frames: Option<std::collections::HashMap<i32, MatchTimelineInfoFrameParticipantFrame>>,
-        #[serde(rename = "timestamp")]
-        pub timestamp: i32,
-    }
-    /// MatchTimelineInfoFrameEventVictimDamageDealt data object.
-    #[derive(Clone, Debug)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct MatchTimelineInfoFrameEventVictimDamageDealt {
+    pub struct MatchTimelineVictimDamage {
         #[serde(rename = "basic")]
         pub basic: bool,
         #[serde(rename = "magicDamage")]
@@ -2115,35 +2204,6 @@ pub mod match_v5 {
         pub true_damage: i32,
         #[serde(rename = "type")]
         pub r#type: String,
-    }
-    /// MatchTimelineInfoParticipant data object.
-    #[derive(Clone, Debug)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct MatchTimelineInfoParticipant {
-        #[serde(rename = "participantId")]
-        pub participant_id: i32,
-        #[serde(rename = "puuid")]
-        pub puuid: String,
-    }
-    /// MatchTimelineInfo data object.
-    #[derive(Clone, Debug)]
-    #[derive(serde::Serialize, serde::Deserialize)]
-    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
-    pub struct MatchTimelineInfo {
-        #[serde(rename = "frameInterval")]
-        pub frame_interval: i32,
-        #[serde(rename = "frames")]
-        pub frames: std::vec::Vec<MatchTimelineInfoFrame>,
-        #[serde(rename = "gameId")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub game_id: Option<i64>,
-        #[serde(rename = "participants")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub participants: Option<std::vec::Vec<MatchTimelineInfoParticipant>>,
-        #[serde(rename = "endOfGameResult")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub end_of_game_result: Option<String>,
     }
 }
 

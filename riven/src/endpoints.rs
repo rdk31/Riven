@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version 92f57e3e7279cc02ec6a5ce6665ca08354d6a178
+// Version 6461993a9c4165ddca053929f19f6d0e3eb1ca14
 
 //! Automatically generated endpoint handles.
 #![allow(clippy::let_and_return, clippy::too_many_arguments)]
@@ -1194,11 +1194,11 @@ impl<'a> MatchV5<'a> {
     ///
     /// Note: this method is automatically generated.
     pub fn get_timeline(&self, route: RegionalRoute, match_id: &str)
-        -> impl Future<Output = Result<Option<match_v5::MatchTimeline>>> + 'a
+        -> impl Future<Output = Result<Option<match_v5::Timeline>>> + 'a
     {
         let route_str = route.into();
         let request = self.base.request(Method::GET, route_str, &format!("/lol/match/v5/matches/{}/timeline", match_id));
-        let future = self.base.execute_opt::<match_v5::MatchTimeline>("match-v5.getTimeline", route_str, request);
+        let future = self.base.execute_opt::<match_v5::Timeline>("match-v5.getTimeline", route_str, request);
         #[cfg(feature = "tracing")]
         let future = future.instrument(tracing::info_span!("match-v5.getTimeline"));
         future

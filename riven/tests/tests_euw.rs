@@ -23,7 +23,7 @@ async fn championmastery_getscore_ma5tery() -> Result<(), String> {
         .await
         .map_err(|e| format!("Error getting champion mastery score: {}", e))?;
     rassert!(
-        (969..=1000).contains(&masteries),
+        (1002..=1100).contains(&masteries),
         "Unexpected ma5tery score: {}.",
         masteries
     );

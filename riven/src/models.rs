@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version 6461993a9c4165ddca053929f19f6d0e3eb1ca14
+// Version 26952273dd9de767dc805b41d363fe8ff8cd0510
 
 #![allow(missing_docs)]
 
@@ -98,6 +98,41 @@ pub mod champion_mastery_v4 {
         /// The token earned for this champion at the current championLevel. When the championLevel is advanced the tokensEarned resets to 0.
         #[serde(rename = "tokensEarned")]
         pub tokens_earned: i32,
+        #[serde(rename = "markRequiredForNextLevel")]
+        pub mark_required_for_next_level: i32,
+        #[serde(rename = "championSeasonMilestone")]
+        pub champion_season_milestone: i32,
+        #[serde(rename = "milestoneGrades")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub milestone_grades: Option<std::vec::Vec<String>>,
+        #[serde(rename = "nextSeasonMilestone")]
+        pub next_season_milestone: NextSeasonMilestone,
+    }
+    /// NextSeasonMilestone data object.
+    #[derive(Clone, Debug)]
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
+    pub struct NextSeasonMilestone {
+        #[serde(rename = "requireGradeCounts")]
+        pub require_grade_counts: std::collections::HashMap<String, i32>,
+        #[serde(rename = "rewardMarks")]
+        pub reward_marks: i32,
+        #[serde(rename = "bonus")]
+        pub bonus: bool,
+        #[serde(rename = "rewardConfig")]
+        pub reward_config: RewardConfig,
+    }
+    /// RewardConfig data object.
+    #[derive(Clone, Debug)]
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
+    pub struct RewardConfig {
+        #[serde(rename = "rewardValue")]
+        pub reward_value: String,
+        #[serde(rename = "rewardType")]
+        pub reward_type: String,
+        #[serde(rename = "maximumReward")]
+        pub maximum_reward: i32,
     }
 }
 
@@ -1019,6 +1054,9 @@ pub mod match_v5 {
         pub game_ended_in_early_surrender: bool,
         #[serde(rename = "gameEndedInSurrender")]
         pub game_ended_in_surrender: bool,
+        #[serde(rename = "holdPings")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub hold_pings: Option<i32>,
         #[serde(rename = "getBackPings")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub get_back_pings: Option<i32>,
@@ -1246,9 +1284,6 @@ pub mod match_v5 {
         #[serde(rename = "basicPings")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub basic_pings: Option<i32>,
-        #[serde(rename = "holdPings")]
-        #[serde(skip_serializing_if = "Option::is_none")]
-        pub hold_pings: Option<i32>,
         #[serde(rename = "playerScore0")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub player_score0: Option<i32>,

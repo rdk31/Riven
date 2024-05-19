@@ -367,6 +367,9 @@ newtype_enum! {
         /// Deprecated in patch 9.2 in favor of queueId 1300
         #[deprecated(note="Deprecated in patch 9.2 in favor of queueId 1300")]
         NEXUS_BLITZ_DEPRECATED_1200 = 1200,
+        /// `1210`.
+        /// Teamfight Tactics (Choncc's Treasure) games on Convergence
+        CONVERGENCE_TEAMFIGHT_TACTICS_CHONCCS_TREASURE = 1210,
         /// `1300`.
         /// Nexus Blitz games on Nexus Blitz
         NEXUS_BLITZ = 1300,

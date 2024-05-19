@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version 26952273dd9de767dc805b41d363fe8ff8cd0510
+// Version 65bb2e6914e0be5f326abee5b7eb014c3e1b96f6
 
 #![allow(missing_docs)]
 
@@ -86,9 +86,6 @@ pub mod champion_mastery_v4 {
         /// Champion level for specified player and champion combination.
         #[serde(rename = "championLevel")]
         pub champion_level: i32,
-        /// Summoner ID for this entry. (Encrypted)
-        #[serde(rename = "summonerId")]
-        pub summoner_id: String,
         /// Total number of champion points for this player and champion combination - they are used to determine championLevel.
         #[serde(rename = "championPoints")]
         pub champion_points: i32,
@@ -120,7 +117,8 @@ pub mod champion_mastery_v4 {
         #[serde(rename = "bonus")]
         pub bonus: bool,
         #[serde(rename = "rewardConfig")]
-        pub reward_config: RewardConfig,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub reward_config: Option<RewardConfig>,
     }
     /// RewardConfig data object.
     #[derive(Clone, Debug)]
@@ -1729,6 +1727,15 @@ pub mod match_v5 {
         #[serde(rename = "visionScoreAdvantageLaneOpponent")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub vision_score_advantage_lane_opponent: Option<f64>,
+        #[serde(rename = "InfernalScalePickup")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub infernal_scale_pickup: Option<f64>,
+        #[serde(rename = "fistBumpParticipation")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub fist_bump_participation: Option<f64>,
+        #[serde(rename = "voidMonsterKill")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub void_monster_kill: Option<f64>,
     }
     /// Missions data object.
     /// # Description

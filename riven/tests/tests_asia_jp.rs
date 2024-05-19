@@ -18,6 +18,8 @@ static MATCHES: &[&str] = &[
     "JP1_417935351",
     // New field: `match-v5.ParticipantDto.riotIdGameName`
     "JP1_419115017",
+    // New field: `match-v5.ParticipantChallenges`: `InfernalScalePickup`, `fistBumpParticipation`
+    "JP1_447303353",
 ];
 
 /// summoner_v4().get_by_summoner_name(...) normally returns an option.

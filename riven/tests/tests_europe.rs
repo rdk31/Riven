@@ -12,6 +12,7 @@ const ROUTE: RegionalRoute = RegionalRoute::EUROPE;
 // "EUW1_5765650307", // https://gist.github.com/MingweiSamuel/d5f9dc40cc5a80a9255e488f27705c56?permalink_comment_id=4088256#gistcomment-4088256
 
 static MATCHES: &[&str] = &[
+    "EUW1_6349186754", // https://github.com/MingweiSamuel/Riven/issues/71
     // New ARENA 2v2v2v2 game mode
     "EUW1_6511808246", // https://github.com/MingweiSamuel/Camille/issues/99
     // Added 2023-08-27

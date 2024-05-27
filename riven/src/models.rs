@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version 65bb2e6914e0be5f326abee5b7eb014c3e1b96f6
+// Version a2ccdc60991a963528b99c289cd43bbbcefd70ec
 
 #![allow(missing_docs)]
 
@@ -1411,7 +1411,7 @@ pub mod match_v5 {
         pub epic_monster_stolen_without_smite: Option<i32>,
         #[serde(rename = "firstTurretKilled")]
         #[serde(skip_serializing_if = "Option::is_none")]
-        pub first_turret_killed: Option<i32>,
+        pub first_turret_killed: Option<f64>,
         #[serde(rename = "firstTurretKilledTime")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub first_turret_killed_time: Option<f32>,
@@ -1732,10 +1732,10 @@ pub mod match_v5 {
         pub infernal_scale_pickup: Option<f64>,
         #[serde(rename = "fistBumpParticipation")]
         #[serde(skip_serializing_if = "Option::is_none")]
-        pub fist_bump_participation: Option<f64>,
+        pub fist_bump_participation: Option<i32>,
         #[serde(rename = "voidMonsterKill")]
         #[serde(skip_serializing_if = "Option::is_none")]
-        pub void_monster_kill: Option<f64>,
+        pub void_monster_kill: Option<i32>,
     }
     /// Missions data object.
     /// # Description

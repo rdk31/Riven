@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version a2ccdc60991a963528b99c289cd43bbbcefd70ec
+// Version 9fef246d3ece1da9515c8941f7a3c7cd57e330fc
 
 #![allow(missing_docs)]
 
@@ -76,7 +76,8 @@ pub mod champion_mastery_v4 {
         pub champion_points_until_next_level: i64,
         /// Is chest granted for this champion or not in current season.
         #[serde(rename = "chestGranted")]
-        pub chest_granted: bool,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub chest_granted: Option<bool>,
         /// Champion ID for this entry.
         #[serde(rename = "championId")]
         pub champion_id: crate::consts::Champion,
@@ -3083,83 +3084,122 @@ pub mod tft_match_v1 {
     #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
     pub struct ParticipantMissions {
         #[serde(rename = "Assists")]
-        pub assists: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub assists: Option<i32>,
         #[serde(rename = "DamageDealt")]
-        pub damage_dealt: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub damage_dealt: Option<i32>,
         #[serde(rename = "DamageDealtToObjectives")]
-        pub damage_dealt_to_objectives: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub damage_dealt_to_objectives: Option<i32>,
         #[serde(rename = "DamageDealtToTurrets")]
-        pub damage_dealt_to_turrets: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub damage_dealt_to_turrets: Option<i32>,
         #[serde(rename = "DamageTaken")]
-        pub damage_taken: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub damage_taken: Option<i32>,
         #[serde(rename = "DoubleKills")]
-        pub double_kills: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub double_kills: Option<i32>,
         #[serde(rename = "GoldEarned")]
-        pub gold_earned: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub gold_earned: Option<i32>,
         #[serde(rename = "GoldSpent")]
-        pub gold_spent: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub gold_spent: Option<i32>,
         #[serde(rename = "InhibitorsDestroyed")]
-        pub inhibitors_destroyed: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub inhibitors_destroyed: Option<i32>,
         #[serde(rename = "Kills")]
-        pub kills: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub kills: Option<i32>,
         #[serde(rename = "LargestKillingSpree")]
-        pub largest_killing_spree: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub largest_killing_spree: Option<i32>,
         #[serde(rename = "LargestMultiKill")]
-        pub largest_multi_kill: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub largest_multi_kill: Option<i32>,
         #[serde(rename = "MagicDamageDealt")]
-        pub magic_damage_dealt: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub magic_damage_dealt: Option<i32>,
         #[serde(rename = "MagicDamageDealtToChampions")]
-        pub magic_damage_dealt_to_champions: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub magic_damage_dealt_to_champions: Option<i32>,
         #[serde(rename = "NeutralMinionsKilledTeamJungle")]
-        pub neutral_minions_killed_team_jungle: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub neutral_minions_killed_team_jungle: Option<i32>,
         #[serde(rename = "PhysicalDamageDealt")]
-        pub physical_damage_dealt: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub physical_damage_dealt: Option<i32>,
         #[serde(rename = "PhysicalDamageTaken")]
-        pub physical_damage_taken: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub physical_damage_taken: Option<i32>,
         #[serde(rename = "PlayerScore0")]
-        pub player_score0: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub player_score0: Option<i32>,
         #[serde(rename = "PlayerScore1")]
-        pub player_score1: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub player_score1: Option<i32>,
         #[serde(rename = "PlayerScore2")]
-        pub player_score2: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub player_score2: Option<i32>,
         #[serde(rename = "PlayerScore3")]
-        pub player_score3: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub player_score3: Option<i32>,
         #[serde(rename = "PlayerScore4")]
-        pub player_score4: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub player_score4: Option<i32>,
         #[serde(rename = "PlayerScore5")]
-        pub player_score5: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub player_score5: Option<i32>,
         #[serde(rename = "PlayerScore6")]
-        pub player_score6: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub player_score6: Option<i32>,
         #[serde(rename = "PlayerScore9")]
-        pub player_score9: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub player_score9: Option<i32>,
         #[serde(rename = "PlayerScore10")]
-        pub player_score10: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub player_score10: Option<i32>,
         #[serde(rename = "PlayerScore11")]
-        pub player_score11: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub player_score11: Option<i32>,
         #[serde(rename = "QuadraKills")]
-        pub quadra_kills: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub quadra_kills: Option<i32>,
         #[serde(rename = "Spell1Casts")]
-        pub spell1_casts: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub spell1_casts: Option<i32>,
         #[serde(rename = "Spell2Casts")]
-        pub spell2_casts: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub spell2_casts: Option<i32>,
         #[serde(rename = "Spell3Casts")]
-        pub spell3_casts: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub spell3_casts: Option<i32>,
         #[serde(rename = "Spell4Casts")]
-        pub spell4_casts: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub spell4_casts: Option<i32>,
         #[serde(rename = "SummonerSpell1Casts")]
-        pub summoner_spell1_casts: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub summoner_spell1_casts: Option<i32>,
         #[serde(rename = "TimeCCOthers")]
-        pub time_cc_others: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub time_cc_others: Option<i32>,
         #[serde(rename = "TotalMinionsKilled")]
-        pub total_minions_killed: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub total_minions_killed: Option<i32>,
         #[serde(rename = "TrueDamageDealtToChampions")]
-        pub true_damage_dealt_to_champions: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub true_damage_dealt_to_champions: Option<i32>,
         #[serde(rename = "UnrealKills")]
-        pub unreal_kills: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub unreal_kills: Option<i32>,
         #[serde(rename = "VisionScore")]
-        pub vision_score: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub vision_score: Option<i32>,
         #[serde(rename = "WardsKilled")]
-        pub wards_killed: i32,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub wards_killed: Option<i32>,
         #[serde(rename = "Deaths")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub deaths: Option<i32>,

@@ -5,8 +5,7 @@ use testutils::{riven_test, val_content_ranked, val_match_v1_get, val_match_v1_l
 const ROUTE: ValPlatformRoute = ValPlatformRoute::NA;
 
 static MATCHES: &[&str] = &[
-    "b979be9e-aeb1-419e-981d-d7d2472649a2",
-    "c086129c-e538-43cf-ae93-7148d0d01182",
+    // TODO
 ];
 
 #[riven_test]

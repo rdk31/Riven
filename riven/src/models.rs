@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version 9fef246d3ece1da9515c8941f7a3c7cd57e330fc
+// Version 3c0bd6b3aee83b97e90e7c93c5ef563b7ddfbb11
 
 #![allow(missing_docs)]
 
@@ -1319,6 +1319,12 @@ pub mod match_v5 {
         #[serde(rename = "playerScore9")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub player_score9: Option<i32>,
+        #[serde(rename = "playerAugment5")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub player_augment5: Option<i32>,
+        #[serde(rename = "playerAugment6")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub player_augment6: Option<i32>,
     }
     /// Challenges data object.
     /// # Description

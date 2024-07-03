@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version 3c0bd6b3aee83b97e90e7c93c5ef563b7ddfbb11
+// Version 8096d0e7127558ddf4df50a0227b4100b5d54a2f
 
 //! Automatically generated endpoint handles.
 #![allow(clippy::let_and_return, clippy::too_many_arguments)]
@@ -233,6 +233,15 @@ impl RiotApi {
     #[inline]
     pub fn tournament_v5(&self) -> TournamentV5 {
         TournamentV5 { base: self }
+    }
+    /// Returns a handle for accessing [ValConsoleMatchV1](crate::endpoints::ValConsoleMatchV1) endpoints.
+    /// # Riot Developer API Reference
+    /// <a href="https://developer.riotgames.com/apis#val-console-match-v1" target="_blank">`val-console-match-v1`</a>
+    ///
+    /// Note: this method is automatically generated.
+    #[inline]
+    pub fn val_console_match_v1(&self) -> ValConsoleMatchV1 {
+        ValConsoleMatchV1 { base: self }
     }
     /// Returns a handle for accessing [ValContentV1](crate::endpoints::ValContentV1) endpoints.
     /// # Riot Developer API Reference
@@ -2016,6 +2025,79 @@ impl<'a> TournamentV5<'a> {
         let future = self.base.execute_val::<i32>("tournament-v5.registerTournament", route_str, request);
         #[cfg(feature = "tracing")]
         let future = future.instrument(tracing::info_span!("tournament-v5.registerTournament"));
+        future
+    }
+
+}
+
+/// ValConsoleMatchV1 endpoints handle, accessed by calling [`val_console_match_v1()`](crate::RiotApi::val_console_match_v1) on a [`RiotApi`](crate::RiotApi) instance.
+/// # Riot Developer API Reference
+/// <a href="https://developer.riotgames.com/apis#val-console-match-v1" target="_blank">`val-console-match-v1`</a>
+///
+/// Note: this struct is automatically generated.
+#[repr(transparent)]
+pub struct ValConsoleMatchV1<'a> {
+    base: &'a RiotApi,
+}
+impl<'a> ValConsoleMatchV1<'a> {
+    /// Get match by id
+    /// # Parameters
+    /// * `route` - Route to query.
+    /// * `match_id` (required, in path)
+    /// # Riot Developer API Reference
+    /// <a href="https://developer.riotgames.com/api-methods/#val-console-match-v1/GET_getMatch" target="_blank">`val-console-match-v1.getMatch`</a>
+    ///
+    /// Note: this method is automatically generated.
+    pub fn get_match(&self, route: ValPlatformRoute, match_id: &str)
+        -> impl Future<Output = Result<val_console_match_v1::Match>> + 'a
+    {
+        let route_str = route.into();
+        let request = self.base.request(Method::GET, route_str, &format!("/val/match/console/v1/matches/{}", match_id));
+        let future = self.base.execute_val::<val_console_match_v1::Match>("val-console-match-v1.getMatch", route_str, request);
+        #[cfg(feature = "tracing")]
+        let future = future.instrument(tracing::info_span!("val-console-match-v1.getMatch"));
+        future
+    }
+
+    /// Get matchlist for games played by puuid and platform type
+    /// # Parameters
+    /// * `route` - Route to query.
+    /// * `puuid` (required, in path)
+    /// * `platform_type` (required, in query)
+    /// # Riot Developer API Reference
+    /// <a href="https://developer.riotgames.com/api-methods/#val-console-match-v1/GET_getMatchlist" target="_blank">`val-console-match-v1.getMatchlist`</a>
+    ///
+    /// Note: this method is automatically generated.
+    pub fn get_matchlist(&self, route: ValPlatformRoute, puuid: &str, platform_type: &str)
+        -> impl Future<Output = Result<val_console_match_v1::Matchlist>> + 'a
+    {
+        let route_str = route.into();
+        let request = self.base.request(Method::GET, route_str, &format!("/val/match/console/v1/matchlists/by-puuid/{}", puuid));
+        let request = request.query(&[ ("platformType", platform_type) ]);
+        let future = self.base.execute_val::<val_console_match_v1::Matchlist>("val-console-match-v1.getMatchlist", route_str, request);
+        #[cfg(feature = "tracing")]
+        let future = future.instrument(tracing::info_span!("val-console-match-v1.getMatchlist"));
+        future
+    }
+
+    /// Get recent matches
+    /// ## Implementation Notes
+    /// Returns a list of match ids that have completed in the last 10 minutes for live regions and 12 hours for the esports routing value. NA/LATAM/BR share a match history deployment. As such, recent matches will return a combined list of matches from those three regions. Requests are load balanced so you may see some inconsistencies as matches are added/removed from the list.
+    /// # Parameters
+    /// * `route` - Route to query.
+    /// * `queue` (required, in path)
+    /// # Riot Developer API Reference
+    /// <a href="https://developer.riotgames.com/api-methods/#val-console-match-v1/GET_getRecent" target="_blank">`val-console-match-v1.getRecent`</a>
+    ///
+    /// Note: this method is automatically generated.
+    pub fn get_recent(&self, route: ValPlatformRoute, queue: &str)
+        -> impl Future<Output = Result<val_console_match_v1::RecentMatches>> + 'a
+    {
+        let route_str = route.into();
+        let request = self.base.request(Method::GET, route_str, &format!("/val/match/console/v1/recent-matches/by-queue/{}", queue));
+        let future = self.base.execute_val::<val_console_match_v1::RecentMatches>("val-console-match-v1.getRecent", route_str, request);
+        #[cfg(feature = "tracing")]
+        let future = future.instrument(tracing::info_span!("val-console-match-v1.getRecent"));
         future
     }
 

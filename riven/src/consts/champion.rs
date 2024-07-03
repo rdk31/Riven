@@ -28,6 +28,7 @@ newtype_enum! {
     /// `APHELIOS` | "Aphelios" | "Aphelios" | 523
     /// `ASHE` | "Ashe" | "Ashe" | 22
     /// `AURELION_SOL` | "Aurelion Sol" | "AurelionSol" | 136
+    /// `AURORA` | "Aurora" | "Aurora" | 893
     /// `AZIR` | "Azir" | "Azir" | 268
     /// `BARD` | "Bard" | "Bard" | 432
     /// `BEL_VETH` | "Bel'Veth" | "Belveth" | 200
@@ -210,6 +211,8 @@ newtype_enum! {
         ASHE = 22,
         /// `136`.
         AURELION_SOL = 136,
+        /// `893`.
+        AURORA = 893,
         /// `268`.
         AZIR = 268,
         /// `432`.
@@ -540,6 +543,7 @@ impl Champion {
             Self::APHELIOS     => Some("Aphelios"),
             Self::ASHE         => Some("Ashe"),
             Self::AURELION_SOL => Some("Aurelion Sol"),
+            Self::AURORA       => Some("Aurora"),
             Self::AZIR         => Some("Azir"),
             Self::BARD         => Some("Bard"),
             Self::BEL_VETH     => Some("Bel'Veth"),
@@ -731,6 +735,7 @@ impl Champion {
             Self::APHELIOS     => Some("Aphelios"),
             Self::ASHE         => Some("Ashe"),
             Self::AURELION_SOL => Some("AurelionSol"),
+            Self::AURORA       => Some("Aurora"),
             Self::AZIR         => Some("Azir"),
             Self::BARD         => Some("Bard"),
             Self::BEL_VETH     => Some("Belveth"),
@@ -952,6 +957,7 @@ impl std::str::FromStr for Champion {
             /* APHE */ [ 'A',  'P',  'H',  'E'] => Ok(Champion::APHELIOS),
             /* ASHE */ [ 'A',  'S',  'H',  'E'] => Ok(Champion::ASHE),
             /* AURE */ [ 'A',  'U',  'R',  'E'] => Ok(Champion::AURELION_SOL),
+            /* AURO */ [ 'A',  'U',  'R',  'O'] => Ok(Champion::AURORA),
             /* AZIR */ [ 'A',  'Z',  'I',  'R'] => Ok(Champion::AZIR),
             /* BARD */ [ 'B',  'A',  'R',  'D'] => Ok(Champion::BARD),
             /* BELV */ [ 'B',  'E',  'L',  'V'] => Ok(Champion::BEL_VETH),

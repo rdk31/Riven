@@ -103,6 +103,12 @@ pub enum PlatformRoute {
     #[strum(to_string="LA2", serialize="LAS")]
     LA2 = 22,
 
+    /// Middle East and North Africa.
+    ///
+    /// `37` (riotapi-schema ID/repr)
+    #[strum(to_string="ME1", serialize="MENA")]
+    ME1 = 37,
+
     /// North America.
     ///
     /// `23` (riotapi-schema ID/repr)
@@ -177,6 +183,7 @@ impl PlatformRoute {
             Self::KR => RegionalRoute::ASIA,
             Self::LA1 => RegionalRoute::AMERICAS,
             Self::LA2 => RegionalRoute::AMERICAS,
+            Self::ME1 => RegionalRoute::EUROPE,
             Self::NA1 => RegionalRoute::AMERICAS,
             Self::OC1 => RegionalRoute::SEA,
             Self::PH2 => RegionalRoute::SEA,
@@ -202,6 +209,7 @@ impl PlatformRoute {
             Self::KR => RegionalRoute::ASIA,
             Self::LA1 => RegionalRoute::AMERICAS,
             Self::LA2 => RegionalRoute::AMERICAS,
+            Self::ME1 => RegionalRoute::EUROPE,
             Self::NA1 => RegionalRoute::AMERICAS,
             Self::OC1 => RegionalRoute::SEA,
             Self::PH2 => RegionalRoute::SEA,
@@ -249,6 +257,7 @@ impl PlatformRoute {
             Self::JP1 => "JP",
             Self::LA1 => "LAN",
             Self::LA2 => "LAS",
+            Self::ME1 => "MENA",
             Self::NA1 => "NA",
             Self::OC1 => "OCE",
             Self::PH2 => "PH",

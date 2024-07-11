@@ -1,20 +1,19 @@
 use std::future::Future;
-use std::sync::Arc;
 
+use memo_map::MemoMap;
 use reqwest::{RequestBuilder, StatusCode};
 #[cfg(feature = "tracing")]
 use tracing::{self as log, Instrument};
 
 use super::{RateLimit, RateLimitType};
 use crate::time::{sleep, Duration};
-use crate::util::InsertOnlyCHashMap;
 use crate::{ResponseInfo, Result, RiotApiConfig, RiotApiError};
 
 pub struct RegionalRequester {
     /// The app rate limit.
     app_rate_limit: RateLimit,
     /// Method rate limits.
-    method_rate_limits: InsertOnlyCHashMap<&'static str, RateLimit>,
+    method_rate_limits: MemoMap<&'static str, RateLimit>,
 }
 
 impl RegionalRequester {
@@ -27,12 +26,12 @@ impl RegionalRequester {
     pub fn new() -> Self {
         Self {
             app_rate_limit: RateLimit::new(RateLimitType::Application),
-            method_rate_limits: InsertOnlyCHashMap::new(),
+            method_rate_limits: MemoMap::new(),
         }
     }
 
     pub fn execute<'a>(
-        self: Arc<Self>,
+        &'a self,
         config: &'a RiotApiConfig,
         method_id: &'static str,
         request: RequestBuilder,
@@ -40,12 +39,12 @@ impl RegionalRequester {
         async move {
             let mut retries: u8 = 0;
             loop {
-                let method_rate_limit: Arc<RateLimit> = self
+                let method_rate_limit = self
                     .method_rate_limits
-                    .get_or_insert_with(method_id, || RateLimit::new(RateLimitType::Method));
+                    .get_or_insert(&method_id, || RateLimit::new(RateLimitType::Method));
 
                 // Rate limit.
-                let rate_limit = RateLimit::acquire_both(&self.app_rate_limit, &method_rate_limit);
+                let rate_limit = RateLimit::acquire_both(&self.app_rate_limit, method_rate_limit);
                 #[cfg(feature = "tracing")]
                 let rate_limit = rate_limit.instrument(tracing::info_span!("rate_limit"));
                 rate_limit.await;

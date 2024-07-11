@@ -45,6 +45,7 @@ required-features = [ "__proxy" ]
 [dependencies]
 futures = "0.3"
 log = "0.4"
+memo-map = "0.3"
 num_enum = "0.5"
 parking_lot = "0.12"
 reqwest = { version = "0.11", default-features = false, features = [ "gzip", "json" ] }

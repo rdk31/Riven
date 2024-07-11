@@ -1,12 +1,11 @@
 use std::future::Future;
-use std::sync::Arc;
 
+use memo_map::MemoMap;
 use reqwest::{Client, Method, RequestBuilder};
 #[cfg(feature = "tracing")]
 use tracing as log;
 
 use crate::req::RegionalRequester;
-use crate::util::InsertOnlyCHashMap;
 use crate::{ResponseInfo, Result, RiotApiConfig, RiotApiError};
 
 /// For retrieving data from the Riot Games API.
@@ -46,7 +45,7 @@ pub struct RiotApi {
     client: Client,
 
     /// Per-region requesters.
-    regional_requesters: InsertOnlyCHashMap<&'static str, RegionalRequester>,
+    regional_requesters: MemoMap<&'static str, RegionalRequester>,
 }
 
 impl RiotApi {
@@ -62,7 +61,7 @@ impl RiotApi {
             client: client_builder
                 .build()
                 .expect("Failed to create client from builder."),
-            regional_requesters: InsertOnlyCHashMap::new(),
+            regional_requesters: MemoMap::new(),
         }
     }
 
@@ -193,9 +192,9 @@ impl RiotApi {
     }
 
     /// Get or create the RegionalRequester for the given region.
-    fn regional_requester(&self, region_platform: &'static str) -> Arc<RegionalRequester> {
+    fn regional_requester(&self, region_platform: &'static str) -> &RegionalRequester {
         self.regional_requesters
-            .get_or_insert_with(region_platform, || {
+            .get_or_insert(&region_platform, || {
                 log::debug!(
                     "Creating requester for region platform {}.",
                     region_platform

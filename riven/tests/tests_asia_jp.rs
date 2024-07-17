@@ -20,6 +20,8 @@ static MATCHES: &[&str] = &[
     "JP1_419115017",
     // New field: `match-v5.ParticipantChallenges`: `InfernalScalePickup`, `fistBumpParticipation`
     "JP1_447303353",
+    // New fields for swarm: `match-v5.ChallengesDto`: `SWARM_DefeatAatrox`, `SWARM_DefeatBriar`
+    "JP1_455137806",
 ];
 
 /// summoner_v4().get_by_summoner_name(...) normally returns an option.

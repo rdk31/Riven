@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version 8096d0e7127558ddf4df50a0227b4100b5d54a2f
+// Version 54ad38717276da9ce06bc6da8b27008d59d109f2
 
 #![allow(missing_docs)]
 
@@ -127,6 +127,8 @@ pub mod champion_mastery_v4 {
         #[serde(rename = "rewardConfig")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub reward_config: Option<RewardConfig>,
+        #[serde(rename = "totalGamesRequires")]
+        pub total_games_requires: i32,
     }
     /// RewardConfig data object.
     /// # Description
@@ -1775,6 +1777,36 @@ pub mod match_v5 {
         #[serde(rename = "wardTakedownsBefore20M")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub ward_takedowns_before20_m: Option<i32>,
+        #[serde(rename = "SWARM_DefeatAatrox")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub swarm_defeat_aatrox: Option<i32>,
+        #[serde(rename = "SWARM_DefeatBriar")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub swarm_defeat_briar: Option<i32>,
+        #[serde(rename = "SWARM_DefeatMiniBosses")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub swarm_defeat_mini_bosses: Option<i32>,
+        #[serde(rename = "SWARM_EvolveWeapon")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub swarm_evolve_weapon: Option<i32>,
+        #[serde(rename = "SWARM_Have3Passives")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub swarm_have3_passives: Option<i32>,
+        #[serde(rename = "SWARM_KillEnemy")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub swarm_kill_enemy: Option<i32>,
+        #[serde(rename = "SWARM_PickupGold")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub swarm_pickup_gold: Option<i32>,
+        #[serde(rename = "SWARM_ReachLevel50")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub swarm_reach_level50: Option<i32>,
+        #[serde(rename = "SWARM_Survive15Min")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub swarm_survive15_min: Option<i32>,
+        #[serde(rename = "SWARM_WinWith5EvolvedWeapons")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub swarm_win_with5_evolved_weapons: Option<i32>,
     }
     /// Missions data object.
     /// # Description

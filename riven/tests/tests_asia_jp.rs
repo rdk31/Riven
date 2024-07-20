@@ -22,6 +22,10 @@ static MATCHES: &[&str] = &[
     "JP1_447303353",
     // New fields for swarm: `match-v5.ChallengesDto`: `SWARM_DefeatAatrox`, `SWARM_DefeatBriar`
     "JP1_455137806",
+    // Swarm solo/duo/trio.
+    "JP1_456819992",
+    "JP1_457311633",
+    "JP1_457196409",
 ];
 
 /// summoner_v4().get_by_summoner_name(...) normally returns an option.

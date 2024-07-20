@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version 54ad38717276da9ce06bc6da8b27008d59d109f2
+// Version db87f38b04ca43dab4aa172bf66ad33bce803528
 
 #![allow(missing_docs)]
 
@@ -576,6 +576,33 @@ pub mod lol_challenges_v1 {
         #[serde(rename = "percentile")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub percentile: Option<f64>,
+    }
+}
+
+/// Data structs used by [`LolRsoMatchV1`](crate::endpoints::LolRsoMatchV1).
+/// 
+/// Note: this module is automatically generated.
+#[allow(dead_code)]
+pub mod lol_rso_match_v1 {
+    /// Match data object.
+    /// # Description
+    /// UNKNOWN TYPE.
+    ///
+    /// Note: This struct is automatically generated
+    #[derive(Clone, Debug)]
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
+    pub struct Match {
+    }
+    /// Timeline data object.
+    /// # Description
+    /// UNKNOWN TYPE.
+    ///
+    /// Note: This struct is automatically generated
+    #[derive(Clone, Debug)]
+    #[derive(serde::Serialize, serde::Deserialize)]
+    #[cfg_attr(feature = "deny-unknown-fields", serde(deny_unknown_fields))]
+    pub struct Timeline {
     }
 }
 

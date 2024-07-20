@@ -382,6 +382,18 @@ newtype_enum! {
         /// `1710`.
         /// Arena (`CHERRY` games) games on Rings of Wrath
         RINGS_OF_WRATH_ARENA_CHERRY_GAMES = 1710,
+        /// `1810`.
+        /// Swarm solo (`STRAWBERRY` games) games on Swarm
+        SWARM_SOLO_STRAWBERRY_GAMES = 1810,
+        /// `1820`.
+        /// Swarm duo (`STRAWBERRY` games) games on Swarm
+        SWARM_DUO_STRAWBERRY_GAMES = 1820,
+        /// `1830`.
+        /// Swarm trio (`STRAWBERRY` games) games on Swarm
+        SWARM_TRIO_STRAWBERRY_GAMES = 1830,
+        /// `1840`.
+        /// Swarm quad (`STRAWBERRY` games) games on Swarm
+        SWARM_QUAD_STRAWBERRY_GAMES = 1840,
         /// `1900`.
         /// Pick URF games on Summoner's Rift
         SUMMONERS_RIFT_PICK_URF = 1900,

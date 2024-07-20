@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version 54ad38717276da9ce06bc6da8b27008d59d109f2
+// Version db87f38b04ca43dab4aa172bf66ad33bce803528
 
 //! Automatically generated endpoint handles.
 #![allow(clippy::let_and_return, clippy::too_many_arguments)]
@@ -89,6 +89,15 @@ impl RiotApi {
     #[inline]
     pub fn lol_challenges_v1(&self) -> LolChallengesV1 {
         LolChallengesV1 { base: self }
+    }
+    /// Returns a handle for accessing [LolRsoMatchV1](crate::endpoints::LolRsoMatchV1) endpoints.
+    /// # Riot Developer API Reference
+    /// <a href="https://developer.riotgames.com/apis#lol-rso-match-v1" target="_blank">`lol-rso-match-v1`</a>
+    ///
+    /// Note: this method is automatically generated.
+    #[inline]
+    pub fn lol_rso_match_v1(&self) -> LolRsoMatchV1 {
+        LolRsoMatchV1 { base: self }
     }
     /// Returns a handle for accessing [LolStatusV4](crate::endpoints::LolStatusV4) endpoints.
     /// # Riot Developer API Reference
@@ -892,6 +901,104 @@ impl<'a> LolChallengesV1<'a> {
         let future = self.base.execute_val::<lol_challenges_v1::PlayerInfo>("lol-challenges-v1.getPlayerData", route_str, request);
         #[cfg(feature = "tracing")]
         let future = future.instrument(tracing::info_span!("lol-challenges-v1.getPlayerData"));
+        future
+    }
+
+}
+
+/// LolRsoMatchV1 endpoints handle, accessed by calling [`lol_rso_match_v1()`](crate::RiotApi::lol_rso_match_v1) on a [`RiotApi`](crate::RiotApi) instance.
+/// # Riot Developer API Reference
+/// <a href="https://developer.riotgames.com/apis#lol-rso-match-v1" target="_blank">`lol-rso-match-v1`</a>
+///
+/// Note: this struct is automatically generated.
+#[repr(transparent)]
+pub struct LolRsoMatchV1<'a> {
+    base: &'a RiotApi,
+}
+impl<'a> LolRsoMatchV1<'a> {
+    /// Get a list of match ids by player access token - Includes custom matches
+    /// # Parameters
+    /// * `route` - Route to query.
+    /// * `access_token` - RSO access token.
+    /// * `count` (optional, in query) - Defaults to 20. Valid values: 0 to 100. Number of match ids to return.
+    /// * `start` (optional, in query) - Defaults to 0. Start index.
+    /// * `type` (optional, in query) - Filter the list of match ids by the type of match. This filter is mutually inclusive of the queue filter meaning any match ids returned must match both the queue and type filters.
+    /// * `queue` (optional, in query) - Filter the list of match ids by a specific queue id. This filter is mutually inclusive of the type filter meaning any match ids returned must match both the queue and type filters.
+    /// * `end_time` (optional, in query) - Epoch timestamp in seconds.
+    /// * `start_time` (optional, in query) - Epoch timestamp in seconds. The matchlist started storing timestamps on June 16th, 2021. Any matches played before June 16th, 2021 won't be included in the results if the startTime filter is set.
+    /// # RSO
+    /// This endpoint uses [Riot Sign On](https://developer.riotgames.com/docs/lol#rso-integration)
+    /// via the `access_token` parameter, instead of the Riot API key.
+    /// # Riot Developer API Reference
+    /// <a href="https://developer.riotgames.com/api-methods/#lol-rso-match-v1/GET_getMatchIds" target="_blank">`lol-rso-match-v1.getMatchIds`</a>
+    ///
+    /// Note: this method is automatically generated.
+    pub fn get_match_ids(&self, route: RegionalRoute, access_token: impl std::fmt::Display, count: Option<i32>, end_time: Option<i64>, queue: Option<i32>, start: Option<i32>, start_time: Option<i64>, r#type: Option<&str>)
+        -> impl Future<Output = Result<Vec<String>>> + 'a
+    {
+        let route_str = route.into();
+        let request = self.base.request(Method::GET, route_str, "/lol/rso-match/v1/matches/ids");
+        let mut request = request.bearer_auth(access_token);
+        if let Some(clear) = self.base.get_rso_clear_header() { request = request.header(clear, "") }
+        let request = if let Some(count) = count { request.query(&[ ("count", count) ]) } else { request };
+        let request = if let Some(end_time) = end_time { request.query(&[ ("endTime", end_time) ]) } else { request };
+        let request = if let Some(queue) = queue { request.query(&[ ("queue", queue) ]) } else { request };
+        let request = if let Some(start) = start { request.query(&[ ("start", start) ]) } else { request };
+        let request = if let Some(start_time) = start_time { request.query(&[ ("startTime", start_time) ]) } else { request };
+        let request = if let Some(r#type) = r#type { request.query(&[ ("type", r#type) ]) } else { request };
+        let future = self.base.execute_val::<Vec<String>>("lol-rso-match-v1.getMatchIds", route_str, request);
+        #[cfg(feature = "tracing")]
+        let future = future.instrument(tracing::info_span!("lol-rso-match-v1.getMatchIds"));
+        future
+    }
+
+    /// Get a match by match id
+    /// # Parameters
+    /// * `route` - Route to query.
+    /// * `access_token` - RSO access token.
+    /// * `match_id` (required, in path)
+    /// # RSO
+    /// This endpoint uses [Riot Sign On](https://developer.riotgames.com/docs/lol#rso-integration)
+    /// via the `access_token` parameter, instead of the Riot API key.
+    /// # Riot Developer API Reference
+    /// <a href="https://developer.riotgames.com/api-methods/#lol-rso-match-v1/GET_getMatch" target="_blank">`lol-rso-match-v1.getMatch`</a>
+    ///
+    /// Note: this method is automatically generated.
+    pub fn get_match(&self, route: RegionalRoute, access_token: impl std::fmt::Display, match_id: &str)
+        -> impl Future<Output = Result<lol_rso_match_v1::Match>> + 'a
+    {
+        let route_str = route.into();
+        let request = self.base.request(Method::GET, route_str, &format!("/lol/rso-match/v1/matches/{}", match_id));
+        let mut request = request.bearer_auth(access_token);
+        if let Some(clear) = self.base.get_rso_clear_header() { request = request.header(clear, "") }
+        let future = self.base.execute_val::<lol_rso_match_v1::Match>("lol-rso-match-v1.getMatch", route_str, request);
+        #[cfg(feature = "tracing")]
+        let future = future.instrument(tracing::info_span!("lol-rso-match-v1.getMatch"));
+        future
+    }
+
+    /// Get a match timeline by match id
+    /// # Parameters
+    /// * `route` - Route to query.
+    /// * `access_token` - RSO access token.
+    /// * `match_id` (required, in path)
+    /// # RSO
+    /// This endpoint uses [Riot Sign On](https://developer.riotgames.com/docs/lol#rso-integration)
+    /// via the `access_token` parameter, instead of the Riot API key.
+    /// # Riot Developer API Reference
+    /// <a href="https://developer.riotgames.com/api-methods/#lol-rso-match-v1/GET_getTimeline" target="_blank">`lol-rso-match-v1.getTimeline`</a>
+    ///
+    /// Note: this method is automatically generated.
+    pub fn get_timeline(&self, route: RegionalRoute, access_token: impl std::fmt::Display, match_id: &str)
+        -> impl Future<Output = Result<lol_rso_match_v1::Timeline>> + 'a
+    {
+        let route_str = route.into();
+        let request = self.base.request(Method::GET, route_str, &format!("/lol/rso-match/v1/matches/{}/timeline", match_id));
+        let mut request = request.bearer_auth(access_token);
+        if let Some(clear) = self.base.get_rso_clear_header() { request = request.header(clear, "") }
+        let future = self.base.execute_val::<lol_rso_match_v1::Timeline>("lol-rso-match-v1.getTimeline", route_str, request);
+        #[cfg(feature = "tracing")]
+        let future = future.instrument(tracing::info_span!("lol-rso-match-v1.getTimeline"));
         future
     }
 

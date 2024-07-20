@@ -29,7 +29,7 @@ pub enum GameMode {
     ASCENSION,
     /// Blood Hunt Assassin games
     ASSASSINATE,
-    /// 2v2v2v2
+    /// 2v2v2v2 Arena
     CHERRY,
     /// Classic Summoner's Rift and Twisted Treeline games
     CLASSIC,
@@ -59,6 +59,8 @@ pub enum GameMode {
     SIEGE,
     /// Star Guardian Invasion games
     STARGUARDIAN,
+    /// Swarm
+    STRAWBERRY,
     /// Teamfight Tactics.
     TFT,
     /// Tutorial games

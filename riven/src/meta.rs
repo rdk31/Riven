@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version 54ad38717276da9ce06bc6da8b27008d59d109f2
+// Version db87f38b04ca43dab4aa172bf66ad33bce803528
 
 //! Metadata about the Riot API and Riven.
 //!
@@ -16,7 +16,7 @@
 
 /// Metadata for endpoints. Each tuple corresponds to one endpoint and contains
 /// the HTTP [`Method`](reqwest::Method), `str` path, and the method's `str` ID.
-pub static ALL_ENDPOINTS: [(reqwest::Method, &str, &str); 82] = [
+pub static ALL_ENDPOINTS: [(reqwest::Method, &str, &str); 85] = [
     (reqwest::Method::GET, "/riot/account/v1/accounts/by-puuid/{puuid}", "account-v1.getByPuuid"),
     (reqwest::Method::GET, "/riot/account/v1/accounts/by-riot-id/{gameName}/{tagLine}", "account-v1.getByRiotId"),
     (reqwest::Method::GET, "/riot/account/v1/accounts/me", "account-v1.getByAccessToken"),
@@ -44,6 +44,9 @@ pub static ALL_ENDPOINTS: [(reqwest::Method, &str, &str); 82] = [
     (reqwest::Method::GET, "/lol/challenges/v1/challenges/{challengeId}/leaderboards/by-level/{level}", "lol-challenges-v1.getChallengeLeaderboards"),
     (reqwest::Method::GET, "/lol/challenges/v1/challenges/{challengeId}/percentiles", "lol-challenges-v1.getChallengePercentiles"),
     (reqwest::Method::GET, "/lol/challenges/v1/player-data/{puuid}", "lol-challenges-v1.getPlayerData"),
+    (reqwest::Method::GET, "/lol/rso-match/v1/matches/ids", "lol-rso-match-v1.getMatchIds"),
+    (reqwest::Method::GET, "/lol/rso-match/v1/matches/{matchId}", "lol-rso-match-v1.getMatch"),
+    (reqwest::Method::GET, "/lol/rso-match/v1/matches/{matchId}/timeline", "lol-rso-match-v1.getTimeline"),
     (reqwest::Method::GET, "/lol/status/v4/platform-data", "lol-status-v4.getPlatformData"),
     (reqwest::Method::GET, "/lor/deck/v1/decks/me", "lor-deck-v1.getDecks"),
     (reqwest::Method::POST, "/lor/deck/v1/decks/me", "lor-deck-v1.createDeck"),

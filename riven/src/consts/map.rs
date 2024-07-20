@@ -74,5 +74,9 @@ newtype_enum! {
         /// Arena
         /// Map for 2v2v2v2 (`CHERRY`). Team up with a friend or venture solo in this new game mode. Face against multiple teams in chaotic battles across diverse arenas
         ARENA = 30,
+        /// `33`.
+        /// Swarm
+        /// Map for Swarm (`STRAWBERRY`). Team up with a friend or venture solo in this horde survival mode.
+        SWARM = 33,
     }
 }

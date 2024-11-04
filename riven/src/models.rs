@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version ebc454ceebe6e7642609d4c7280bde93b93adba0
+// Version dfff73340b38e0d7df45f9c60a9b9a4792ad489e
 
 #![allow(missing_docs)]
 
@@ -1510,7 +1510,7 @@ pub mod match_v5 {
         pub blast_cone_opposite_opponent_count: Option<i32>,
         #[serde(rename = "bountyGold")]
         #[serde(skip_serializing_if = "Option::is_none")]
-        pub bounty_gold: Option<i32>,
+        pub bounty_gold: Option<f64>,
         #[serde(rename = "buffsStolen")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub buffs_stolen: Option<i32>,

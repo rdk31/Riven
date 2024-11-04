@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version 91e4e0e66537fdebe7117ee0589a16627335b056
+// Version ebc454ceebe6e7642609d4c7280bde93b93adba0
 
 #![allow(missing_docs)]
 
@@ -1386,6 +1386,10 @@ pub mod match_v5 {
         #[serde(rename = "riotIdName")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub riot_id_name: Option<String>,
+        /// https://github.com/RiotGames/developer-relations/issues/814
+        #[serde(rename = "retreatPings")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub retreat_pings: Option<i32>,
     }
     /// Challenges data object.
     /// # Description
@@ -1836,6 +1840,9 @@ pub mod match_v5 {
         #[serde(rename = "wardTakedownsBefore20M")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub ward_takedowns_before20_m: Option<i32>,
+        #[serde(rename = "HealFromMapSources")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub heal_from_map_sources: Option<f64>,
     }
     /// Missions data object.
     /// # Description
@@ -3072,9 +3079,11 @@ pub mod tft_match_v1 {
         #[serde(rename = "puuid")]
         pub puuid: String,
         #[serde(rename = "riotIdGameName")]
-        pub riot_id_game_name: String,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub riot_id_game_name: Option<String>,
         #[serde(rename = "riotIdTagline")]
-        pub riot_id_tagline: String,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub riot_id_tagline: Option<String>,
         /// The number of seconds before the participant was eliminated.
         #[serde(rename = "time_eliminated")]
         pub time_eliminated: f32,
@@ -3096,6 +3105,9 @@ pub mod tft_match_v1 {
         #[serde(rename = "missions")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub missions: Option<ParticipantMissions>,
+        #[serde(rename = "win")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub win: Option<bool>,
     }
     /// Trait data object.
     #[derive(Clone, Debug)]

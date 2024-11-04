@@ -13,6 +13,5 @@ pub use token_bucket::*;
 mod regional_requester;
 pub use regional_requester::*;
 
-#[cfg(test)]
 #[path = "token_bucket.test.rs"]
 mod token_bucket_test;

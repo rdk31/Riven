@@ -318,7 +318,7 @@ pub async fn spectator_v5_combo(route: PlatformRoute) -> Result<(), String> {
 
     let livegame_p = riot_api()
         .spectator_v5()
-        .get_current_game_info_by_puuid(route, &puuid);
+        .get_current_game_info_by_puuid(route, puuid);
     let livegame_o = livegame_p.await.map_err(|e| {
         format!(
             "Failed to get live game {} for summoner PUUID {}: {}",
@@ -360,7 +360,7 @@ pub async fn spectator_tft_v5_combo(route: PlatformRoute) -> Result<(), String> 
 
     let livegame_p = riot_api()
         .spectator_tft_v5()
-        .get_current_game_info_by_puuid(route, &puuid);
+        .get_current_game_info_by_puuid(route, puuid);
     let livegame_o = livegame_p.await.map_err(|e| {
         format!(
             "Failed to get live game {} for summoner PUUID {}: {}",

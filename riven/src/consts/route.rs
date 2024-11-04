@@ -50,6 +50,11 @@ pub enum RegionalRoute {
     /// `11` (riotapi-schema ID/repr)
     ESPORTS = 11,
 
+    /// Special Europe esports platform for `account-v1`. Do not confuse with the `esports` Valorant platform route.
+    ///
+    /// `12` (riotapi-schema ID/repr)
+    ESPORTSEU = 12,
+
 }
 
 /// Platform routes for League of Legends (LoL), Teamfight Tactics (TFT), and Legends of Runeterra (LoR).

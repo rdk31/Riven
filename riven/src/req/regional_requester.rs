@@ -1,4 +1,3 @@
-
 use memo_map::MemoMap;
 use reqwest::{RequestBuilder, StatusCode};
 #[cfg(feature = "tracing")]
@@ -135,7 +134,12 @@ impl RegionalRequester {
                     backoff.await;
                 }
                 Some(delay) => {
-                    log::debug!("Response {} (retried {} times), `retry-after` set, retrying after {:?}.", status, retries, delay);
+                    log::debug!(
+                        "Response {} (retried {} times), `retry-after` set, retrying after {:?}.",
+                        status,
+                        retries,
+                        delay
+                    );
                 }
             }
             retries += 1;

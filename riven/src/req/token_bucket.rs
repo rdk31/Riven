@@ -116,7 +116,7 @@ impl VectorTokenBucket {
         // `Instant::now()` call or something.
         if let Some(cutoff) = Instant::now().checked_sub(self.duration + self.duration_overhead) {
             // Pop off timestamps that are beyound the bucket duration.
-            while timestamps.back().map_or(false, |ts| *ts < cutoff) {
+            while timestamps.back().is_some_and(|ts| *ts < cutoff) {
                 timestamps.pop_back();
             }
         }

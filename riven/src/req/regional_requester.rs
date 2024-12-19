@@ -125,14 +125,6 @@ impl RegionalRequester {
             // Is retryable, do exponential backoff if retry-after wasn't specified.
             // 1 sec, 2 sec, 4 sec, 8 sec.
             match retry_after {
-                None => {
-                    let delay = Duration::from_secs(2_u64.pow(retries as u32));
-                    log::debug!("Response {} (retried {} times), NO `retry-after`, using exponential backoff, retrying after {:?}.", status, retries, delay);
-                    let backoff = sleep(delay);
-                    #[cfg(feature = "tracing")]
-                    let backoff = backoff.instrument(tracing::info_span!("backoff"));
-                    backoff.await;
-                }
                 Some(delay) => {
                     log::debug!(
                         "Response {} (retried {} times), `retry-after` set, retrying after {:?}.",
@@ -140,6 +132,14 @@ impl RegionalRequester {
                         retries,
                         delay
                     );
+                }
+                None => {
+                    let delay = Duration::from_secs(2_u64.pow(retries as u32));
+                    log::debug!("Response {} (retried {} times), NO `retry-after`, using exponential backoff, retrying after {:?}.", status, retries, delay);
+                    let backoff = sleep(delay);
+                    #[cfg(feature = "tracing")]
+                    let backoff = backoff.instrument(tracing::info_span!("backoff"));
+                    backoff.await;
                 }
             }
             retries += 1;

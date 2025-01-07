@@ -102,6 +102,7 @@ async fn clash_get_team_by_id_invalid() -> Result<(), String> {
     Ok(())
 }
 
+// STATUS
 #[riven_test]
 async fn status() -> Result<(), String> {
     let p = riot_api().lol_status_v4().get_platform_data(ROUTE);

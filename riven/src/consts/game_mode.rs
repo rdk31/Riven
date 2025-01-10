@@ -61,6 +61,8 @@ pub enum GameMode {
     STARGUARDIAN,
     /// Swarm
     STRAWBERRY,
+    /// Swiftplay Summoner's Rift
+    SWIFTPLAY,
     /// Teamfight Tactics.
     TFT,
     /// Tutorial games

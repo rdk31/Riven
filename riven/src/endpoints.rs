@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version 3db3221cc1b657c2acddf6ce02428680f38ad9aa
+// Version 9c1b8bdd90aa4346eea65d7b95a418855deac47c
 
 //! Automatically generated endpoint handles.
 #![allow(clippy::let_and_return, clippy::too_many_arguments)]
@@ -666,12 +666,12 @@ impl<'a> LeagueExpV4<'a> {
     ///
     /// Note: this method is automatically generated.
     pub fn get_league_entries(&self, route: PlatformRoute, queue: crate::consts::QueueType, tier: crate::consts::Tier, division: crate::consts::Division, page: Option<i32>)
-        -> impl Future<Output = Result<Vec<league_exp_v4::LeagueEntry>>> + 'a
+        -> impl Future<Output = Result<Option<Vec<league_exp_v4::LeagueEntry>>>> + 'a
     {
         let route_str = route.into();
         let request = self.base.request(Method::GET, route_str, &format!("/lol/league-exp/v4/entries/{}/{}/{}", queue, tier, division));
         let request = if let Some(page) = page { request.query(&[ ("page", page) ]) } else { request };
-        let future = self.base.execute_val::<Vec<league_exp_v4::LeagueEntry>>("league-exp-v4.getLeagueEntries", route_str, request);
+        let future = self.base.execute_opt::<Vec<league_exp_v4::LeagueEntry>>("league-exp-v4.getLeagueEntries", route_str, request);
         #[cfg(feature = "tracing")]
         let future = future.instrument(tracing::info_span!("league-exp-v4.getLeagueEntries"));
         future
@@ -739,12 +739,12 @@ impl<'a> LeagueV4<'a> {
     ///
     /// Note: this method is automatically generated.
     pub fn get_league_entries(&self, route: PlatformRoute, queue: crate::consts::QueueType, tier: crate::consts::Tier, division: crate::consts::Division, page: Option<i32>)
-        -> impl Future<Output = Result<Vec<league_v4::LeagueEntry>>> + 'a
+        -> impl Future<Output = Result<Option<Vec<league_v4::LeagueEntry>>>> + 'a
     {
         let route_str = route.into();
         let request = self.base.request(Method::GET, route_str, &format!("/lol/league/v4/entries/{}/{}/{}", queue, tier, division));
         let request = if let Some(page) = page { request.query(&[ ("page", page) ]) } else { request };
-        let future = self.base.execute_val::<Vec<league_v4::LeagueEntry>>("league-v4.getLeagueEntries", route_str, request);
+        let future = self.base.execute_opt::<Vec<league_v4::LeagueEntry>>("league-v4.getLeagueEntries", route_str, request);
         #[cfg(feature = "tracing")]
         let future = future.instrument(tracing::info_span!("league-v4.getLeagueEntries"));
         future

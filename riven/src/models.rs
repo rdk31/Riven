@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version 3db3221cc1b657c2acddf6ce02428680f38ad9aa
+// Version 9c1b8bdd90aa4346eea65d7b95a418855deac47c
 
 #![allow(missing_docs)]
 
@@ -1984,6 +1984,9 @@ pub mod match_v5 {
         pub rift_herald: Objective,
         #[serde(rename = "tower")]
         pub tower: Objective,
+        #[serde(rename = "atakhan")]
+        #[serde(skip_serializing_if = "Option::is_none")]
+        pub atakhan: Option<Objective>,
     }
     /// Objective data object.
     #[derive(Clone, Debug)]

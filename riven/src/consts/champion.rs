@@ -98,6 +98,7 @@ newtype_enum! {
     /// `MALZAHAR` | "Malzahar" | "Malzahar" | 90
     /// `MAOKAI` | "Maokai" | "Maokai" | 57
     /// `MASTER_YI` | "Master Yi" | "MasterYi" | 11
+    /// `MEL` | "Mel" | "Mel" | 800
     /// `MILIO` | "Milio" | "Milio" | 902
     /// `MISS_FORTUNE` | "Miss Fortune" | "MissFortune" | 21
     /// `MORDEKAISER` | "Mordekaiser" | "Mordekaiser" | 82
@@ -352,6 +353,8 @@ newtype_enum! {
         MAOKAI = 57,
         /// `11`.
         MASTER_YI = 11,
+        /// `800`.
+        MEL = 800,
         /// `902`.
         MILIO = 902,
         /// `21`.
@@ -616,6 +619,7 @@ impl Champion {
             Self::MALZAHAR     => Some("Malzahar"),
             Self::MAOKAI       => Some("Maokai"),
             Self::MASTER_YI    => Some("Master Yi"),
+            Self::MEL          => Some("Mel"),
             Self::MILIO        => Some("Milio"),
             Self::MISS_FORTUNE => Some("Miss Fortune"),
             Self::MORDEKAISER  => Some("Mordekaiser"),
@@ -809,6 +813,7 @@ impl Champion {
             Self::MALZAHAR     => Some("Malzahar"),
             Self::MAOKAI       => Some("Maokai"),
             Self::MASTER_YI    => Some("MasterYi"),
+            Self::MEL          => Some("Mel"),
             Self::MILIO        => Some("Milio"),
             Self::MISS_FORTUNE => Some("MissFortune"),
             Self::MORDEKAISER  => Some("Mordekaiser"),
@@ -1040,6 +1045,7 @@ impl std::str::FromStr for Champion {
             /* MALZ */ [ 'M',  'A',  'L',  'Z'] => Ok(Champion::MALZAHAR),
             /* MAOK */ [ 'M',  'A',  'O',  'K'] => Ok(Champion::MAOKAI),
             /* MAST */ [ 'M',  'A',  'S',  'T'] => Ok(Champion::MASTER_YI),
+            /* MEL  */ [ 'M',  'E',  'L', '\0'] => Ok(Champion::MEL),
             /* MILI */ [ 'M',  'I',  'L',  'I'] => Ok(Champion::MILIO),
             /* MISS */ [ 'M',  'I',  'S',  'S'] => Ok(Champion::MISS_FORTUNE),
             /* MORD */ [ 'M',  'O',  'R',  'D'] => Ok(Champion::MORDEKAISER),

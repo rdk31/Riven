@@ -244,6 +244,9 @@ newtype_enum! {
         /// Deprecated in patch 9.23
         #[deprecated(note="Deprecated in patch 9.23")]
         TWISTED_TREELINE_3V3_RANKED_FLEX_DEPRECATED_470 = 470,
+        /// `480`.
+        /// Normal (Swiftplay) games on Summoner's Rift
+        SUMMONERS_RIFT_NORMAL_SWIFTPLAY = 480,
         /// `490`.
         /// Normal (Quickplay) games on Summoner's Rift
         SUMMONERS_RIFT_NORMAL_QUICKPLAY = 490,

@@ -1,4 +1,6 @@
 mod testutils;
+use core::option::Option::None;
+
 use riven::consts::*;
 use testutils::*;
 
@@ -26,9 +28,11 @@ async fn league_get_diamond() -> Result<(), String> {
         Division::IV,
         None,
     );
-    let d = p.await.map_err(|e| e.to_string())?;
-    if d.is_empty() {
-        eprintln!("Diamond league is empty!");
+    let opt = p.await.map_err(|e| e.to_string())?;
+    if let Some(list) = opt {
+        assert!(!list.is_empty(), "Returns 204 (`None`) when empty.");
+    } else {
+        eprintln!("Off-season, challenger league is empty.");
     }
     Ok(())
 }
@@ -38,8 +42,8 @@ async fn league_get_challenger() -> Result<(), String> {
     let p = riot_api()
         .league_v4()
         .get_challenger_league(ROUTE, QueueType::RANKED_SOLO_5x5);
-    let d = p.await.map_err(|e| e.to_string())?;
-    if d.entries.is_empty() {
+    let ll = p.await.map_err(|e| e.to_string())?;
+    if ll.entries.is_empty() {
         eprintln!("Off-season, challenger league is empty.");
     }
     Ok(())
@@ -54,8 +58,12 @@ async fn leagueexp_get_challenger() -> Result<(), String> {
         Division::I,
         None,
     );
-    let d = p.await.map_err(|e| e.to_string())?;
-    assert!(!d.is_empty(), "Returns 204 (`None`) when empty.");
+    let opt = p.await.map_err(|e| e.to_string())?;
+    if let Some(list) = opt {
+        assert!(!list.is_empty(), "Returns 204 (`None`) when empty.");
+    } else {
+        eprintln!("Off-season, challenger league is empty.");
+    }
     Ok(())
 }
 

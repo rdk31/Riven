@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////
 
 // http://www.mingweisamuel.com/riotapi-schema/tool/
-// Version af1173cdd23a8673a22202fef3b38f0ba25ae575
+// Version c2a4acaddf7d61573b44016a47f43fe0f8366f0a
 
 #![allow(missing_docs)]
 
@@ -4201,10 +4201,9 @@ pub mod val_content_v1 {
         #[serde(rename = "ceremonies")]
         #[serde(skip_serializing_if = "Option::is_none")]
         pub ceremonies: Option<std::vec::Vec<ContentItem>>,
-        /// Unknown type, this is a placeholder subject to change.
         #[serde(rename = "totems")]
         #[serde(skip_serializing_if = "Option::is_none")]
-        pub totems: Option<std::vec::Vec<String>>,
+        pub totems: Option<std::vec::Vec<ContentItem>>,
     }
     /// ContentItem data object.
     #[derive(Clone, Debug)]

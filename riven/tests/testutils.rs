@@ -53,7 +53,13 @@ macro_rules! rassert {
 
 #[macro_export]
 macro_rules! rassert_eq {
-    ( $a:expr, $b:expr ) => { rassert!($a == $b) };
+    ( $a:expr, $b:expr ) => {
+        {
+            let a = &$a;
+            let b = &$b;
+            rassert!(a == b, "should be equal: {:?}, {:?}", a, b)
+        }
+    };
     ( $a:expr, $b:expr, $format:expr $(, $arg:expr)* ) => {
         rassert!($a == $b, $format $(, $arg )* )
     };
@@ -413,7 +419,11 @@ pub async fn val_content_ranked(route: ValPlatformRoute) -> Result<(), String> {
         act.id, act.name
     ))?;
 
-    rassert_eq!(act.id, leaderboard.act_id);
+    if leaderboard.act_id.is_empty() {
+        eprintln!("Leaderboard has empty `act_id`, continuing anyway.");
+    } else {
+        rassert_eq!(act.id, leaderboard.act_id);
+    }
 
     for (i, p) in leaderboard.players.iter().take(10).enumerate() {
         rassert_eq!(i + 1, p.leaderboard_rank as usize);

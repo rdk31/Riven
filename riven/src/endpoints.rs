@@ -327,7 +327,7 @@ impl<'a> AccountV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/riot/account/v1/accounts/by-puuid/{}", puuid));
         let future = self.base.execute_val::<account_v1::Account>("account-v1.getByPuuid", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("account-v1.getByPuuid"));
+        let future = future.instrument(tracing::info_span!("account-v1.getByPuuid", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "account-v1.getByPuuid", route_str);
         future
@@ -349,7 +349,7 @@ impl<'a> AccountV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/riot/account/v1/accounts/by-riot-id/{}/{}", game_name, tag_line));
         let future = self.base.execute_opt::<account_v1::Account>("account-v1.getByRiotId", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("account-v1.getByRiotId"));
+        let future = future.instrument(tracing::info_span!("account-v1.getByRiotId", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "account-v1.getByRiotId", route_str);
         future
@@ -375,7 +375,7 @@ impl<'a> AccountV1<'a> {
         if let Some(clear) = self.base.get_rso_clear_header() { request = request.header(clear, "") }
         let future = self.base.execute_val::<account_v1::Account>("account-v1.getByAccessToken", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("account-v1.getByAccessToken"));
+        let future = future.instrument(tracing::info_span!("account-v1.getByAccessToken", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "account-v1.getByAccessToken", route_str);
         future
@@ -397,7 +397,7 @@ impl<'a> AccountV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/riot/account/v1/active-shards/by-game/{}/by-puuid/{}", game, puuid));
         let future = self.base.execute_opt::<account_v1::ActiveShard>("account-v1.getActiveShard", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("account-v1.getActiveShard"));
+        let future = future.instrument(tracing::info_span!("account-v1.getActiveShard", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "account-v1.getActiveShard", route_str);
         future
@@ -430,7 +430,7 @@ impl<'a> ChampionMasteryV4<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/champion-mastery/v4/champion-masteries/by-puuid/{}", encrypted_puuid));
         let future = self.base.execute_val::<Vec<champion_mastery_v4::ChampionMastery>>("champion-mastery-v4.getAllChampionMasteriesByPUUID", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("champion-mastery-v4.getAllChampionMasteriesByPUUID"));
+        let future = future.instrument(tracing::info_span!("champion-mastery-v4.getAllChampionMasteriesByPUUID", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "champion-mastery-v4.getAllChampionMasteriesByPUUID", route_str);
         future
@@ -452,7 +452,7 @@ impl<'a> ChampionMasteryV4<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/champion-mastery/v4/champion-masteries/by-puuid/{}/by-champion/{}", encrypted_puuid, champion_id));
         let future = self.base.execute_val::<champion_mastery_v4::ChampionMastery>("champion-mastery-v4.getChampionMasteryByPUUID", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("champion-mastery-v4.getChampionMasteryByPUUID"));
+        let future = future.instrument(tracing::info_span!("champion-mastery-v4.getChampionMasteryByPUUID", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "champion-mastery-v4.getChampionMasteryByPUUID", route_str);
         future
@@ -475,7 +475,7 @@ impl<'a> ChampionMasteryV4<'a> {
         let request = if let Some(count) = count { request.query(&[ ("count", count) ]) } else { request };
         let future = self.base.execute_val::<Vec<champion_mastery_v4::ChampionMastery>>("champion-mastery-v4.getTopChampionMasteriesByPUUID", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("champion-mastery-v4.getTopChampionMasteriesByPUUID"));
+        let future = future.instrument(tracing::info_span!("champion-mastery-v4.getTopChampionMasteriesByPUUID", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "champion-mastery-v4.getTopChampionMasteriesByPUUID", route_str);
         future
@@ -496,7 +496,7 @@ impl<'a> ChampionMasteryV4<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/champion-mastery/v4/scores/by-puuid/{}", encrypted_puuid));
         let future = self.base.execute_val::<i32>("champion-mastery-v4.getChampionMasteryScoreByPUUID", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("champion-mastery-v4.getChampionMasteryScoreByPUUID"));
+        let future = future.instrument(tracing::info_span!("champion-mastery-v4.getChampionMasteryScoreByPUUID", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "champion-mastery-v4.getChampionMasteryScoreByPUUID", route_str);
         future
@@ -528,7 +528,7 @@ impl<'a> ChampionV3<'a> {
         let request = self.base.request(Method::GET, route_str, "/lol/platform/v3/champion-rotations");
         let future = self.base.execute_val::<champion_v3::ChampionInfo>("champion-v3.getChampionInfo", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("champion-v3.getChampionInfo"));
+        let future = future.instrument(tracing::info_span!("champion-v3.getChampionInfo", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "champion-v3.getChampionInfo", route_str);
         future
@@ -563,7 +563,7 @@ impl<'a> ClashV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/clash/v1/players/by-puuid/{}", puuid));
         let future = self.base.execute_val::<Vec<clash_v1::Player>>("clash-v1.getPlayersByPUUID", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("clash-v1.getPlayersByPUUID"));
+        let future = future.instrument(tracing::info_span!("clash-v1.getPlayersByPUUID", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "clash-v1.getPlayersByPUUID", route_str);
         future
@@ -586,7 +586,7 @@ impl<'a> ClashV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/clash/v1/players/by-summoner/{}", summoner_id));
         let future = self.base.execute_val::<Vec<clash_v1::Player>>("clash-v1.getPlayersBySummoner", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("clash-v1.getPlayersBySummoner"));
+        let future = future.instrument(tracing::info_span!("clash-v1.getPlayersBySummoner", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "clash-v1.getPlayersBySummoner", route_str);
         future
@@ -607,7 +607,7 @@ impl<'a> ClashV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/clash/v1/teams/{}", team_id));
         let future = self.base.execute_opt::<clash_v1::Team>("clash-v1.getTeamById", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("clash-v1.getTeamById"));
+        let future = future.instrument(tracing::info_span!("clash-v1.getTeamById", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "clash-v1.getTeamById", route_str);
         future
@@ -627,7 +627,7 @@ impl<'a> ClashV1<'a> {
         let request = self.base.request(Method::GET, route_str, "/lol/clash/v1/tournaments");
         let future = self.base.execute_val::<Vec<clash_v1::Tournament>>("clash-v1.getTournaments", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("clash-v1.getTournaments"));
+        let future = future.instrument(tracing::info_span!("clash-v1.getTournaments", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "clash-v1.getTournaments", route_str);
         future
@@ -648,7 +648,7 @@ impl<'a> ClashV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/clash/v1/tournaments/by-team/{}", team_id));
         let future = self.base.execute_opt::<clash_v1::Tournament>("clash-v1.getTournamentByTeam", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("clash-v1.getTournamentByTeam"));
+        let future = future.instrument(tracing::info_span!("clash-v1.getTournamentByTeam", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "clash-v1.getTournamentByTeam", route_str);
         future
@@ -669,7 +669,7 @@ impl<'a> ClashV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/clash/v1/tournaments/{}", tournament_id));
         let future = self.base.execute_opt::<clash_v1::Tournament>("clash-v1.getTournamentById", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("clash-v1.getTournamentById"));
+        let future = future.instrument(tracing::info_span!("clash-v1.getTournamentById", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "clash-v1.getTournamentById", route_str);
         future
@@ -706,7 +706,7 @@ impl<'a> LeagueExpV4<'a> {
         let request = if let Some(page) = page { request.query(&[ ("page", page) ]) } else { request };
         let future = self.base.execute_opt::<Vec<league_exp_v4::LeagueEntry>>("league-exp-v4.getLeagueEntries", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("league-exp-v4.getLeagueEntries"));
+        let future = future.instrument(tracing::info_span!("league-exp-v4.getLeagueEntries", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "league-exp-v4.getLeagueEntries", route_str);
         future
@@ -739,7 +739,7 @@ impl<'a> LeagueV4<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/league/v4/challengerleagues/by-queue/{}", queue));
         let future = self.base.execute_val::<league_v4::LeagueList>("league-v4.getChallengerLeague", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("league-v4.getChallengerLeague"));
+        let future = future.instrument(tracing::info_span!("league-v4.getChallengerLeague", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "league-v4.getChallengerLeague", route_str);
         future
@@ -760,7 +760,7 @@ impl<'a> LeagueV4<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/league/v4/entries/by-summoner/{}", encrypted_summoner_id));
         let future = self.base.execute_val::<Vec<league_v4::LeagueEntry>>("league-v4.getLeagueEntriesForSummoner", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("league-v4.getLeagueEntriesForSummoner"));
+        let future = future.instrument(tracing::info_span!("league-v4.getLeagueEntriesForSummoner", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "league-v4.getLeagueEntriesForSummoner", route_str);
         future
@@ -785,7 +785,7 @@ impl<'a> LeagueV4<'a> {
         let request = if let Some(page) = page { request.query(&[ ("page", page) ]) } else { request };
         let future = self.base.execute_opt::<Vec<league_v4::LeagueEntry>>("league-v4.getLeagueEntries", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("league-v4.getLeagueEntries"));
+        let future = future.instrument(tracing::info_span!("league-v4.getLeagueEntries", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "league-v4.getLeagueEntries", route_str);
         future
@@ -806,7 +806,7 @@ impl<'a> LeagueV4<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/league/v4/grandmasterleagues/by-queue/{}", queue));
         let future = self.base.execute_val::<league_v4::LeagueList>("league-v4.getGrandmasterLeague", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("league-v4.getGrandmasterLeague"));
+        let future = future.instrument(tracing::info_span!("league-v4.getGrandmasterLeague", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "league-v4.getGrandmasterLeague", route_str);
         future
@@ -827,7 +827,7 @@ impl<'a> LeagueV4<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/league/v4/leagues/{}", league_id));
         let future = self.base.execute_opt::<league_v4::LeagueList>("league-v4.getLeagueById", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("league-v4.getLeagueById"));
+        let future = future.instrument(tracing::info_span!("league-v4.getLeagueById", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "league-v4.getLeagueById", route_str);
         future
@@ -848,7 +848,7 @@ impl<'a> LeagueV4<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/league/v4/masterleagues/by-queue/{}", queue));
         let future = self.base.execute_val::<league_v4::LeagueList>("league-v4.getMasterLeague", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("league-v4.getMasterLeague"));
+        let future = future.instrument(tracing::info_span!("league-v4.getMasterLeague", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "league-v4.getMasterLeague", route_str);
         future
@@ -880,7 +880,7 @@ impl<'a> LolChallengesV1<'a> {
         let request = self.base.request(Method::GET, route_str, "/lol/challenges/v1/challenges/config");
         let future = self.base.execute_val::<Vec<lol_challenges_v1::ChallengeConfigInfo>>("lol-challenges-v1.getAllChallengeConfigs", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("lol-challenges-v1.getAllChallengeConfigs"));
+        let future = future.instrument(tracing::info_span!("lol-challenges-v1.getAllChallengeConfigs", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "lol-challenges-v1.getAllChallengeConfigs", route_str);
         future
@@ -900,7 +900,7 @@ impl<'a> LolChallengesV1<'a> {
         let request = self.base.request(Method::GET, route_str, "/lol/challenges/v1/challenges/percentiles");
         let future = self.base.execute_val::<std::collections::HashMap<i64, std::collections::HashMap<crate::consts::Tier, f64>>>("lol-challenges-v1.getAllChallengePercentiles", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("lol-challenges-v1.getAllChallengePercentiles"));
+        let future = future.instrument(tracing::info_span!("lol-challenges-v1.getAllChallengePercentiles", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "lol-challenges-v1.getAllChallengePercentiles", route_str);
         future
@@ -921,7 +921,7 @@ impl<'a> LolChallengesV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/challenges/v1/challenges/{}/config", challenge_id));
         let future = self.base.execute_opt::<lol_challenges_v1::ChallengeConfigInfo>("lol-challenges-v1.getChallengeConfigs", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("lol-challenges-v1.getChallengeConfigs"));
+        let future = future.instrument(tracing::info_span!("lol-challenges-v1.getChallengeConfigs", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "lol-challenges-v1.getChallengeConfigs", route_str);
         future
@@ -945,7 +945,7 @@ impl<'a> LolChallengesV1<'a> {
         let request = if let Some(limit) = limit { request.query(&[ ("limit", limit) ]) } else { request };
         let future = self.base.execute_opt::<Vec<lol_challenges_v1::ApexPlayerInfo>>("lol-challenges-v1.getChallengeLeaderboards", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("lol-challenges-v1.getChallengeLeaderboards"));
+        let future = future.instrument(tracing::info_span!("lol-challenges-v1.getChallengeLeaderboards", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "lol-challenges-v1.getChallengeLeaderboards", route_str);
         future
@@ -966,7 +966,7 @@ impl<'a> LolChallengesV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/challenges/v1/challenges/{}/percentiles", challenge_id));
         let future = self.base.execute_opt::<std::collections::HashMap<crate::consts::Tier, f64>>("lol-challenges-v1.getChallengePercentiles", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("lol-challenges-v1.getChallengePercentiles"));
+        let future = future.instrument(tracing::info_span!("lol-challenges-v1.getChallengePercentiles", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "lol-challenges-v1.getChallengePercentiles", route_str);
         future
@@ -987,7 +987,7 @@ impl<'a> LolChallengesV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/challenges/v1/player-data/{}", puuid));
         let future = self.base.execute_val::<lol_challenges_v1::PlayerInfo>("lol-challenges-v1.getPlayerData", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("lol-challenges-v1.getPlayerData"));
+        let future = future.instrument(tracing::info_span!("lol-challenges-v1.getPlayerData", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "lol-challenges-v1.getPlayerData", route_str);
         future
@@ -1037,7 +1037,7 @@ impl<'a> LolRsoMatchV1<'a> {
         let request = if let Some(r#type) = r#type { request.query(&[ ("type", r#type) ]) } else { request };
         let future = self.base.execute_val::<Vec<String>>("lol-rso-match-v1.getMatchIds", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("lol-rso-match-v1.getMatchIds"));
+        let future = future.instrument(tracing::info_span!("lol-rso-match-v1.getMatchIds", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "lol-rso-match-v1.getMatchIds", route_str);
         future
@@ -1064,7 +1064,7 @@ impl<'a> LolRsoMatchV1<'a> {
         if let Some(clear) = self.base.get_rso_clear_header() { request = request.header(clear, "") }
         let future = self.base.execute_val::<lol_rso_match_v1::Match>("lol-rso-match-v1.getMatch", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("lol-rso-match-v1.getMatch"));
+        let future = future.instrument(tracing::info_span!("lol-rso-match-v1.getMatch", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "lol-rso-match-v1.getMatch", route_str);
         future
@@ -1091,7 +1091,7 @@ impl<'a> LolRsoMatchV1<'a> {
         if let Some(clear) = self.base.get_rso_clear_header() { request = request.header(clear, "") }
         let future = self.base.execute_val::<lol_rso_match_v1::Timeline>("lol-rso-match-v1.getTimeline", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("lol-rso-match-v1.getTimeline"));
+        let future = future.instrument(tracing::info_span!("lol-rso-match-v1.getTimeline", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "lol-rso-match-v1.getTimeline", route_str);
         future
@@ -1123,7 +1123,7 @@ impl<'a> LolStatusV4<'a> {
         let request = self.base.request(Method::GET, route_str, "/lol/status/v4/platform-data");
         let future = self.base.execute_val::<lol_status_v4::PlatformData>("lol-status-v4.getPlatformData", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("lol-status-v4.getPlatformData"));
+        let future = future.instrument(tracing::info_span!("lol-status-v4.getPlatformData", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "lol-status-v4.getPlatformData", route_str);
         future
@@ -1161,7 +1161,7 @@ impl<'a> LorDeckV1<'a> {
         if let Some(clear) = self.base.get_rso_clear_header() { request = request.header(clear, "") }
         let future = self.base.execute_val::<Vec<lor_deck_v1::Deck>>("lor-deck-v1.getDecks", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("lor-deck-v1.getDecks"));
+        let future = future.instrument(tracing::info_span!("lor-deck-v1.getDecks", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "lor-deck-v1.getDecks", route_str);
         future
@@ -1188,7 +1188,7 @@ impl<'a> LorDeckV1<'a> {
         let request = request.body(serde_json::ser::to_vec(body).unwrap());
         let future = self.base.execute_val::<String>("lor-deck-v1.createDeck", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("lor-deck-v1.createDeck"));
+        let future = future.instrument(tracing::info_span!("lor-deck-v1.createDeck", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "lor-deck-v1.createDeck", route_str);
         future
@@ -1226,7 +1226,7 @@ impl<'a> LorInventoryV1<'a> {
         if let Some(clear) = self.base.get_rso_clear_header() { request = request.header(clear, "") }
         let future = self.base.execute_val::<Vec<lor_inventory_v1::Card>>("lor-inventory-v1.getCards", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("lor-inventory-v1.getCards"));
+        let future = future.instrument(tracing::info_span!("lor-inventory-v1.getCards", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "lor-inventory-v1.getCards", route_str);
         future
@@ -1259,7 +1259,7 @@ impl<'a> LorMatchV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lor/match/v1/matches/by-puuid/{}/ids", puuid));
         let future = self.base.execute_val::<Vec<String>>("lor-match-v1.getMatchIdsByPUUID", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("lor-match-v1.getMatchIdsByPUUID"));
+        let future = future.instrument(tracing::info_span!("lor-match-v1.getMatchIdsByPUUID", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "lor-match-v1.getMatchIdsByPUUID", route_str);
         future
@@ -1280,7 +1280,7 @@ impl<'a> LorMatchV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lor/match/v1/matches/{}", match_id));
         let future = self.base.execute_val::<lor_match_v1::Match>("lor-match-v1.getMatch", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("lor-match-v1.getMatch"));
+        let future = future.instrument(tracing::info_span!("lor-match-v1.getMatch", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "lor-match-v1.getMatch", route_str);
         future
@@ -1312,7 +1312,7 @@ impl<'a> LorRankedV1<'a> {
         let request = self.base.request(Method::GET, route_str, "/lor/ranked/v1/leaderboards");
         let future = self.base.execute_val::<lor_ranked_v1::Leaderboard>("lor-ranked-v1.getLeaderboards", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("lor-ranked-v1.getLeaderboards"));
+        let future = future.instrument(tracing::info_span!("lor-ranked-v1.getLeaderboards", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "lor-ranked-v1.getLeaderboards", route_str);
         future
@@ -1344,7 +1344,7 @@ impl<'a> LorStatusV1<'a> {
         let request = self.base.request(Method::GET, route_str, "/lor/status/v1/platform-data");
         let future = self.base.execute_val::<lor_status_v1::PlatformData>("lor-status-v1.getPlatformData", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("lor-status-v1.getPlatformData"));
+        let future = future.instrument(tracing::info_span!("lor-status-v1.getPlatformData", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "lor-status-v1.getPlatformData", route_str);
         future
@@ -1389,7 +1389,7 @@ impl<'a> MatchV5<'a> {
         let request = if let Some(r#type) = r#type { request.query(&[ ("type", r#type) ]) } else { request };
         let future = self.base.execute_val::<Vec<String>>("match-v5.getMatchIdsByPUUID", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("match-v5.getMatchIdsByPUUID"));
+        let future = future.instrument(tracing::info_span!("match-v5.getMatchIdsByPUUID", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "match-v5.getMatchIdsByPUUID", route_str);
         future
@@ -1410,7 +1410,7 @@ impl<'a> MatchV5<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/match/v5/matches/{}", match_id));
         let future = self.base.execute_opt::<match_v5::Match>("match-v5.getMatch", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("match-v5.getMatch"));
+        let future = future.instrument(tracing::info_span!("match-v5.getMatch", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "match-v5.getMatch", route_str);
         future
@@ -1431,7 +1431,7 @@ impl<'a> MatchV5<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/match/v5/matches/{}/timeline", match_id));
         let future = self.base.execute_opt::<match_v5::Timeline>("match-v5.getTimeline", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("match-v5.getTimeline"));
+        let future = future.instrument(tracing::info_span!("match-v5.getTimeline", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "match-v5.getTimeline", route_str);
         future
@@ -1464,7 +1464,7 @@ impl<'a> SpectatorTftV5<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/spectator/tft/v5/active-games/by-puuid/{}", encrypted_puuid));
         let future = self.base.execute_opt::<spectator_tft_v5::CurrentGameInfo>("spectator-tft-v5.getCurrentGameInfoByPuuid", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("spectator-tft-v5.getCurrentGameInfoByPuuid"));
+        let future = future.instrument(tracing::info_span!("spectator-tft-v5.getCurrentGameInfoByPuuid", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "spectator-tft-v5.getCurrentGameInfoByPuuid", route_str);
         future
@@ -1484,7 +1484,7 @@ impl<'a> SpectatorTftV5<'a> {
         let request = self.base.request(Method::GET, route_str, "/lol/spectator/tft/v5/featured-games");
         let future = self.base.execute_val::<spectator_tft_v5::FeaturedGames>("spectator-tft-v5.getFeaturedGames", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("spectator-tft-v5.getFeaturedGames"));
+        let future = future.instrument(tracing::info_span!("spectator-tft-v5.getFeaturedGames", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "spectator-tft-v5.getFeaturedGames", route_str);
         future
@@ -1517,7 +1517,7 @@ impl<'a> SpectatorV5<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/spectator/v5/active-games/by-summoner/{}", encrypted_puuid));
         let future = self.base.execute_opt::<spectator_v5::CurrentGameInfo>("spectator-v5.getCurrentGameInfoByPuuid", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("spectator-v5.getCurrentGameInfoByPuuid"));
+        let future = future.instrument(tracing::info_span!("spectator-v5.getCurrentGameInfoByPuuid", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "spectator-v5.getCurrentGameInfoByPuuid", route_str);
         future
@@ -1537,7 +1537,7 @@ impl<'a> SpectatorV5<'a> {
         let request = self.base.request(Method::GET, route_str, "/lol/spectator/v5/featured-games");
         let future = self.base.execute_val::<spectator_v5::FeaturedGames>("spectator-v5.getFeaturedGames", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("spectator-v5.getFeaturedGames"));
+        let future = future.instrument(tracing::info_span!("spectator-v5.getFeaturedGames", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "spectator-v5.getFeaturedGames", route_str);
         future
@@ -1570,7 +1570,7 @@ impl<'a> SummonerV4<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/fulfillment/v1/summoners/by-puuid/{}", rso_puuid));
         let future = self.base.execute_val::<summoner_v4::Summoner>("summoner-v4.getByRSOPUUID", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("summoner-v4.getByRSOPUUID"));
+        let future = future.instrument(tracing::info_span!("summoner-v4.getByRSOPUUID", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "summoner-v4.getByRSOPUUID", route_str);
         future
@@ -1591,7 +1591,7 @@ impl<'a> SummonerV4<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/summoner/v4/summoners/by-account/{}", encrypted_account_id));
         let future = self.base.execute_val::<summoner_v4::Summoner>("summoner-v4.getByAccountId", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("summoner-v4.getByAccountId"));
+        let future = future.instrument(tracing::info_span!("summoner-v4.getByAccountId", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "summoner-v4.getByAccountId", route_str);
         future
@@ -1612,7 +1612,7 @@ impl<'a> SummonerV4<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/summoner/v4/summoners/by-puuid/{}", encrypted_puuid));
         let future = self.base.execute_val::<summoner_v4::Summoner>("summoner-v4.getByPUUID", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("summoner-v4.getByPUUID"));
+        let future = future.instrument(tracing::info_span!("summoner-v4.getByPUUID", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "summoner-v4.getByPUUID", route_str);
         future
@@ -1638,7 +1638,7 @@ impl<'a> SummonerV4<'a> {
         if let Some(clear) = self.base.get_rso_clear_header() { request = request.header(clear, "") }
         let future = self.base.execute_val::<summoner_v4::Summoner>("summoner-v4.getByAccessToken", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("summoner-v4.getByAccessToken"));
+        let future = future.instrument(tracing::info_span!("summoner-v4.getByAccessToken", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "summoner-v4.getByAccessToken", route_str);
         future
@@ -1659,7 +1659,7 @@ impl<'a> SummonerV4<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/summoner/v4/summoners/{}", encrypted_summoner_id));
         let future = self.base.execute_val::<summoner_v4::Summoner>("summoner-v4.getBySummonerId", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("summoner-v4.getBySummonerId"));
+        let future = future.instrument(tracing::info_span!("summoner-v4.getBySummonerId", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "summoner-v4.getBySummonerId", route_str);
         future
@@ -1693,7 +1693,7 @@ impl<'a> TftLeagueV1<'a> {
         let request = if let Some(queue) = queue { request.query(&[ ("queue", queue) ]) } else { request };
         let future = self.base.execute_val::<tft_league_v1::LeagueList>("tft-league-v1.getChallengerLeague", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tft-league-v1.getChallengerLeague"));
+        let future = future.instrument(tracing::info_span!("tft-league-v1.getChallengerLeague", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tft-league-v1.getChallengerLeague", route_str);
         future
@@ -1714,7 +1714,7 @@ impl<'a> TftLeagueV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/tft/league/v1/entries/by-summoner/{}", summoner_id));
         let future = self.base.execute_val::<Vec<tft_league_v1::LeagueEntry>>("tft-league-v1.getLeagueEntriesForSummoner", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tft-league-v1.getLeagueEntriesForSummoner"));
+        let future = future.instrument(tracing::info_span!("tft-league-v1.getLeagueEntriesForSummoner", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tft-league-v1.getLeagueEntriesForSummoner", route_str);
         future
@@ -1740,7 +1740,7 @@ impl<'a> TftLeagueV1<'a> {
         let request = if let Some(queue) = queue { request.query(&[ ("queue", queue) ]) } else { request };
         let future = self.base.execute_val::<Vec<tft_league_v1::LeagueEntry>>("tft-league-v1.getLeagueEntries", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tft-league-v1.getLeagueEntries"));
+        let future = future.instrument(tracing::info_span!("tft-league-v1.getLeagueEntries", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tft-league-v1.getLeagueEntries", route_str);
         future
@@ -1762,7 +1762,7 @@ impl<'a> TftLeagueV1<'a> {
         let request = if let Some(queue) = queue { request.query(&[ ("queue", queue) ]) } else { request };
         let future = self.base.execute_val::<tft_league_v1::LeagueList>("tft-league-v1.getGrandmasterLeague", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tft-league-v1.getGrandmasterLeague"));
+        let future = future.instrument(tracing::info_span!("tft-league-v1.getGrandmasterLeague", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tft-league-v1.getGrandmasterLeague", route_str);
         future
@@ -1783,7 +1783,7 @@ impl<'a> TftLeagueV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/tft/league/v1/leagues/{}", league_id));
         let future = self.base.execute_opt::<tft_league_v1::LeagueList>("tft-league-v1.getLeagueById", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tft-league-v1.getLeagueById"));
+        let future = future.instrument(tracing::info_span!("tft-league-v1.getLeagueById", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tft-league-v1.getLeagueById", route_str);
         future
@@ -1805,7 +1805,7 @@ impl<'a> TftLeagueV1<'a> {
         let request = if let Some(queue) = queue { request.query(&[ ("queue", queue) ]) } else { request };
         let future = self.base.execute_val::<tft_league_v1::LeagueList>("tft-league-v1.getMasterLeague", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tft-league-v1.getMasterLeague"));
+        let future = future.instrument(tracing::info_span!("tft-league-v1.getMasterLeague", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tft-league-v1.getMasterLeague", route_str);
         future
@@ -1826,7 +1826,7 @@ impl<'a> TftLeagueV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/tft/league/v1/rated-ladders/{}/top", queue));
         let future = self.base.execute_val::<Vec<tft_league_v1::TopRatedLadderEntry>>("tft-league-v1.getTopRatedLadder", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tft-league-v1.getTopRatedLadder"));
+        let future = future.instrument(tracing::info_span!("tft-league-v1.getTopRatedLadder", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tft-league-v1.getTopRatedLadder", route_str);
         future
@@ -1867,7 +1867,7 @@ impl<'a> TftMatchV1<'a> {
         let request = if let Some(start_time) = start_time { request.query(&[ ("startTime", start_time) ]) } else { request };
         let future = self.base.execute_val::<Vec<String>>("tft-match-v1.getMatchIdsByPUUID", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tft-match-v1.getMatchIdsByPUUID"));
+        let future = future.instrument(tracing::info_span!("tft-match-v1.getMatchIdsByPUUID", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tft-match-v1.getMatchIdsByPUUID", route_str);
         future
@@ -1888,7 +1888,7 @@ impl<'a> TftMatchV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/tft/match/v1/matches/{}", match_id));
         let future = self.base.execute_opt::<tft_match_v1::Match>("tft-match-v1.getMatch", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tft-match-v1.getMatch"));
+        let future = future.instrument(tracing::info_span!("tft-match-v1.getMatch", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tft-match-v1.getMatch", route_str);
         future
@@ -1920,7 +1920,7 @@ impl<'a> TftStatusV1<'a> {
         let request = self.base.request(Method::GET, route_str, "/tft/status/v1/platform-data");
         let future = self.base.execute_val::<tft_status_v1::PlatformData>("tft-status-v1.getPlatformData", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tft-status-v1.getPlatformData"));
+        let future = future.instrument(tracing::info_span!("tft-status-v1.getPlatformData", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tft-status-v1.getPlatformData", route_str);
         future
@@ -1953,7 +1953,7 @@ impl<'a> TftSummonerV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/tft/summoner/v1/summoners/by-account/{}", encrypted_account_id));
         let future = self.base.execute_val::<tft_summoner_v1::Summoner>("tft-summoner-v1.getByAccountId", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tft-summoner-v1.getByAccountId"));
+        let future = future.instrument(tracing::info_span!("tft-summoner-v1.getByAccountId", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tft-summoner-v1.getByAccountId", route_str);
         future
@@ -1974,7 +1974,7 @@ impl<'a> TftSummonerV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/tft/summoner/v1/summoners/by-puuid/{}", encrypted_puuid));
         let future = self.base.execute_val::<tft_summoner_v1::Summoner>("tft-summoner-v1.getByPUUID", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tft-summoner-v1.getByPUUID"));
+        let future = future.instrument(tracing::info_span!("tft-summoner-v1.getByPUUID", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tft-summoner-v1.getByPUUID", route_str);
         future
@@ -2000,7 +2000,7 @@ impl<'a> TftSummonerV1<'a> {
         if let Some(clear) = self.base.get_rso_clear_header() { request = request.header(clear, "") }
         let future = self.base.execute_val::<tft_summoner_v1::Summoner>("tft-summoner-v1.getByAccessToken", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tft-summoner-v1.getByAccessToken"));
+        let future = future.instrument(tracing::info_span!("tft-summoner-v1.getByAccessToken", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tft-summoner-v1.getByAccessToken", route_str);
         future
@@ -2021,7 +2021,7 @@ impl<'a> TftSummonerV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/tft/summoner/v1/summoners/{}", encrypted_summoner_id));
         let future = self.base.execute_val::<tft_summoner_v1::Summoner>("tft-summoner-v1.getBySummonerId", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tft-summoner-v1.getBySummonerId"));
+        let future = future.instrument(tracing::info_span!("tft-summoner-v1.getBySummonerId", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tft-summoner-v1.getBySummonerId", route_str);
         future
@@ -2058,7 +2058,7 @@ impl<'a> TournamentStubV5<'a> {
         let request = request.body(serde_json::ser::to_vec(body).unwrap());
         let future = self.base.execute_val::<Vec<String>>("tournament-stub-v5.createTournamentCode", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tournament-stub-v5.createTournamentCode"));
+        let future = future.instrument(tracing::info_span!("tournament-stub-v5.createTournamentCode", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tournament-stub-v5.createTournamentCode", route_str);
         future
@@ -2079,7 +2079,7 @@ impl<'a> TournamentStubV5<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/tournament-stub/v5/codes/{}", tournament_code));
         let future = self.base.execute_val::<tournament_stub_v5::TournamentCodeV5>("tournament-stub-v5.getTournamentCode", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tournament-stub-v5.getTournamentCode"));
+        let future = future.instrument(tracing::info_span!("tournament-stub-v5.getTournamentCode", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tournament-stub-v5.getTournamentCode", route_str);
         future
@@ -2100,7 +2100,7 @@ impl<'a> TournamentStubV5<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/tournament-stub/v5/lobby-events/by-code/{}", tournament_code));
         let future = self.base.execute_val::<tournament_stub_v5::LobbyEventV5Wrapper>("tournament-stub-v5.getLobbyEventsByCode", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tournament-stub-v5.getLobbyEventsByCode"));
+        let future = future.instrument(tracing::info_span!("tournament-stub-v5.getLobbyEventsByCode", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tournament-stub-v5.getLobbyEventsByCode", route_str);
         future
@@ -2123,7 +2123,7 @@ impl<'a> TournamentStubV5<'a> {
         let request = request.body(serde_json::ser::to_vec(body).unwrap());
         let future = self.base.execute_val::<i32>("tournament-stub-v5.registerProviderData", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tournament-stub-v5.registerProviderData"));
+        let future = future.instrument(tracing::info_span!("tournament-stub-v5.registerProviderData", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tournament-stub-v5.registerProviderData", route_str);
         future
@@ -2144,7 +2144,7 @@ impl<'a> TournamentStubV5<'a> {
         let request = request.body(serde_json::ser::to_vec(body).unwrap());
         let future = self.base.execute_val::<i32>("tournament-stub-v5.registerTournament", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tournament-stub-v5.registerTournament"));
+        let future = future.instrument(tracing::info_span!("tournament-stub-v5.registerTournament", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tournament-stub-v5.registerTournament", route_str);
         future
@@ -2181,7 +2181,7 @@ impl<'a> TournamentV5<'a> {
         let request = request.body(serde_json::ser::to_vec(body).unwrap());
         let future = self.base.execute_val::<Vec<String>>("tournament-v5.createTournamentCode", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tournament-v5.createTournamentCode"));
+        let future = future.instrument(tracing::info_span!("tournament-v5.createTournamentCode", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tournament-v5.createTournamentCode", route_str);
         future
@@ -2202,7 +2202,7 @@ impl<'a> TournamentV5<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/tournament/v5/codes/{}", tournament_code));
         let future = self.base.execute_val::<tournament_v5::TournamentCodeV5>("tournament-v5.getTournamentCode", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tournament-v5.getTournamentCode"));
+        let future = future.instrument(tracing::info_span!("tournament-v5.getTournamentCode", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tournament-v5.getTournamentCode", route_str);
         future
@@ -2224,7 +2224,7 @@ impl<'a> TournamentV5<'a> {
         let request = request.body(serde_json::ser::to_vec(body).unwrap());
         let future = self.base.execute("tournament-v5.updateCode", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tournament-v5.updateCode"));
+        let future = future.instrument(tracing::info_span!("tournament-v5.updateCode", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tournament-v5.updateCode", route_str);
         future
@@ -2251,7 +2251,7 @@ impl<'a> TournamentV5<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/tournament/v5/games/by-code/{}", tournament_code));
         let future = self.base.execute_val::<Vec<tournament_v5::TournamentGamesV5>>("tournament-v5.getGames", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tournament-v5.getGames"));
+        let future = future.instrument(tracing::info_span!("tournament-v5.getGames", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tournament-v5.getGames", route_str);
         future
@@ -2272,7 +2272,7 @@ impl<'a> TournamentV5<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/lol/tournament/v5/lobby-events/by-code/{}", tournament_code));
         let future = self.base.execute_val::<tournament_v5::LobbyEventV5Wrapper>("tournament-v5.getLobbyEventsByCode", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tournament-v5.getLobbyEventsByCode"));
+        let future = future.instrument(tracing::info_span!("tournament-v5.getLobbyEventsByCode", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tournament-v5.getLobbyEventsByCode", route_str);
         future
@@ -2295,7 +2295,7 @@ impl<'a> TournamentV5<'a> {
         let request = request.body(serde_json::ser::to_vec(body).unwrap());
         let future = self.base.execute_val::<i32>("tournament-v5.registerProviderData", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tournament-v5.registerProviderData"));
+        let future = future.instrument(tracing::info_span!("tournament-v5.registerProviderData", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tournament-v5.registerProviderData", route_str);
         future
@@ -2316,7 +2316,7 @@ impl<'a> TournamentV5<'a> {
         let request = request.body(serde_json::ser::to_vec(body).unwrap());
         let future = self.base.execute_val::<i32>("tournament-v5.registerTournament", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("tournament-v5.registerTournament"));
+        let future = future.instrument(tracing::info_span!("tournament-v5.registerTournament", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "tournament-v5.registerTournament", route_str);
         future
@@ -2349,7 +2349,7 @@ impl<'a> ValConsoleMatchV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/val/match/console/v1/matches/{}", match_id));
         let future = self.base.execute_val::<val_console_match_v1::Match>("val-console-match-v1.getMatch", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("val-console-match-v1.getMatch"));
+        let future = future.instrument(tracing::info_span!("val-console-match-v1.getMatch", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "val-console-match-v1.getMatch", route_str);
         future
@@ -2372,7 +2372,7 @@ impl<'a> ValConsoleMatchV1<'a> {
         let request = request.query(&[ ("platformType", platform_type) ]);
         let future = self.base.execute_val::<val_console_match_v1::Matchlist>("val-console-match-v1.getMatchlist", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("val-console-match-v1.getMatchlist"));
+        let future = future.instrument(tracing::info_span!("val-console-match-v1.getMatchlist", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "val-console-match-v1.getMatchlist", route_str);
         future
@@ -2395,7 +2395,7 @@ impl<'a> ValConsoleMatchV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/val/match/console/v1/recent-matches/by-queue/{}", queue));
         let future = self.base.execute_val::<val_console_match_v1::RecentMatches>("val-console-match-v1.getRecent", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("val-console-match-v1.getRecent"));
+        let future = future.instrument(tracing::info_span!("val-console-match-v1.getRecent", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "val-console-match-v1.getRecent", route_str);
         future
@@ -2434,7 +2434,7 @@ impl<'a> ValConsoleRankedV1<'a> {
         let request = if let Some(start_index) = start_index { request.query(&[ ("startIndex", start_index) ]) } else { request };
         let future = self.base.execute_val::<val_console_ranked_v1::Leaderboard>("val-console-ranked-v1.getLeaderboard", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("val-console-ranked-v1.getLeaderboard"));
+        let future = future.instrument(tracing::info_span!("val-console-ranked-v1.getLeaderboard", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "val-console-ranked-v1.getLeaderboard", route_str);
         future
@@ -2468,7 +2468,7 @@ impl<'a> ValContentV1<'a> {
         let request = if let Some(locale) = locale { request.query(&[ ("locale", locale) ]) } else { request };
         let future = self.base.execute_val::<val_content_v1::Content>("val-content-v1.getContent", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("val-content-v1.getContent"));
+        let future = future.instrument(tracing::info_span!("val-content-v1.getContent", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "val-content-v1.getContent", route_str);
         future
@@ -2501,7 +2501,7 @@ impl<'a> ValMatchV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/val/match/v1/matches/{}", match_id));
         let future = self.base.execute_opt::<val_match_v1::Match>("val-match-v1.getMatch", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("val-match-v1.getMatch"));
+        let future = future.instrument(tracing::info_span!("val-match-v1.getMatch", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "val-match-v1.getMatch", route_str);
         future
@@ -2522,7 +2522,7 @@ impl<'a> ValMatchV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/val/match/v1/matchlists/by-puuid/{}", puuid));
         let future = self.base.execute_val::<val_match_v1::Matchlist>("val-match-v1.getMatchlist", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("val-match-v1.getMatchlist"));
+        let future = future.instrument(tracing::info_span!("val-match-v1.getMatchlist", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "val-match-v1.getMatchlist", route_str);
         future
@@ -2545,7 +2545,7 @@ impl<'a> ValMatchV1<'a> {
         let request = self.base.request(Method::GET, route_str, &format!("/val/match/v1/recent-matches/by-queue/{}", queue));
         let future = self.base.execute_val::<val_match_v1::RecentMatches>("val-match-v1.getRecent", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("val-match-v1.getRecent"));
+        let future = future.instrument(tracing::info_span!("val-match-v1.getRecent", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "val-match-v1.getRecent", route_str);
         future
@@ -2582,7 +2582,7 @@ impl<'a> ValRankedV1<'a> {
         let request = if let Some(start_index) = start_index { request.query(&[ ("startIndex", start_index) ]) } else { request };
         let future = self.base.execute_opt::<val_ranked_v1::Leaderboard>("val-ranked-v1.getLeaderboard", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("val-ranked-v1.getLeaderboard"));
+        let future = future.instrument(tracing::info_span!("val-ranked-v1.getLeaderboard", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "val-ranked-v1.getLeaderboard", route_str);
         future
@@ -2614,7 +2614,7 @@ impl<'a> ValStatusV1<'a> {
         let request = self.base.request(Method::GET, route_str, "/val/status/v1/platform-data");
         let future = self.base.execute_val::<val_status_v1::PlatformData>("val-status-v1.getPlatformData", route_str, request);
         #[cfg(feature = "tracing")]
-        let future = future.instrument(tracing::info_span!("val-status-v1.getPlatformData"));
+        let future = future.instrument(tracing::info_span!("val-status-v1.getPlatformData", route = route_str));
         #[cfg(feature = "metrics")]
         let future = metrics::timed(future, "val-status-v1.getPlatformData", route_str);
         future

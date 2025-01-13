@@ -78,7 +78,13 @@ pub fn riot_api() -> &'static RiotApi {
     RIOT_API.get_or_init(|| {
         // Initialize logger here, as a convenient trigger spot.
         #[cfg(not(target_family = "wasm"))]
-        env_logger::init();
+        {
+            #[cfg(not(feature = "tracing"))]
+            env_logger::init();
+            #[cfg(feature = "tracing")]
+            tracing_subscriber::fmt::init();
+        }
+
         #[cfg(target_family = "wasm")]
         console_log::init_with_level(log::Level::Info).unwrap();
 

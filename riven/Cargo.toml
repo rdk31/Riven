@@ -1,40 +1,43 @@
 [package]
 name = "riven"
-version = "2.60.0"
+version = "2.61.0"
 authors = ["Mingwei Samuel <mingwei.samuel@gmail.com>"]
 repository = "https://github.com/MingweiSamuel/Riven"
 description = "Riot Games API Library"
 readme = "../README.md"
 license = "MIT"
 edition = "2018"
-include = [ "src/**", "../README.md", "/examples" ]
-keywords = [ "riot-games", "riot", "league", "league-of-legends" ]
-categories = [ "api-bindings", "web-programming::http-client", "wasm" ]
+include = ["src/**", "../README.md", "/examples"]
+keywords = ["riot-games", "riot", "league", "league-of-legends"]
+categories = ["api-bindings", "web-programming::http-client", "wasm"]
 
 [lib]
 crate-type = ["cdylib", "rlib"]
 
 [package.metadata.docs.rs]
-features = [ "nightly" ]
+features = ["nightly"]
 
 [features]
-default = [ "default-tls" ]
+default = ["default-tls"]
 
-nightly = [ "parking_lot/nightly" ]
+nightly = ["parking_lot/nightly"]
 
-default-tls = [ "reqwest/default-tls" ]
-native-tls = [ "reqwest/native-tls" ]
-rustls-tls = [ "reqwest/rustls-tls" ]
+default-tls = ["reqwest/default-tls"]
+native-tls = ["reqwest/native-tls"]
+rustls-tls = ["reqwest/rustls-tls"]
 
 metrics = ["dep:metrics"]
 
-deny-unknown = [ "deny-unknown-fields", "deny-unknown-enum-variants" ]
+deny-unknown = ["deny-unknown-fields", "deny-unknown-enum-variants"]
 # If enabled, extra unknown fields encountered during deserialization will
 # cause an error instead of being ignored.
 deny-unknown-fields = []
 # If enabled, deserialization of unknown enum variants will cause an error
 # instead of being deserialized to `UNKNOWN` or other integer variants.
-deny-unknown-enum-variants = [ "deny-unknown-enum-variants-strings", "deny-unknown-enum-variants-integers" ]
+deny-unknown-enum-variants = [
+    "deny-unknown-enum-variants-strings",
+    "deny-unknown-enum-variants-integers",
+]
 deny-unknown-enum-variants-strings = []
 deny-unknown-enum-variants-integers = []
 
@@ -42,7 +45,7 @@ __proxy = []
 
 [[example]]
 name = "proxy"
-required-features = [ "__proxy" ]
+required-features = ["__proxy"]
 
 [dependencies]
 futures = "0.3"
@@ -51,9 +54,12 @@ memo-map = "0.3"
 metrics = { version = "0.24", optional = true }
 num_enum = "0.5"
 parking_lot = "0.12"
-reqwest = { version = "0.11", default-features = false, features = [ "gzip", "json" ] }
+reqwest = { version = "0.11", default-features = false, features = [
+    "gzip",
+    "json",
+] }
 scan_fmt = { version = "0.2", default-features = false }
-serde = { version = "1.0", features = [ "derive" ] }
+serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 serde_repr = "0.1"
 slab = "0.4"
@@ -62,10 +68,10 @@ strum_macros = "0.20"
 tracing = { version = "0.1", optional = true }
 
 [target.'cfg(not(target_family = "wasm"))'.dependencies]
-tokio = { version = "1", default-features = false, features = [ "time" ] }
+tokio = { version = "1", default-features = false, features = ["time"] }
 
 [target.'cfg(target_family = "wasm")'.dependencies]
-gloo-timers = { version = "0.3", features = [ "futures" ] }
+gloo-timers = { version = "0.3", features = ["futures"] }
 web-time = "1.0.0"
 
 [dev-dependencies]
@@ -75,8 +81,8 @@ tracing = "0.1"
 tracing-subscriber = "0.3.17"
 
 [target.'cfg(not(target_family = "wasm"))'.dev-dependencies]
-hyper = { version = "0.14", features = [ "server" ] }
-tokio = { version = "1", features = [ "macros", "rt-multi-thread" ] }
+hyper = { version = "0.14", features = ["server"] }
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 tokio-shared-rt = "0.1"
 
 [target.'cfg(target_family = "wasm")'.dev-dependencies]

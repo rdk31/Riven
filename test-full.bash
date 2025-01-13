@@ -3,10 +3,10 @@ set -euxo pipefail
 
 # Ensure stable builds.
 cargo +stable check --all-targets --features __proxy
-cargo +stable check --all-targets --features tracing,__proxy
+cargo +stable check --all-targets --features metrics,tracing,__proxy
 
 # Ensure nightly builds.
-cargo check --all-targets --features nightly,tracing,__proxy
+cargo check --all-targets --features nightly,metrics,tracing,__proxy
 cargo build --all-targets --features nightly,deny-unknown,__proxy
 
 # Run nightly tests.

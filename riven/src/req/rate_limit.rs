@@ -242,7 +242,7 @@ impl RateLimit {
     }
 }
 
-fn buckets_require_updating(limit_header: &str, buckets: &[VectorTokenBucket]) -> bool {
+fn buckets_require_updating(limit_header: &str, buckets: &[impl TokenBucket]) -> bool {
     if buckets.len() != limit_header.split(',').count() {
         return true;
     }

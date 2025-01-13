@@ -30,11 +30,13 @@ pub trait TokenBucket {
     /// Get the duration of this bucket.
     /// # Returns
     /// Duration of the bucket.
+    #[allow(dead_code, reason = "false positive")]
     fn get_bucket_duration(&self) -> Duration;
 
     /// Get the total limit of this bucket per timespan.
     /// # Returns
     /// Total limit per timespan.
+    #[allow(dead_code, reason = "false positive")]
     fn get_total_limit(&self) -> usize;
 }
 

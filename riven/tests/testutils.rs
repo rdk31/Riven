@@ -20,6 +20,7 @@ pub fn env_var<K: AsRef<str>>(key: K) -> Result<String, std::env::VarError> {
     #[wasm_bindgen]
     extern "C" {
         type Process;
+        #[wasm_bindgen(thread_local_v2)]
         static process: Process;
 
         type Env;
@@ -32,7 +33,7 @@ pub fn env_var<K: AsRef<str>>(key: K) -> Result<String, std::env::VarError> {
     }
 
     process
-        .env()
+        .with(Process::env)
         .get(key.as_ref())
         .ok_or(std::env::VarError::NotPresent)
 }
